@@ -254,12 +254,12 @@ export default {
         var retdata=JSON.parse(retdataobj).data;
 
         sessionStorage.setItem('success', issuccess);
-        // sessionStorage.setItem('groupname', retdata.groupname);
-        // sessionStorage.setItem('rolename', retdata.rolename);
-        // sessionStorage.setItem('loginname', retdata.loginname);
-        sessionStorage.setItem('groupname', '鄞州');
-        sessionStorage.setItem('rolename','1' );
-        sessionStorage.setItem('loginname','jane');
+        sessionStorage.setItem('groupname', retdata.groupname);
+        sessionStorage.setItem('rolename', retdata.rolename);
+        sessionStorage.setItem('loginname', retdata.loginname);
+        // sessionStorage.setItem('groupname', '鄞州');
+        // sessionStorage.setItem('rolename','1' );
+        // sessionStorage.setItem('loginname','jane');
         this.$router.push({name: 'first'})
         // 延迟 1 秒显示欢迎信息
         setTimeout(() => {
