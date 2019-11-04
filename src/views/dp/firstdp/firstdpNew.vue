@@ -109,7 +109,8 @@
         <div class="map">
           <!--<div class="map1"><img src="../dpimg/firstdp/picture/lbx.png"></div>-->
           <!--<div class="map4" id="map_1"></div>-->
-          <mapecharts :cityName="cityName" :parameter="parameter"></mapecharts>
+          <!-- <mapecharts :cityName="cityName" :parameter="parameter"></mapecharts> -->
+          <map-two :cityName="cityName" :parameter="parameter"></map-two>
         </div>
       </li>
       <li>
@@ -198,6 +199,7 @@
   import '@/views/dp/css/firstdp.css'
   import $ from 'jquery'
   import map from './map/map.vue'
+  import mapTwo from './map/maptwo.vue'
   import pie from './pie/piedou.vue'
   import scatter from './scatter/scatterL3.vue'
   import pie3d from './pie/pie3d.vue'
@@ -241,7 +243,8 @@
         "pieecharts":pie,
         "scatterecharts":scatter,
         "pie3decharts":pie3d,
-        'barecharts':bar
+        'barecharts':bar,
+        mapTwo
       },
   //用于数据初始化
   created:function(){

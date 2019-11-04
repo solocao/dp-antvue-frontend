@@ -30,7 +30,8 @@ module.exports = {
     ],
     externals: {
       'vue': 'Vue',
-      'ant-design-vue': 'antd'
+      'ant-design-vue': 'antd',
+      'BMap': 'BMap'
     }
   },
 
