@@ -134,7 +134,7 @@
         this.$router.push({ name: 'detaildp'})
       },
       getTableData(){
-        axios.get('/GW/card/getKgCardList.action',{
+        axios.get('/GW.WIR/card/getKgCardList.action',{
           params:{start:this.pageIndex,limit:this.pageSize,queryCardString :""}
         }).then(({data})=>{
           data = eval('(' + data + ')')

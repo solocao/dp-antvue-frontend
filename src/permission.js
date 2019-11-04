@@ -9,8 +9,9 @@ import { PageView } from '@/components/layouts'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-const whiteList = ['login', 'register', 'registerResult','detaildp','first','firstdp','menjin-detail','yangan-detail'
-  ,'shuiwei-detail','chushiqi-detail','wendu-detail','shidu-detail','seconddp','VideoSurveillancedp'] // no redirect whitelist
+const whiteList = ['login', 'register', 'registerResult','dplogin'] // no redirect whitelist
+//'detaildp','firstdp','menjin-detail','yangan-detail'
+//   ,'shuiwei-detail','chushiqi-detail','wendu-detail','shidu-detail','seconddp','VideoSurveillancedp'
 
 const makeRoutesSafe = (routes, deep) => {
   for (var index in routes) {
@@ -39,18 +40,32 @@ export const addRoutes = (newRoutes) => {
 }
 
 router.beforeEach((to, from, next) => {
+
   NProgress.start() // start progress bar
-  // if (to.path === '/user/dplogin') {
-  if (to.path === '/dp/first') {
+  if (to.path === '/') {
+    next({path: '/user/dplogin', query: {redirect: to.fullPath}})
+  }
+  if (to.path === '/user/dplogin') {
+  // if (to.path === '/dp/first') {
     next()
+    NProgress.done()
   } else {
     if (whiteList.includes(to.name)) {
 
       // 在免登录白名单，直接进入
       next()
     } else {
-      // next({ path: '/user/dplogin', query: { redirect: to.fullPath } })
-      next({ path: '/dp/first', query: { redirect: to.fullPath } })
+     const issuccess = sessionStorage.getItem('success')
+      if(issuccess=='true'){
+        next()
+      }else {
+        // alert(store.getters.nickname);
+        // if (!store.getters.nickname){
+        //   alert()
+        // }
+        next({path: '/user/dplogin', query: {redirect: to.fullPath}})
+      }
+      // next({ path: '/dp/first', query: { redirect: to.fullPath } })
       // if current page is login will not trigger afterEach hook, so manually handle it
     }
   }

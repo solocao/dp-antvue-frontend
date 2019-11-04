@@ -10,8 +10,9 @@
       <span></span>
       <sapn>
       <Select class="form_select_L1" @change="cityclick" id="city">
-      <Option value ="宁波">宁波</Option>
-      <Option value ="慈溪">慈溪</Option>
+        <option v-for="item in groupNames" :key="item.key" :label="item.label" :value="item.value"></option>
+      <!--<Option value ="宁波">宁波</Option>-->
+      <!--<Option value ="慈溪">慈溪</Option>-->
       </Select></sapn>
       <span >{{date1 | formatDateTime}}</span>
     </div>
@@ -19,9 +20,10 @@
     <div class="weather ">
 
       <span > <Select id="site" class="form_select_R1" @change="testclick" v-model="selected.site" >
-     <Option value="0" >全部站点</Option>
-      <Option value ="0574020B020238">骆城芳洲2</Option>
-      <Option value ="13373685112">奥林公馆开关站</Option>
+        <option v-for="item in stationNames" :key="item.key" :label="item.label" :value="item.value"></option>
+     <!--<Option value="0" >全部站点</Option>-->
+      <!--<Option value ="0574020B020238">骆城芳洲2</Option>-->
+      <!--<Option value ="13373685112">奥林公馆开关站</Option>-->
       <!--<Option value ="马新二号">奥林公馆开关站</Option>-->
       </Select></span></div>
   </div>
@@ -206,6 +208,12 @@
     export default {
         data() {
             return {
+              groupname:'',
+              rolename:'',
+              GroupID:'',
+              groupNames:[],
+              stationNames:[],
+              groupOp:{},
               selected:{site:0},
               timer1:'',
               timer11:'',
@@ -237,6 +245,7 @@
       },
   //用于数据初始化
   created:function(){
+
     // $(window).load(function(){
     //   $(".loading").fadeOut()
     // })
@@ -256,6 +265,56 @@
     // });
   },
       mounted(){
+        this.groupname=sessionStorage.getItem('groupname');
+        this.rolename=sessionStorage.getItem('rolename');
+
+        // sessionStorage.getItem('loginname', retdata.loginname);
+        if(this.rolename==1) {
+          axiosKj({
+            url: '/GW.WIR/cabTGroup/getGroupList.action',
+            method: 'post',
+            // headers: {
+            //   'Content-Type': ' application/x-www-form-urlencoded;charset=UTF-8'
+            // },
+            // data: parameter,
+            // params: loginParams
+          }).then((response) => {
+
+            var obj3 = '{"Table" ' + response.substr(response.search('Table') + 5, response.length - 1);
+            var datajson = JSON.parse(obj3).Table;
+            var groupopall={};
+            groupopall.key='宁波';
+            groupopall.value='宁波';
+            groupopall.label='宁波';
+            this.groupNames.push(groupopall);
+            for (var i = 0; i < datajson.length; i++) {
+              var groupop={};
+              groupop.key=datajson[i].groupName;
+              groupop.value=datajson[i].groupName;
+              groupop.label=datajson[i].groupName;
+              this.groupNames.push(groupop);
+            }
+            this.cityName=this.groupNames[0].label;
+            this.getgroupid();
+            this.stationAction();
+
+            this.executeTime1();
+            this.executeTime2();
+            this.executeTime3();
+          });
+        }else{
+          this.groupOp.key=this.groupname;
+          this.groupOp.value=this.groupname;
+          this.groupOp.label=this.groupname;
+          this.groupNames.push(this.groupOp);
+          this.cityName=this.groupNames[0].label;
+          this.getgroupid();
+          this.stationAction();
+          this.executeTime1();
+          this.executeTime2();
+          this.executeTime3();
+
+        }
 
         // $(".loading").fadeOut()
         // $(document).ready(function(){
@@ -328,175 +387,24 @@
         //     stationNum:
         //   }
         // })
-        this.executeTime1();
-        this.executeTime2();
-        this.executeTime3();
-        this.timer1=setInterval(function(){
-          that.executeTime1();
-          // axiosKj({
-          //   url: '/GW/alarm/getKgzAlarmList.action',
-          //   method: 'post',
-          //   headers: {
-          //     'Content-Type': ' application/x-www-form-urlencoded;charset=UTF-8'
-          //   },
-          //   // data: parameter,
-          //   params: parameter
-          // }).then(response=>{
-          //
-          //   var obj3='{"Table" '+response.substr(response.search('Table')+5,response.length-1);
-          //   var datajson=JSON.parse(obj3).Table;
-          //  //  CREATEDATE
-          //   debugger;
-          //  for(var l=0;l<datajson.length;l++){
-          //    Roll(datajson[datajson.length-1-l]);
-          //
-          //    }
-          // });
 
-          // that.axiosKj({
-          //   url: '/GW/alarm/getKgzAlarmList.action',
-          //   method: 'post',
-          //   headers: {
-          //     'Content-Type': 'application/json;charset=UTF-8'
-          //   },
-          //   data: parameter
-          // });
-            // axios.get('/GW/alarm/getKgzAlarmList.action', {
-            //   params: {
-            //     // stationID: 4,
-            //     ROLENAME: '超级管理员',
-            //     // endDt: '2019-10-15',
-            //     start: 0,
-            //     limit: 100000
-            //   }
-            // }).then(response => {
-//             axios.post('/GW/alarm/getKgzAlarmList.action?ROLENAME=超级管理员',headers,qs.stringify({params})).then(response=>
-//             {
-// alert(response.data.size);
-//             });
-// l++;
-//           if(l<=9) {
-//             var html = ' <li class="clearfix1"> <span class="pulll_left1" style="color:#00CCFF">' + datatest[9 - l].CREATEDATE + '</span> <span class="pulll_center1" style="color:#00CCFF">' + datatest[9 - l].STATIONNAME + ' </span><span class="pulll_right" style="color:#00CCFF">' + datatest[9 - l].ALARMTYPE + '</span><img src="' + surl1 + '" id="testimg"></li>';
-//             var ul = $(".addNewd ul");
-//             var liHeight = ul.find("li:last").height();
-//             var lis = ul.find("li").length;
-//             ul.animate({
-//               marginTop: -liHeight + "px"
-//             }, 1000, function () {
-//               if (lis > 9) {
-//                 ul.find("li:first").remove();
-//               }
-//               ul.css({marginTop: 0});
-//               ul.find("li:last").fadeIn(liHeight);
-//               ul.append(html);
-//
-//             });
-//             // if (lis > 9) {
-//             //   ul.find("li:last").remove();
-//             // }
-//           }
-      },60000);
+        // this.executeTime1();
+        // this.executeTime2();
+        // this.executeTime3();
+      //   this.timer1=setInterval(function(){
+      //     that.executeTime1();
+      // },60000);
 
         var surl2='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTggKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkQ2MjVEMEY4RUMyQjExRTk4MzZBRERCOUEwQzhENTlBIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkQ2MjVEMEY5RUMyQjExRTk4MzZBRERCOUEwQzhENTlBIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RDYyNUQwRjZFQzJCMTFFOTgzNkFEREI5QTBDOEQ1OUEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RDYyNUQwRjdFQzJCMTFFOTgzNkFEREI5QTBDOEQ1OUEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5rr3QDAAAAZklEQVR42mJ8oRHIAASqQNwBxC4MELAHiCuA+DYLkFAH4hNALMCAAEFA7ATEFkxAog1NEgZAYm1MSMZiA25MDAQAE9RBuMAukIJqIP6ARRIkVg1ScAPkWiBeB8SfoXgdVOwGQIABADmOEaKmFMIAAAAAAElFTkSuQmCC';
         var k=1;
-      //   setInterval(function(){
-      //     k++;
-      //   var html2='<li class="clearfix"> <span class="pulll_left" style="color:#00CCFF">Camear01</span> <span class="pulll_center" style="color:#00CCFF">异常 </span><img src="'+surl2+'" ><span class="pulll_right" style="color:#00CCFF" ><button class="form_button_L" >未按正常操作规范</button></span> </li>';
-      //
-      //   var ul1 = $(".adduser ul");
-      //   var liHeight1 = ul1.find("li:last").height();
-      //   var lis1 = ul1.find("li").length;
-      //   ul1.animate({
-      //     marginTop: -liHeight1  + "px"
-      //   }, 1000, function () {
-      //     if (lis1 >= 9) {
-      //       ul1.find("li:first").remove();
-      //     }
-      //     ul1.css({marginTop: 0});
-      //     ul1.find("li:last").fadeIn(liHeight1);
-      //     ul1.append(html2);
-      //     $(".form_button_L").on('click', function() {
-      //          alert("异常信息");
-      //       // that.$router.push({ name: 'detailL',path:"/dp/detailL" });
-      //       // that.$router.push({ name: 'detaildp',path:"/dp/detaildp" })
-      //     });
-      //   });
-      //   // if (lis1 > 9) {
-      //   //   ul1.find("li:first").remove();
-      //   // }
-      //
-      // },2100);
 
-
-        // var html2=$(".adduser ul").html()
-          // $(".adduser ul").append(html2)
-          // var ls=$(".adduser li").length/2+1
-          // var i=0
-          // var ref = setInterval(function(){
-          //   i++
-          //   if(i==ls){
-          //     i=1
-          //     $(".adduser ul").css({marginTop:0})
-          //     $(".adduser ul").animate({marginTop:-'.52'*i+'rem'},800)
-          //   }
-          //   $(".adduser ul").animate({marginTop:-'.52'*i+'rem'},800)
-          //
-          //
-          // },4300);
-
-          // var html2=$(".adduser ul").html()
-          // $(".adduser ul").append(html2)
-          // var ls2=$(".adduser li").length/2+1
-          // var a=0
-          // var ref = setInterval(function(){
-          //   a++
-          //   if(a==ls2){
-          //     a=1
-          //     $(".adduser ul").css({marginTop:0})
-          //     $(".adduser ul").animate({marginTop:-'.5'*a+'rem'},800)
-          //   }
-          //   $(".adduser ul").animate({marginTop:-'.5'*a+'rem'},800)
-          //
-          //
-          // },4300);
-
-          // var html3=$(".adduser1 ul").html()
-          // $(".adduser1 ul").append(html3)
-          // var ls2=$(".adduser1 li").length/2+1
-          // var a=0
-          // var ref = setInterval(function(){
-          //   a++
-          //   if(a==ls2){
-          //     a=1
-          //     $(".adduser1 ul").css({marginTop:0})
-          //     $(".adduser1 ul").animate({marginTop:-'.5'*a+'rem'},800)
-          //   }
-          //   $(".adduser1 ul").animate({marginTop:-'.5'*a+'rem'},800)
-          //
-          //
-          // },4300);
-        // });
 
         var that = this;
-        // var myChart6 = this.$echarts.init(document.getElementById('echarts6'));
-        // var myChart7 = this.$echarts.init(document.getElementById('echarts7'));
-        // var myChart8 = this.$echarts.init(document.getElementById('echarts8'));
-        // that.myChart6=myChart6;
-        // that.myChart7=myChart7;
-        // that.myChart8=myChart8;
-        // that.myChart6.resize();
-        // that.myChart7.resize();
-        // that.myChart8.resize();
-        // that.capacityEachart();
-        // setTimeout(function(){
-        //   that.date1 = new Date();
-        // },1000);
+
         var settime = setInterval(function(){
           that.date1 = new Date();
         },1000);
-        // this.timer1 = setInterval(() => {
-        //   this.date = new Date(); // 修改数据date
-        // }, 1000)
+
 
 
       },
@@ -525,6 +433,67 @@
         // }
       },
       methods:{
+          getgroupid(){
+            var data=this.cityName;
+            if(data=='鄞州'){
+             this.GroupID=1
+            }else if(data=='海曙'){
+              this.GroupID=2
+            }else if(data=='奉化'){
+              this.GroupID=3
+            }else if(data=='余姚'){
+              this.GroupID=4
+            }else if(data=='慈溪'){
+              this.GroupID=5
+            }else if(data=='集中'){
+              this.GroupID=21
+            }else if(data=='宁海'){
+              this.GroupID=22
+            }else if(data=='江东'){
+              this.GroupID=41
+            }else if(data=='江北'){
+              this.GroupID=42
+            }else if(data=='北仑'){
+              this.GroupID=61
+            }else if(data=='镇海'){
+              this.GroupID=81
+            }
+          },
+          stationAction(){
+            this.stationNames=[];
+            var parm={GroupID:this.GroupID};
+            if(this.cityName=='宁波'){
+              delete parm.GroupID;
+            }
+            axiosKj({
+              url: '/GW.WIR/kgStation/getKgStationDataList.action',
+              method: 'post',
+              // headers: {
+              //   'Content-Type': ' application/x-www-form-urlencoded;charset=UTF-8'
+              // },
+              // data: parameter,
+              params: parm
+            }).then((response) => {
+
+              var datajson = eval('(' + response + ')').data;
+              var groupopALL={};
+              groupopALL.key='0';
+              groupopALL.value='0';
+              groupopALL.label='全部站点';
+              this.stationNames.push(groupopALL);
+              for (var i = 0; i < datajson.length; i++) {
+                var groupop={};
+                groupop.key=datajson[i].STATIONNUM;
+                groupop.value=datajson[i].STATIONNUM;
+                groupop.label=datajson[i].STATIONNAME;
+                this.stationNames.push(groupop);
+              }
+              // this.cityName=this.stationNames[0].label;
+              // this.executeTime1();
+              // this.executeTime2();
+              // this.executeTime3();
+            });
+          },
         executeTime1(){
           var parms=this.parameter;
 
@@ -545,7 +514,7 @@
   parms.alarmTime_from=year+"-"+month+"-"+day+" 00:00:00";
 
   axiosKj({
-    url: '/GW/alarm/getKgzAlarmList.action',
+    url: '/GW.WIR/alarm/getKgzAlarmList.action',
     method: 'post',
     headers: {
       'Content-Type': ' application/x-www-form-urlencoded;charset=UTF-8'
@@ -573,11 +542,18 @@
         l++;
       }, 1000);
 
+    }else{
+      clearInterval(this.timer11);
+      var ul = $(".addNewd ul");
+      window.setTimeout(function() {
+        ul.find("li").remove();
+      }, 1000);
     }
     // }
   });
   },
         executeTime2(){
+
           var parms=this.parameter;
 
           if(this.parameter.stationNum=="0"||this.parameter.stationNum==""){
@@ -597,7 +573,7 @@
           parms.alarmTime_from=year+"-"+month+"-"+day+" 00:00:00";
 
           axiosKj({
-            url: '/GW/alarm/getAlarmChartResult.action',
+            url: '/GW.WIR/alarm/getAlarmChartResult.action',
             method: 'post',
             headers: {
               'Content-Type': ' application/x-www-form-urlencoded;charset=UTF-8'
@@ -605,6 +581,7 @@
             // data: parameter,
             params: parms
           }).then(response=>{
+
             if(response.length>0) {
               this.$refs.barecharts.setData(response);
 
@@ -625,7 +602,7 @@
           // parms.alarmTime_from=year+"-"+month+"-"+day+" 00:00:00";
 
           axiosKj({
-            url: '/GW/kgStation/getStatusStationList.action',
+            url: '/GW.WIR/kgStation/getStatusStationList.action',
             method: 'post',
             headers: {
               'Content-Type': ' application/x-www-form-urlencoded;charset=UTF-8'
@@ -676,8 +653,9 @@
         testclick(){
           //右下滚动
           this.maxDate=0;
+
           let site_ =  document.getElementById('site')
-          var name = site_.options[site_.selectedIndex].text;
+          var name = site_.options[site_.selectedIndex].label;
           var value=site_.options[site_.selectedIndex].value;
           this.parameter.stationNum=value;
 
@@ -707,10 +685,12 @@
         },
         cityclick(){
           let city_ =  document.getElementById('city')
-          var name = city_.options[city_.selectedIndex].text;
+
+          var name = city_.options[city_.selectedIndex].label;
           var value= city_.options[city_.selectedIndex].value;
           this.cityName=name;
           this.maxDate=0;
+          this.parameter.stationNum='';
           clearInterval(this.timer11);
           clearInterval(this.timer1);
           var ul1 = $(".addNewd");
@@ -723,6 +703,8 @@
           this.timer1=setInterval(function(){
             that.executeTime1();
           },30000);
+          this.getgroupid();
+          this.stationAction();
           this.executeTime1();
           this.executeTime2();
           this.executeTime3();

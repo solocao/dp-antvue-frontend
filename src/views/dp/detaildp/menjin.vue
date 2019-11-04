@@ -128,7 +128,7 @@
           this.stationnum=sessionStorage.getItem('stationNum');
         }
 
-        axios.get('/GW/host/getKgHostList.action', {
+        axios.get('/GW.WIR/host/getKgHostList.action', {
           params: {
             stationNum: this.stationnum,
             stationID: this.stationdata,
@@ -215,7 +215,7 @@
       }
     },
     created(){
-      axios.get('/GW/door/getKgDoorList.action',{
+      axios.get('/GW.WIR/door/getKgDoorList.action',{
         params:{start:0,limit:1,kgStationId:4,queryString:""}
       }).then(({data})=>{
         data = eval('(' + data + ')')

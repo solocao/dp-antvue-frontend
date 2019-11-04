@@ -230,7 +230,7 @@
           this.stationdata=sessionStorage.getItem('stationID');
         }
 
-        axios.get('/GW/show/getTemperatureReport.action', {
+        axios.get('/GW.WIR/show/getTemperatureReport.action', {
           params: {
             stationID:this.stationdata,
             startDt:this.getTime(),
@@ -270,7 +270,7 @@
         if(this.stationdata==null ||this.stationdata=='undefined'||this.stationdata==''){
           this.stationdata=sessionStorage.getItem('stationID');
         }
-        axios.get('/GW/show/getHumidityReport.action', {
+        axios.get('/GW.WIR/show/getHumidityReport.action', {
           params: {
             stationID: this.stationdata,
             startDt:this.getTime(),

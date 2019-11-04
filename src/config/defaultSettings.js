@@ -30,9 +30,9 @@ export default {
     storage: 'local' // storage name session, local, memory
   },
   baseURL: {
-    dev: 'http://localhost:8080'
+    dev: 'https://localhost:8080'
   },
   RMURL: {
-    dev: 'http://localhost:8080'
+    dev: 'https://localhost:8080'
   }
 }

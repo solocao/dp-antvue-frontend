@@ -135,6 +135,7 @@
            totalAll=totalAll+data[i].total;
            opennumAll=opennumAll+data[i].opennum;
            closenumAll=closenumAll+data[i].closenum;
+
            if(data[i].groupname==cityname){
              total=data[i].total;
              opennum=data[i].opennum;
@@ -142,9 +143,15 @@
            }
          }
          if(total==0){
-           totalCommit=totalAll;
-           opennumCommit=opennumAll;
-           closenumCommit=closenumAll;
+           if(cityname=='宁波') {
+             totalCommit = totalAll;
+             opennumCommit = opennumAll;
+             closenumCommit = closenumAll;
+           }else{
+             totalCommit=total;
+             opennumCommit=opennum;
+             closenumCommit=closenum;
+           }
          }else{
            totalCommit=total;
            opennumCommit=opennum;

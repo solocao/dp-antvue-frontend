@@ -49,6 +49,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  ::-webkit-scrollbar {
+    width: 0 !important;
+  }
+  ::-webkit-scrollbar {
+    width: 0 !important;height: 0;
+  }
   #userLayout.user-layout-wrapper {
     height: 100%;
 
@@ -65,8 +71,9 @@ export default {
       width: 100%;
       min-height: 100%;
       /*background: #f0f2f5 url(~@/assets/background.svg) no-repeat 50%;*/
-      background: #f0f2f5 url(~@/assets/bg.png) no-repeat 50%;
-      background-size: 100%;
+      background: #f0f2f5 url(~@/views/dp/dpimg/firstdp/backgroudphtot.png)  no-repeat top;
+      background-size:100% 100%;
+      /*background-size: 100%;*/
       padding: 110px 0 144px;
       position: relative;
 

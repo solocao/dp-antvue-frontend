@@ -64,7 +64,7 @@ module.exports = {
   },
 
   devServer: {
-    // https: true,
+    https: true,
     disableHostCheck: true,
     proxy: {
       '/api': {
@@ -81,16 +81,13 @@ module.exports = {
           '^/gateway': '/api'
         }
       },
-      '/GW': {
-        target: 'https://61.153.144.212:8403/GW.WIR',
-        // target: 'http://192.168.0.135:7777/GW.WIR',
-        ws: true,
-        changeOrigin: true,
-        pathRewrite: {
-          '^/GW': ''
-        }
+      '/GW.WIR/': {
+        target: 'https://61.153.144.212:8403',
+        // target: 'http://192.168.0.179:7777',
+        // ws: true,
+        changeOrigin: true
       },
-      '/video': {
+      '/video/': {
         target: 'http://115.236.28.77:55554/',
         // target: 'http://192.168.1.107:8080/GW.WIR',
         ws: true,
@@ -99,7 +96,7 @@ module.exports = {
           '^/video': ''
         }
       },
-      '/viptz': {
+      '/viptz/': {
         target: 'http://115.236.28.77:55555/',
         // target: 'http://192.168.1.107:8080/GW.WIR',
         ws: true,

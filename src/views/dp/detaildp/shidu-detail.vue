@@ -212,7 +212,7 @@
        var that=this;
 
         this.dataForm.stationID=sessionStorage.getItem('stationID');
-        axios.get('/GW/show/getHumidityReport.action', {
+        axios.get('/GW.WIR/show/getHumidityReport.action', {
           params: {
             stationID: this.dataForm.stationID,
             startDt: this.formatDate(this.dataForm.time[0]),

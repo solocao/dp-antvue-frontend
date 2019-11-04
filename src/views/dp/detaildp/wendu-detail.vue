@@ -213,7 +213,7 @@
         var that=this;
 
         this.dataForm.stationID=sessionStorage.getItem('stationID');
-        axios.get('/GW/show/getTemperatureReport.action', {
+        axios.get('/GW.WIR/show/getTemperatureReport.action', {
           params: {
             stationID: this.dataForm.stationID,
             startDt: this.formatDate(this.dataForm.time[0]),

@@ -17,9 +17,9 @@
             <a-input
               size="large"
               type="text"
-              placeholder="帐户名或邮箱地址 / admin"
+              placeholder="帐户名"
               v-decorator="[
-                'userName',
+                'LoginName',
                 {rules: [{ required: true, message: '请输入帐户名或邮箱地址' }, { validator: handleUsernameOrEmail }], validateTrigger: 'change'}
               ]"
             >
@@ -32,9 +32,9 @@
               size="large"
               type="password"
               autocomplete="false"
-              placeholder="密码 / admin"
+              placeholder="密码"
               v-decorator="[
-                'password',
+                'Password',
                 {rules: [{ required: true, message: '请输入密码' }], validateTrigger: 'blur'}
               ]"
             >
@@ -45,14 +45,14 @@
 
       </a-tabs>
 
-      <a-form-item>
-        <a-checkbox v-decorator="['rememberMe']"  class="rememberMe">自动登陆</a-checkbox>
-        <router-link
-          :to="{ name: 'recover', params: { user: 'aaa'} }"
-          class="forge-password"
-          style="float: right;"
-        >忘记密码</router-link>
-      </a-form-item>
+      <!--<a-form-item>-->
+        <!--<a-checkbox v-decorator="['rememberMe']"  class="rememberMe">自动登陆</a-checkbox>-->
+        <!--<router-link-->
+          <!--:to="{ name: 'recover', params: { user: 'aaa'} }"-->
+          <!--class="forge-password"-->
+          <!--style="float: right;"-->
+        <!--&gt;忘记密码</router-link>-->
+      <!--</a-form-item>-->
 
       <a-form-item style="margin-top:24px">
         <a-button
@@ -65,19 +65,19 @@
         >确定</a-button>
       </a-form-item>
 
-      <div class="user-login-other">
-        <span class="rememberMe">其他登陆方式</span>
-        <a>
-          <a-icon class="item-icon" type="alipay-circle"></a-icon>
-        </a>
-        <a>
-          <a-icon class="item-icon" type="taobao-circle"></a-icon>
-        </a>
-        <a>
-          <a-icon class="item-icon" type="weibo-circle"></a-icon>
-        </a>
-        <router-link class="register" :to="{ name: 'register' }">注册账户</router-link>
-      </div>
+      <!--<div class="user-login-other">-->
+        <!--<span class="rememberMe">其他登陆方式</span>-->
+        <!--<a>-->
+          <!--<a-icon class="item-icon" type="alipay-circle"></a-icon>-->
+        <!--</a>-->
+        <!--<a>-->
+          <!--<a-icon class="item-icon" type="taobao-circle"></a-icon>-->
+        <!--</a>-->
+        <!--<a>-->
+          <!--<a-icon class="item-icon" type="weibo-circle"></a-icon>-->
+        <!--</a>-->
+        <!--<router-link class="register" :to="{ name: 'register' }">注册账户</router-link>-->
+      <!--</div>-->
     </a-form>
 
     <two-step-captcha
@@ -91,12 +91,13 @@
 
 <script>
 import md5 from 'md5'
-import base64 from 'base64-js'
+import base64 from 'js-base64'
 import TwoStepCaptcha from '@/components/tools/TwoStepCaptcha'
 import { mapActions } from 'vuex'
 import { timeFix } from '@/utils/util'
 import { getSmsCaptcha, get2step } from '@/api/login'
 import  {axiosKj}  from '@/utils/requestKj'
+
 export default {
   components: {
     TwoStepCaptcha
@@ -120,6 +121,7 @@ export default {
     }
   },
   created () {
+    sessionStorage.setItem('success', false);
     get2step({ })
       .then(res => {
         this.requiredTwoStepCaptcha = res.result.stepCode
@@ -157,49 +159,29 @@ export default {
 
       state.loginBtn = true
 
-      const validateFieldsKey = customActiveKey === 'tab1' ? ['userName', 'password'] : ['mobile', 'captcha']
-
+      const validateFieldsKey = customActiveKey === 'tab1' ? ['LoginName', 'Password'] : ['mobile', 'captcha']
       validateFields(validateFieldsKey, { force: true }, (err, values) => {
         if (!err) {
           console.log('login form', values)
           const loginParams = { ...values }
-          delete loginParams.userName
-          loginParams[!state.loginType ? 'email' : 'userName'] = values.userName
+          delete loginParams.LoginName
+          loginParams[!state.loginType ? 'email' : 'LoginName'] = values.LoginName
           // alert(base64.encode(values.password));
-          loginParams.password = md5(values.password)
+
+          // Base64.encode(values.password);
+          loginParams.Password=values.Password
+          // loginParams.password=base64.Base64.encode(values.password)
+          // loginParams.password = md5(values.password)
 
           axiosKj({
-            url: '/GW/cabTPerson/findCabTPersonList.action',
+            url: '/GW.WIR/cabTPerson/findCabTPerson.action',
             method: 'post',
-            headers: {
-              'Content-Type': ' application/x-www-form-urlencoded;charset=UTF-8'
-            },
+            // headers: {
+            //   'Content-Type': ' application/x-www-form-urlencoded;charset=UTF-8'
+            // },
             // data: parameter,
             params: loginParams
-          }).then(response=>{
-            // if(this.dblick==1){
-            //   var ul = $(".addNewd ul");
-            //   ul.find("li").remove();
-            //   that.dblick=0;
-            // }
-
-            var obj3='{"Table" '+response.substr(response.search('Table')+5,response.length-1);
-            var datajson=JSON.parse(obj3).Table;
-            if(datajson.length>0) {
-              var l = 0;
-              var that = this;
-              that.timer11 = setInterval(function () {
-
-                if (datajson.length - 1 == l) {
-                  clearInterval(that.timer11);
-                }
-                that.Roll(datajson[datajson.length - 1 - l]);
-                l++;
-              }, 1000);
-
-            }
-            // }
-          }).catch(err => this.requestFailed(err)).finally(() => {
+          }).then((res) => this.loginSuccess(res)).catch(err => this.requestFailed(err)).finally(() => {
             state.loginBtn = false
           });
 
@@ -261,20 +243,41 @@ export default {
       })
     },
     loginSuccess (res) {
+
+      var obj3='{"success" '+res.substr(res.search('success')+7,res.search(',')-8)+'}';
+      var issuccess=JSON.parse(obj3).success;
+
       console.log(res)
-      this.$router.push({ name: 'firstdp' })
-      // 延迟 1 秒显示欢迎信息
-      setTimeout(() => {
-        this.$notification.success({
-          message: '欢迎',
-          description: `${timeFix()}，欢迎回来`
-        })
-      }, 1000)
+      if(issuccess) {
+
+        var retdataobj='{"data" '+res.substr(res.search('data')+4,res.length-1);
+        var retdata=JSON.parse(retdataobj).data;
+
+        sessionStorage.setItem('success', issuccess);
+        // sessionStorage.setItem('groupname', retdata.groupname);
+        // sessionStorage.setItem('rolename', retdata.rolename);
+        // sessionStorage.setItem('loginname', retdata.loginname);
+        sessionStorage.setItem('groupname', '鄞州');
+        sessionStorage.setItem('rolename','1' );
+        sessionStorage.setItem('loginname','jane');
+        this.$router.push({name: 'first'})
+        // 延迟 1 秒显示欢迎信息
+        setTimeout(() => {
+          this.$notification.success({
+            message: '欢迎',
+            description: `${timeFix()}，欢迎回来`
+          })
+        }, 1000)
+      }else{
+        sessionStorage.setItem('success', issuccess);
+        this.loginBtn = false;
+        this.requestFailed(res);
+      }
     },
     requestFailed (err) {
       this.$notification['error']({
         message: '错误',
-        description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
+        description: ((err.response || {}).data || {}).message || '帐户名或密码错误',
         duration: 4
       })
     }

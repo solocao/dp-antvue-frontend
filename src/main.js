@@ -20,8 +20,12 @@ import 'echarts-gl'
 import highcharts from 'highcharts'
 import VueHighCharts from 'vue-highcharts'
 import highcharts3d from 'highcharts/highcharts-3d'
+import axios from 'axios'
 // Vue.prototype.echarts = Echarts
-
+// Vue.http.options.credentials = true
+// Vue.http.options.xhr = { withCredentials: true }
+Vue.prototype.$axios = axios;
+axios.defaults.withCredentials=true;
 Vue.use(echarts)
 // import global from './common'
 Vue.use(BaiduMap,{ ak:'wycygWOMkzZt9XB7wDTQwu49VcssxkFG'})
