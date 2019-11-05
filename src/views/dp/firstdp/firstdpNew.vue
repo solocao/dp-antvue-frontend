@@ -110,7 +110,7 @@
           <!--<div class="map1"><img src="../dpimg/firstdp/picture/lbx.png"></div>-->
           <!--<div class="map4" id="map_1"></div>-->
           <!-- <mapecharts :cityName="cityName" :parameter="parameter"></mapecharts> -->
-          <map-two :cityName="cityName" :parameter="parameter"  :stationdata="stationdata" :dataJsonList="dataJsonList" ref="maptwo" ></map-two>
+          <map-two :cityName="cityName"  :parameter="parameter"  :stationdata="stationdata" :dataJsonList="dataJsonList" ref="maptwo" ></map-two>
         </div>
       </li>
       <li>
@@ -314,7 +314,7 @@
               this.groupNames.push(groupop);
             }
             this.cityName=this.groupNames[0].label;
-            this.$refs.maptwo.load(this.cityName);
+
             this.getgroupid();
             this.stationAction();
 
@@ -618,7 +618,8 @@
 
             var obj3='{"Table" '+response.substr(response.search('Table')+5,response.length-1);
             var datajson=JSON.parse(obj3).Table;
-            this.dataJsonList = JSON.parse(obj3).Table;
+            this.dataJsonList=datajson;
+            this.$refs.maptwo.load(this.cityName,datajson);
             this.flag = true;
             if(datajson.length>0) {
               this.$refs.pieecharts.setData(datajson,this.cityName);
