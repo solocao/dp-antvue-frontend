@@ -67,6 +67,7 @@ export default {
             font: '24',
             mapTop:'',
             mapZoom:null,
+            mapLeft:'',
             curMap:{},
             mapStack:[],
             scatterdata:[],
@@ -155,15 +156,20 @@ export default {
        this.dataJsonList=datajson;
        if (cityName === '宁波'){
          this.mapTop = '16%'
+         this.mapLeft = '33%'
          this.mapZoom = 1.4
          this.geoCoordMap = this.geoCoordMapSmall
        } else {
          this.mapTop = '0%'
+         this.mapLeft = '20%'
          this.mapZoom = 1
          this.geoCoordMap = this.geoCoordMapMain
        }
        if (cityName === '江北'){
          this.mapTop = '11%'
+       }
+       if (cityName === '余姚'){
+         this.mapLeft = '33%'
        }
         this.loadmap2D(this.cityMap[cityName], 'ningbo');
         this.loadmarket(cityName);
@@ -254,7 +260,7 @@ debugger
             geo: {
               map: mapName,
               zoom: that.mapZoom,
-              left:'19%',
+              left:that.mapLeft,
               top:that.mapTop,
               viewControl: {
                 center: [-10, 0, 10]
