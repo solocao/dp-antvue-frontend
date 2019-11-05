@@ -110,7 +110,7 @@
           <!--<div class="map1"><img src="../dpimg/firstdp/picture/lbx.png"></div>-->
           <!--<div class="map4" id="map_1"></div>-->
           <!-- <mapecharts :cityName="cityName" :parameter="parameter"></mapecharts> -->
-          <map-two :cityName="cityName" :parameter="parameter"  :stationdata="stationdata" ref="maptwo"></map-two>
+          <map-two :cityName="cityName" :parameter="parameter"  :stationdata="stationdata" :dataJsonList="dataJsonList" ref="maptwo" ></map-two>
         </div>
       </li>
       <li>
@@ -215,6 +215,7 @@
               GroupID:'',
               groupNames:[],
               stationNames:[],
+              dataJsonList:[],
               groupOp:{},
               selected:{site:0},
               timer1:'',
@@ -226,6 +227,7 @@
               myChart7: {},
               myChart8: {},
               MaxId:0,
+              flag:false,
               cityName:'宁波',
               stationdata:'',
               parameter:{
@@ -616,6 +618,8 @@
 
             var obj3='{"Table" '+response.substr(response.search('Table')+5,response.length-1);
             var datajson=JSON.parse(obj3).Table;
+            this.dataJsonList = JSON.parse(obj3).Table;
+            this.flag = true;
             if(datajson.length>0) {
               this.$refs.pieecharts.setData(datajson,this.cityName);
 
@@ -684,7 +688,7 @@
           this.executeTime2();
 
 
-          this.refs.maptwo.setcenterAndZoom(value);
+          this.$refs.maptwo.setcenterAndZoom(value);
 
           // this.$router.push({ name: 'detaildp',path:"/dp/detaildp" })
         },
