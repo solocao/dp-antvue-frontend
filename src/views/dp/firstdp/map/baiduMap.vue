@@ -92,28 +92,37 @@ export default {
           let marker=new BMap.Marker(point);
 
             marker.addEventListener("mouseover",function(e){
-              var label = new BMap.Label(stationv.kgzName,{offset:new BMap.Size(-20,-25)});
+
+              var txt='<span style="color:white;font-size: 17px ;">'+stationv.kgzName+'</span><br/> <span style="color:#ffff00;font-size: 17px ;" >水位:</span><span style="color:#00ff00;font-size: 17px ;">'+stationv.waterLevel+'</span><br/><span style="color:#ffff00;font-size: 17px ;" >门状态:</span><span style="color:#00ff00;font-size: 17px ;">'+stationv.doorStatus+'</span>'
+              var txttemp='';
+
+              if(typeof(stationv.temp)!='undefined'){
+                var humi=stationv.humi.substr(stationv.humi.indexOf('&')+1);
+                var temp=stationv.temp.substr(stationv.temp.indexOf('&')+1);
+                txttemp='<br/><span style="color:#ffff00;font-size: 17px ;" >湿度:</span><span style="color:#00ff00;font-size: 17px ;">'+humi+'</span><br/><span style="color:#ffff00;font-size: 17px ;" >温度:</span><span style="color:#00ff00;font-size: 17px ;">'+temp+'</span>'
+              }
+
+              var label = new BMap.Label(txt+txttemp,{offset:new BMap.Size(-20,-120)});
+              label.setStyle({
+                opacity:"0.9",
+                backgroundColor :"black",
+              })
               // label.setStyle({
-              //     color : "red",
-              //     fontSize : "12px",
-              //     height : "20px",
-              //     lineHeight : "20px",
-              //     width:"50px",
-              //     overflow:"hidden",
-              //     whiteSpace:"nowrap",
-              //     textOverflow:"ellipsis"
+              //   whiteSpace : "nowrap",
+              //   color : "#ffffff"
               // });
                     // label.setStyle({display:"block"});
             //         label.setStyle({whiteSpace:"normal",
             // height:"auto"});
               marker.setLabel(label)
+              // marker.setZIndex(999)
             });
             marker.addEventListener("mouseout",function(e){
                 var label = this.getLabel()
             //     label.setStyle({whiteSpace:"nowrap",
             // height:"20px"});
               label.setContent("");//设置标签内容为空
-              label.setStyle({borderWidth:"0px"});//设置标签边框宽度为0
+              label.setStyle({opacity:"0"});//设置标签边框宽度为0
             });
           marker.addEventListener("click",function(e){
             that.$router.push({ name: 'detaildp', params: {stationName:stationv.kgzName,stationNum:stationv.stationNum,stationID:stationv.id} })

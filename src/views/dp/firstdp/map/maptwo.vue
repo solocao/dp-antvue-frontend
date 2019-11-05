@@ -37,28 +37,45 @@ export default {
                 "奉化": "330283",
                 "宁波": "330200"
             },
-            geoCoordMap:{
-                "象山县": [121.889215117188,29.2913259101563],
-                "鄞州区": [121.489215117188,29.7913259101563],
-                "奉化市":[121.489215117188,29.5913259101563],
-                "余姚市":[121.289215117188,29.9913259101563],
-                "宁海县":[121.389215117188,29.2913259101563],
-                "镇海区":[121.679215117188,29.9813259101563],
-                "北仑区":[121.889215117188,29.8913259101563],
-                "江北区":[121.489215117188,29.9913259101563],
-                "江东区":[121.579215117188,29.8813259101563],
-                "海曙区":[121.519215117188,29.8613259101563],
-                "慈溪市":[121.489215117188,30.1913259101563]
-            },
+          geoCoordMapSmall:{
+            "象山县": [121.889215117188,29.2913259101563],
+            "鄞州区": [121.389215117188,29.7913259101563],
+            "奉化市":[121.489215117188,29.5913259101563],
+            "余姚市":[121.189215117188,29.8913259101563],
+            "宁海县":[121.389215117188,29.2913259101563],
+            "镇海区":[121.649215117188,30.0289999101563],
+            "北仑区":[121.889215117188,29.8913259101563],
+            "江北区":[121.489215117188,29.9999999101563],
+            "江东区":[121.529215117188,29.8613259101563],
+            "海曙区":[121.669215117188,29.8813259101563],
+            "慈溪市":[121.289215117188,30.1913259101563]
+          },
+          geoCoordMapMain:{
+            "象山县": [121.889215117188,29.2913259101563],
+            "鄞州区": [121.489215117188,29.7913259101563],
+            "奉化市":[121.489215117188,29.5913259101563],
+            "余姚市":[121.289215117188,29.9913259101563],
+            "宁海县":[121.389215117188,29.2913259101563],
+            "镇海区":[121.629215117188,29.9813259101563],
+            "北仑区":[121.889215117188,29.8913259101563],
+            "江北区":[121.449215117188,29.9913259101563],
+            "江东区":[121.579215117188,29.8813259101563],
+            "海曙区":[121.519215117188,29.8613259101563],
+            "慈溪市":[121.429215117188,30.1913259101563]
+          },
             timeFn:null,
             font: '24',
+            mapTop:'',
+           mapLeft:'',
+            mapZoom:null,
             curMap:{},
             mapStack:[],
             scatterdata:[],
             initData:[],
             baiduCityName:'',
             show:false,
-            stationgcityroup:{}
+            stationgcityroup:{},
+          geoCoordMap:{}
         }
     },
     props: ['cityName','parameter','stationdata','dataJsonList']
@@ -173,6 +190,14 @@ export default {
 
     },
     methods:{
+      backmap(){
+        var map = this.mapStack.pop();
+        if (!this.mapStack.length && !map) {
+          return;
+        }
+        this.loadmap2D(map.mapCode, map.mapName);
+        this.style1=''
+      },
       setdataJsonList(){
 
       },
@@ -184,14 +209,31 @@ export default {
       },
       load(cityName,datajson){
        this.dataJsonList=datajson;
-        this.loadmap2D(this.cityMap[cityName], 'ningbo');
+        if (cityName === '宁波'){
+          this.mapTop = '16%'
+          this.mapLeft = '33%'
+          this.mapZoom = 1.4
+          this.geoCoordMap = this.geoCoordMapSmall
+        } else {
+          this.mapTop = '0%'
+          this.mapLeft = '20%'
+          this.mapZoom = 1
+          this.geoCoordMap = this.geoCoordMapMain
+        }
+        if (cityName === '江北'){
+          this.mapTop = '11%'
+        }
+        if (cityName === '余姚'){
+          this.mapLeft = '33%'
+        }
+        this.loadmap2D(this.cityMap[cityName], cityName);
         this.loadmarket(cityName);
       },
       loadmarket(cityName){
         var vd=[];
 
       },
-        convertData(data) {
+        convertData(data,mapName) {
             data=data[0];
             let self = this;
 
@@ -199,10 +241,20 @@ export default {
             for (var i = 0; i < data.length; i++) {
                 var geoCoord = this.geoCoordMap[data[i].name];
                 if (geoCoord) {
-                res.push({
-                    name: data[i].name,
-                    value: geoCoord.concat(data[i].value)
-                });
+
+                  if(mapName=='宁波') {
+                    res.push({
+                      name: data[i].name,
+                      value: geoCoord.concat(data[i].value)
+                    });
+
+                  }else if(data[i].name.indexOf(mapName)>=0){
+                    res.push({
+                      name: data[i].name,
+                      value: geoCoord.concat(data[i].value)
+                    });
+                  }
+
                 }
             }
             return res;
@@ -294,12 +346,13 @@ export default {
             let myChart = echarts.init(chartMap);
             var that=this;
           var img = 'image://data:image/png;base64,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';
-debugger
+
           let option = {
             geo: {
               map: mapName,
-              zoom: 1.4,
-              left:'19%',
+              zoom: that.mapZoom,
+              left:that.mapLeft,
+              top:that.mapTop,
               viewControl: {
                 center: [-10, 0, 10]
               },
@@ -319,14 +372,14 @@ debugger
                 },
               },
               label: {
-                show: true,
-                position: ['50%', '50%'],
-                textStyle: {
-                  color: '#28cd9c', //地图初始化区域字体颜色
-                  fontSize: 16,
-                  opacity: 1,
-                  backgroundColor: 'rgba(0,23,11,0)',
-                },
+                show: false,
+                // position: ['50%', '50%'],
+                // textStyle: {
+                //   color: '#28cd9c', //地图初始化区域字体颜色
+                //   fontSize: 16,
+                //   opacity: 1,
+                //   backgroundColor: 'rgba(0,23,11,0)',
+                // },
               },
               emphasis: { //当鼠标放上去  地区区域是否显示名称
                 label: {
@@ -351,10 +404,10 @@ debugger
               {
                 type: 'scatter',
                 coordinateSystem: 'geo',
-                data: that.convertData(chinaDatas1),
+                data: that.convertData(chinaDatas1,mapName),
                 symbol: img,
-                symbolSize: [50, 80],
-                symbolOffset:['-40%','-30%'],
+                symbolSize: [40, 60],
+                symbolOffset:['-30%','-30%'],
                 itemStyle:{
                   // color:'#17e3ff',
                   borderColor:'#fff',
@@ -368,17 +421,17 @@ debugger
                     let value = null
                     for (let i = 0; i< that.dataJsonList.length; i++){
                       if (name === that.dataJsonList[i].groupname){
-                        return  that.dataJsonList[i].total
+                        return `${params.name} : ${that.dataJsonList[i].total}`
                       }
                     }
                     if (params.value[1]){
-                      return 0
+                      return `${params.name}:${0}`
                     }
                   }),
                   position:'top',
                   textStyle:{
                     color:'#00ffff',
-                    fontSize:'18px',
+                    fontSize:16,
                   }
                 },
                 shading: 'lambert',

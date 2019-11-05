@@ -694,6 +694,7 @@
           // this.$router.push({ name: 'detaildp',path:"/dp/detaildp" })
         },
         cityclick(){
+            this.$refs.maptwo.backmap();
           let city_ =  document.getElementById('city')
 
           var name = city_.options[city_.selectedIndex].label;
