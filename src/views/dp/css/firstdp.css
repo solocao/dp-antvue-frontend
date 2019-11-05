@@ -169,8 +169,9 @@ a:hover{ color:#06c; text-decoration: none!important}
 .mainbox{ padding:.4rem .4rem 0rem .4rem;}
 .mainbox>ul{ margin-left:-.4rem; margin-right:-.4rem;}
 .mainbox>ul>li{ float: left; padding: 0 .4rem;margin:0px;}
-.mainbox>ul>li{ width: 30%}
+.mainbox>ul>li:nth-child(1){ width: 25%}
 .mainbox>ul>li:nth-child(2){ width: 40%}
+.mainbox>ul>li:nth-child(3){ width: 30%;margin-left:1rem;}
 
 /*.boxall{ border: 1px solid rgba(25,186,139,.17); padding:0 .3rem .3rem .3rem;  background: rgba(255,255,255,.04) url(../dpimg/line.png); background-size: 100% auto; position: relative; margin-bottom: .3rem; z-index: 10;}*/
 /*.boxall:before,*/

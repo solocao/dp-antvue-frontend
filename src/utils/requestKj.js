@@ -33,6 +33,10 @@ const err = (error) => {
         })
       }
     }
+    if (error.response.status === 500) {
+      notification.error({ message: '超时', description: '重新登录' })
+
+      }
   }
   return Promise.reject(error)
 }

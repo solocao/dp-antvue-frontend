@@ -1,7 +1,7 @@
 <template>
   <div  id="s-map">
-    <div id="chartMap" class="chartGauge" :style="{height:height,width:width,top:top}" v-if="!show"></div>
-    <baidu-map v-else :initData="initData" :baiduCityName="baiduCityName"></baidu-map>
+    <baidu-map  :initData="initData" :baiduCityName="baiduCityName" :style="style1"></baidu-map>
+    <div id="chartMap" class="chartGauge" style="height:10rem;width:9.5rem;" ></div>
   </div>
 </template>
 
@@ -22,6 +22,7 @@ export default {
     },
     data () {
         return{
+          style1:'',
             cityMap:{
                 "慈溪市": "330282",
                 "海曙区": "330203",
@@ -73,11 +74,11 @@ export default {
     ,
     watch: {},
     created () {
-        this.$nextTick(function(){
-        let self = this;
-        let myChart = echarts.init(document.getElementById('chartMap'));
-        this.loadmap2D('330200', 'ningbo');
-        });
+        // this.$nextTick(function(){
+        // let self = this;
+        // let myChart = echarts.init(document.getElementById('chartMap'));
+        // this.loadmap2D('330200', 'ningbo');
+        // });
     },
     mounted () {
         //初始化地图
@@ -88,7 +89,11 @@ export default {
         myChart.on("click", (params) =>{
             console.log(params, 'params')
             var that = this
-            that.show = true
+          chartMap.style.width  = '0px';
+          chartMap.style.height = '0px';
+          chartMap.style.top = '0px';
+          myChart.clear();
+          that.style1='height:9rem;width:8.5rem;'
             if(JSON.stringify(that.cityMap).search(params.name)=='-1'){
                 that.$router.push({ name: 'detaildp', params: {stationName:params.name,stationNum:params.value[3],stationID:params.value[4]} })
             }
@@ -123,11 +128,11 @@ export default {
                         121.829516,29.368717,100,13373685112,793
                     ]}
                 ];
-                
+                that.activeNum=1;
                 that.initData = that.scatterdata
                 that.baiduCityName = name
-            // that.loadmap2D(code,name)
-            
+
+
 
             //将上一级地图信息压入mapStack
             that.mapStack.push({
@@ -139,17 +144,33 @@ export default {
          /**
          绑定双击事件，并加载上一级地图
         */
-        myChart.getZr().on('dblclick', function(params) {
+         myChart.getZr().on('dblclick', function(params) {
             //当双击事件发生时，清除单击事件，仅响应双击事件
             // clearTimeout(timeFn);
-            // debugger;
             var map = that.mapStack.pop();
             if (!that.mapStack.length && !map) {
                 alert('已经到达最上一级地图了');
                 return;
             }
             that.loadmap2D(map.mapCode, map.mapName);
+           that.style1=''
         });
+
+
+      // document.getElementById("s-map").onmouseup=function(oEvent) {
+      //
+      //   if (!oEvent) oEvent=window.event;
+      //   if (oEvent.button==2) {
+      //     that.show = false
+      //     var map = that.mapStack.pop();
+      //     if (!that.mapStack.length && !map) {
+      //       alert('已经到达最上一级地图了');
+      //       return;
+      //     }
+      //     that.loadmap2D(map.mapCode, map.mapName);
+      //   }
+      // }
+
     },
     methods:{
         convertData(data) {
@@ -170,6 +191,7 @@ export default {
         },
 
         loadmap2D(mapCode, mapName){
+
             let chartMap=document.getElementById('chartMap');
             let smap = document.getElementById('s-map');
             var resizeWorldMapContainer = function () {
@@ -241,7 +263,7 @@ export default {
             //     ];
             // }
 
-            let myChart = echarts.init(document.getElementById('chartMap'));
+            let myChart = echarts.init(chartMap);
             var that=this;
             let option = {
                 geo: {
@@ -306,7 +328,7 @@ export default {
                             borderColor:'#fff',
                             borderWidth:1,
                             opacity: 1
-                        },        
+                        },
                         label:{
                             show:true,
                             formatter:'{b}',

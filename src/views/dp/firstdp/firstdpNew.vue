@@ -304,6 +304,8 @@
             this.executeTime1();
             this.executeTime2();
             this.executeTime3();
+          }).catch((res)=>{
+            this.$router.push({ name: 'dplogin' })
           });
         }else{
           this.groupOp.key=this.groupname;
