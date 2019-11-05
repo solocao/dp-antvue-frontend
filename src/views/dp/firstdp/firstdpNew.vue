@@ -110,7 +110,7 @@
           <!--<div class="map1"><img src="../dpimg/firstdp/picture/lbx.png"></div>-->
           <!--<div class="map4" id="map_1"></div>-->
           <!-- <mapecharts :cityName="cityName" :parameter="parameter"></mapecharts> -->
-          <map-two :cityName="cityName" :parameter="parameter"></map-two>
+          <map-two :cityName="cityName" :parameter="parameter"  :stationdata="stationdata" ref="maptwo"></map-two>
         </div>
       </li>
       <li>
@@ -227,6 +227,7 @@
               myChart8: {},
               MaxId:0,
               cityName:'宁波',
+              stationdata:'',
               parameter:{
                 start: 0,
                 limit: 100000,
@@ -249,6 +250,19 @@
   //用于数据初始化
   created:function(){
 
+    //加载站点数据
+    axiosKj({
+      url: '/GW.WIR/show/getKgzInfo.action',
+      method: 'post'
+      // data: parameter,
+      // params: loginParams
+    }).then((response) => {
+      var datajson = eval('(' + response + ')').data;
+      if(datajson.length>0){
+        this.$refs.maptwo.setstationdata(datajson);
+        this.stationdata=datajson;
+      }
+    });
     // $(window).load(function(){
     //   $(".loading").fadeOut()
     // })
@@ -298,6 +312,7 @@
               this.groupNames.push(groupop);
             }
             this.cityName=this.groupNames[0].label;
+            this.$refs.maptwo.load(this.cityName);
             this.getgroupid();
             this.stationAction();
 
@@ -308,11 +323,18 @@
             this.$router.push({ name: 'dplogin' })
           });
         }else{
+          axiosKj({
+            url: '/GW.WIR/cabTGroup/getGroupList.action',
+            method: 'post',
+          }).catch((res)=> {
+            this.$router.push({name: 'dplogin'})
+          });
           this.groupOp.key=this.groupname;
           this.groupOp.value=this.groupname;
           this.groupOp.label=this.groupname;
           this.groupNames.push(this.groupOp);
           this.cityName=this.groupNames[0].label;
+          this.$refs.maptwo.load(this.cityName);
           this.getgroupid();
           this.stationAction();
           this.executeTime1();
@@ -371,34 +393,7 @@
         parameter.limit=100000;
         parameter.ROLENAME=encodeURI('超级管理员');
         parameter.stationNum=13373685112;
-        // new Date('2019-10-14 16:39:12').getTime()
-        // axios.defaults.headers = {
-        //   "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
-        // }
-        // axios.defaults.transformRequest = [function (data) {
-        //   var newData = "";
-        //   for (var k in data) {
-        //     newData += encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) + '&'
-        //   }
-        //   return newData
-        // }]
-        // axios.get('/GW/alarm/getKgzAlarmList.action', {
-        //   params: {
-        //     // stationID: 4,
-        //     ROLENAME: '超级管理员',
-        //     // endDt: '2019-10-15',
-        //     start: 0,
-        //     limit: 100000,
-        //     stationNum:
-        //   }
-        // })
 
-        // this.executeTime1();
-        // this.executeTime2();
-        // this.executeTime3();
-      //   this.timer1=setInterval(function(){
-      //     that.executeTime1();
-      // },60000);
 
         var surl2='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTggKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkQ2MjVEMEY4RUMyQjExRTk4MzZBRERCOUEwQzhENTlBIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkQ2MjVEMEY5RUMyQjExRTk4MzZBRERCOUEwQzhENTlBIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RDYyNUQwRjZFQzJCMTFFOTgzNkFEREI5QTBDOEQ1OUEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RDYyNUQwRjdFQzJCMTFFOTgzNkFEREI5QTBDOEQ1OUEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5rr3QDAAAAZklEQVR42mJ8oRHIAASqQNwBxC4MELAHiCuA+DYLkFAH4hNALMCAAEFA7ATEFkxAog1NEgZAYm1MSMZiA25MDAQAE9RBuMAukIJqIP6ARRIkVg1ScAPkWiBeB8SfoXgdVOwGQIABADmOEaKmFMIAAAAAAElFTkSuQmCC';
         var k=1;
@@ -412,7 +407,10 @@
 
 
 
-      },
+
+
+
+          },
       filters: {
         formatDateTime(value) {
           let date = new Date(value);
@@ -685,6 +683,8 @@
           //右上bar
           this.executeTime2();
 
+
+          this.refs.maptwo.setcenterAndZoom(value);
 
           // this.$router.push({ name: 'detaildp',path:"/dp/detaildp" })
         },

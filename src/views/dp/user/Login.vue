@@ -41,6 +41,21 @@
               <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }"/>
             </a-input>
           </a-form-item>
+
+          <a-row :gutter="16">
+            <a-col class="gutter-row" :span="16">
+              <a-form-item>
+                <a-input size="large" type="text" placeholder="验证码" v-decorator="['captcha', {rules: [{ required: true, message: '请输入验证码' }], validateTrigger: 'blur'}]">
+                  <a-icon slot="prefix" type="mail" :style="{ color: 'rgba(0,0,0,.25)' }"/>
+                </a-input>
+              </a-form-item>
+            </a-col>
+            <a-col class="gutter-row" :span="8">
+              <img alt="验证码"  :src="srcyzm" id="code" @click="showImageCode" />
+            </a-col>
+          </a-row>
+
+
         </a-tab-pane>
 
       </a-tabs>
@@ -117,10 +132,13 @@ export default {
         // login type: 0 email, 1 username, 2 telephone
         loginType: 0,
         smsSendBtn: false
-      }
+      },
+      code:'',
+      srcyzm:''
     }
   },
   created () {
+    this.srcyzm = "/GW.WIR/CodeServlet?code=" + this.createCode();
     sessionStorage.setItem('success', false);
     get2step({ })
       .then(res => {
@@ -144,11 +162,42 @@ export default {
       }
       callback()
     },
+    showImageCode(){
+      // 显示验证码
+      document.getElementById("code").src = "/GW.WIR/CodeServlet?code=" + this.createCode();
+    },
+    createCode() {
+      this.code='';
+      var codeLength = 5;// 验证码的长度
+      // 所有候选组成验证码的字符，可以用中文
+      var selectChar = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C',
+        'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+        'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c',
+        'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+        'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+      for (var i = 0; i < codeLength; i++) {
+        var charIndex = Math.floor(Math.random() * 60);
+        this.code += selectChar[charIndex];
+      }
+      return this.code;
+    },
     handleTabClick (key) {
       this.customActiveKey = key
       // this.form.resetFields()
     },
     handleSubmit (e) {
+
+      var inputCode = document.getElementById("captcha").value.toLowerCase();
+      if (inputCode.length <= 0) {
+        alert("请输入验证码！");
+        return ;
+      } else if (inputCode != this.code.toLowerCase()) {
+        alert("验证码输入错误！");
+        this.showImageCode();// 刷新验证码
+        return ;
+      }
+
+
       e.preventDefault()
       const {
         form: { validateFields },

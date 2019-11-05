@@ -1,6 +1,6 @@
 <template>
   <div  id="s-map">
-    <baidu-map  :initData="initData" :baiduCityName="baiduCityName" :style="style1"></baidu-map>
+    <baidu-map  :initData="initData" :baiduCityName="baiduCityName" :stationdata="stationdata" :style="style1" ref="bmap"></baidu-map>
     <div id="chartMap" class="chartGauge" style="height:10rem;width:9.5rem;" ></div>
   </div>
 </template>
@@ -24,30 +24,20 @@ export default {
         return{
           style1:'',
             cityMap:{
-                "慈溪市": "330282",
-                "海曙区": "330203",
-                "江东区": "330204",
-                "江北区": "330205",
-                "北仑区": "330206",
-                "镇海区": "330211",
-                "鄞州区": "330212",
-                "象山县": "330225",
-                "宁海县": "330226",
-                "余姚市": "330281",
-                "奉化市": "330283"
+                "慈溪": "330282",
+                "海曙": "330203",
+                "江东": "330204",
+                "江北": "330205",
+                "北仑": "330206",
+                "镇海": "330211",
+                "鄞州": "330212",
+                "象山": "330225",
+                "宁海": "330226",
+                "余姚": "330281",
+                "奉化": "330283",
+                "宁波": "330200"
             },
             geoCoordMap:{
-                "开关站5":[121.547345,29.853843],
-                "开关站1":[121.907345,29.7538430000001],
-                "开关站2": [121.077345,30.2538430000001],
-                "开关站3": [121.577345,29.533843],
-                "开关站4": [121.522974882813,29.9892946601563],
-                "开关站6": [121.611710234375,29.8565480781251],
-                "开关站7": [121.807345,29.253843 ],
-                "开关站8": [122.233922148438,28.8660353828126],
-                "开关站9": [121.092594023438,30.2424977851563],
-                "开关站10": [121.63427859375,30.0507741523438 ],
-                "开关11": [121.489215117188,29.8913259101563],
                 "象山县": [121.889215117188,29.2913259101563],
                 "鄞州区": [121.489215117188,29.7913259101563],
                 "奉化市":[121.489215117188,29.5913259101563],
@@ -67,13 +57,22 @@ export default {
             scatterdata:[],
             initData:[],
             baiduCityName:'',
-            show:false
+            show:false,
+            stationgcityroup:{}
         }
     },
-    props: ['cityName','parameter']
+    props: ['cityName','parameter','stationdata']
     ,
     watch: {},
     created () {
+
+      for(var i=0;i<this.stationdata.length;i++){
+
+        var stationv=this.stationdata[i];
+        // 创建标注
+        // this.addPoint(stationv)
+        // this.addMaker()
+      }
         // this.$nextTick(function(){
         // let self = this;
         // let myChart = echarts.init(document.getElementById('chartMap'));
@@ -81,8 +80,8 @@ export default {
         // });
     },
     mounted () {
+
         //初始化地图
-        this.loadmap2D('330200', 'ningbo');
         let that = this;
         var cityMap=this.cityMap;
         let myChart = echarts.init(document.getElementById('chartMap'));
@@ -94,9 +93,10 @@ export default {
           chartMap.style.top = '0px';
           myChart.clear();
           that.style1='height:9rem;width:8.5rem;'
-            if(JSON.stringify(that.cityMap).search(params.name)=='-1'){
-                that.$router.push({ name: 'detaildp', params: {stationName:params.name,stationNum:params.value[3],stationID:params.value[4]} })
-            }
+          this.$refs.bmap.addMaker(params.name);
+            // if(JSON.stringify(that.cityMap).search(params.name)=='-1'){
+            //     that.$router.push({ name: 'detaildp', params: {stationName:params.name,stationNum:params.value[3],stationID:params.value[4]} })
+            // }
             let name = ''
             let code = ''
             if (!params.data){
@@ -106,31 +106,31 @@ export default {
                 name = params.data.name
                 code = params.data.cityCode
             }
-            that.scatterdata=[{
-                    "name": "奥林公馆开关站",
-                    "value": [
-                        121.739516,29.368717,100,13373685112,793
-                    ]},{
-                    "name": "开关站1",
-                    "value": [
-                        121.789516,29.268717,100,13373685112,793
-                    ]},{
-                    "name": "开关站2",
-                    "value": [
-                        121.789516,29.228717,100,13373685112,793
-                    ]},{
-                    "name": "开关站3",
-                    "value": [
-                        121.889516,29.238717,100,13373685112,793
-                    ]},{
-                    "name": "开关站4",
-                    "value": [
-                        121.829516,29.368717,100,13373685112,793
-                    ]}
-                ];
-                that.activeNum=1;
-                that.initData = that.scatterdata
-                that.baiduCityName = name
+            // that.scatterdata=[{
+            //         "name": "奥林公馆开关站",
+            //         "value": [
+            //             121.739516,29.368717,100,13373685112,793
+            //         ]},{
+            //         "name": "开关站1",
+            //         "value": [
+            //             121.789516,29.268717,100,13373685112,793
+            //         ]},{
+            //         "name": "开关站2",
+            //         "value": [
+            //             121.789516,29.228717,100,13373685112,793
+            //         ]},{
+            //         "name": "开关站3",
+            //         "value": [
+            //             121.889516,29.238717,100,13373685112,793
+            //         ]},{
+            //         "name": "开关站4",
+            //         "value": [
+            //             121.829516,29.368717,100,13373685112,793
+            //         ]}
+            //     ];
+
+                // that.initData = that.scatterdata
+                // that.baiduCityName = name
 
 
 
@@ -173,6 +173,21 @@ export default {
 
     },
     methods:{
+      setstationdata(datajson){
+        this.$refs.bmap.setdatajson(datajson);
+      },
+      setcenterAndZoom(stationNum){
+
+      },
+      load(cityName){
+
+        this.loadmap2D(this.cityMap[cityName], 'ningbo');
+        this.loadmarket(cityName);
+      },
+      loadmarket(cityName){
+        var vd=[];
+
+      },
         convertData(data) {
             data=data[0];
             let self = this;
