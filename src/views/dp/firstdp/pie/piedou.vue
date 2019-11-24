@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="mappie1"><img src="../../dpimg/firstdp/picture/jt.png"></div>
-    <div id="piedou" style="height:400px;width:420px"></div>
+    <!--<div id="piedou" style="height:400px;width:420px"></div>-->
+    <div id="piedou" style="height:4.2rem;width:4.35rem"></div>
   </div>
 </template>
 
@@ -30,6 +31,13 @@
     },
     watch: {},
     methods: {
+      resize(){
+        // if(this.isbmap==0){
+        let piedou = document.getElementById('piedou');
+        let pieChart = this.$echarts.init(piedou);
+        pieChart.resize();
+        // }
+      },
       showpieLinex(){
         var myChartLine = echarts.init(document.getElementById('pieviewLines'));
         var tips = 0;
@@ -201,7 +209,7 @@
        let grid = {
          // left: '5px', // 与容器左侧的距离
          // right: '5px', // 与容器右侧的距离
-         top: '-500px', // 与容器顶部的距离
+         top: '-1rem', // 与容器顶部的距离
          // bottom: '50px', // 与容器底部的距离
        };
        let placeHolderStyle = {
@@ -323,7 +331,7 @@
            text: total,
            // subtext: '接入总数 \n '+total+' \n 在线数:'+opennum+'   离线数:'+closenum,
            x: 'center',
-           y: '120px',
+           y: '30%',
            textStyle: {
              fontSize:24,
              fontWeight:'bold',
@@ -342,14 +350,14 @@
                width: 22,
                height: 22
              },
-             left: '140px',
+             left: '30%',
              top: 'center'
            },
              {
                type: 'text',
                z: 100,
                left: 'center',
-               top: '160px',
+               top: '40%',
                style: {
                  fill: '#00CCFF',
                  text: [
@@ -361,7 +369,7 @@
              {
                type: 'text',
                z: 100,
-               left: '170px',
+               left: '37%',
                top: 'center',
                style: {
                  fill: '#66CC99',
@@ -378,12 +386,12 @@
                  width: 22,
                  height: 22
                },
-               left: '230px',
+               left: '55%',
                top: 'center'
              },{
                type: 'text',
                z: 100,
-               left: '260px',
+               left: '62%',
                top: 'center',
                style: {
                  fill: '#999999',
@@ -395,8 +403,8 @@
              },{
                type: 'text',
                z: 100,
-               left: '140px',
-               top: '220px',
+               left: '30%',
+               top: '55%',
                style: {
                  fill: '#66CC99',
                  text: [
@@ -407,8 +415,8 @@
              },{
                type: 'text',
                z: 100,
-               left: '230px',
-               top: '220px',
+               left: '55%',
+               top: '55%',
                style: {
                  fill: '#66CC99',
                  text: [

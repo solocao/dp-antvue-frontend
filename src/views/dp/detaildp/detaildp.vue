@@ -1,6 +1,6 @@
 <template>
   <div class="Index_bgImg">
-    <p  class="Index_left_p2" style="color:#00BB00">配变站所智能预警平台</p>
+    <p  class="Index_left_p2" style="color:rgba(40,205,156,1)">配变站所智能预警平台</p>
     <div style="position: relative;top: 5rem;">
       <img style="position: absolute;top:0.28rem;" src="./img/icon-back.png">
       <span @click="backHandle" style="position: absolute;left:1rem;font-size: 16px;font-family:PingFang-SC;color:rgba(255,255,255,1);">返回</span>

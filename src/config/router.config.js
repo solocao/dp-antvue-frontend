@@ -17,8 +17,8 @@ export const asyncRouterMap = [
         component: RouteView,
         children: [
           {
-            path: '/dp/first',
-            name: 'first',
+            path: '/dp/first-detail',
+            name: 'first-detail',
             component: () => import('@/views/dp/firstdp/first'),
             meta: { title: '首页', keepAlive: false, permission: [ 'user' ] }
           },
@@ -128,43 +128,43 @@ export const constantRouterMap = [
       {
         path: '/dp/detaildp',
         name: 'detaildp',
-        component: () => import('@/views/dp/detaildp/detaildp'),
+        component: () => import('@/views/dp/stationdp/detaildp'),
         meta: { title: '详细页', keepAlive: true, permission: [ 'user' ] }
       },
       {
         path: '/dp/menjin-detail',
         name: 'menjin-detail',
-        component: () => import('@/views/dp/detaildp/menjin-detail'),
+        component: () => import('@/views/dp/stationdp/menjin-detail'),
         meta: { title: '门禁详情页', keepAlive: false, permission: [ 'user' ] }
       },
       {
         path: '/dp/yangan-detail',
         name: 'yangan-detail',
-        component: () => import('@/views/dp/detaildp/yangan-detail'),
+        component: () => import('@/views/dp/stationdp/yangan-detail'),
         meta: { title: '烟感详情页', keepAlive: false, permission: [ 'user' ] }
       },
       {
         path: '/dp/shuiwei-detail',
         name: 'shuiwei-detail',
-        component: () => import('@/views/dp/detaildp/shuiwei-detail'),
+        component: () => import('@/views/dp/stationdp/shuiwei-detail'),
         meta: { title: '水位详情页', keepAlive: false, permission: [ 'user' ] }
       },
       {
         path: '/dp/chushiqi-detail',
         name: 'chushiqi-detail',
-        component: () => import('@/views/dp/detaildp/chushiqi-detail'),
+        component: () => import('@/views/dp/stationdp/chushiqi-detail'),
         meta: { title: '除湿器详情页', keepAlive: false, permission: [ 'user' ] }
       },
       {
         path: '/dp/wendu-detail',
         name: 'wendu-detail',
-        component: () => import('@/views/dp/detaildp/wendu-detail'),
+        component: () => import('@/views/dp/stationdp/wendu-detail'),
         meta: { title: '温度详情页', keepAlive: false, permission: [ 'user' ] }
       },
       {
         path: '/dp/shidu-detail',
         name: 'shidu-detail',
-        component: () => import('@/views/dp/detaildp/shidu-detail'),
+        component: () => import('@/views/dp/stationdp/shidu-detail'),
         meta: { title: '湿度详情页', keepAlive: false, permission: [ 'user' ] }
       },
       {
@@ -183,14 +183,14 @@ export const constantRouterMap = [
   },
   {
     path: '/user',
-    component: UserLayout,
+    component: RouteView,
     redirect: '/user/login',
     hidden: true,
     children: [
       {
         path: '/user/dplogin',
         name: 'dplogin',
-        component: () => import('@/views/dp/user/Login'),
+        component: () => import('@/views/dp/user/loginNew'),
         meta: { title: '登录', keepAlive: false, permission: [ 'user' ] }
       },
       {

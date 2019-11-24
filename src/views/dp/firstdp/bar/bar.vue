@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="bar" style="height:400px;width:400px"></div>
+    <div id="bar" style="height:300px;width:460px"></div>
   </div>
 </template>
 
@@ -50,12 +50,17 @@
        // var data = [78, 60, 60, 70, 69,86]
        var titlename = ['红外报警', '湿度报警', '温度报警', '水位报警', '门磁报警','电源报警'];
        var valdata = data;
+       var totnum=0;
+       for(var i=0;i<valdata.length;i++){
+         totnum=totnum+valdata[i]
+       }
        var myColor = ['#1089E7', '#F57474', '#56D0E3', '#F8B448', '#8B78F6','#00CCFF'];
       var option = {
         grid:{
           top:'0%',
-        left:'15%',
-        height:'100%'
+        left:'18.5%',
+        height:'100%',
+          right:'15%'
         },
          xAxis: {
            show: false
@@ -64,6 +69,8 @@
            show: true,
            data: titlename,
            inverse: true,
+           position:'left',
+           // padding: [3, 4, 5, 10],
            axisLine: {
              show: false
            },
@@ -74,6 +81,7 @@
              show: false
            },
            axisLabel: {
+             fontSize:18,
              textStyle: {
                color: '#00CCFF'
              },
@@ -90,8 +98,15 @@
            inverse: true,
            data: valdata,
            axisLabel: {
+             fontSize:16,
              textStyle: {
                color: '#00CCFF'
+             },
+             formatter: function(value, index) {
+               if(value==0){
+                 return 0
+               }
+               return  (value/totnum*100).toFixed(2)+'%'
              }
            },
            axisLine: {
@@ -117,14 +132,21 @@
                color: function(params) {
                  var num = myColor.length;
                  return myColor[params.dataIndex % num]
-               },
+               }
+               // ,
+               // formatter:function (value) {
+               //   return (value.value/totnum*100).toFixed(2)+'%'
+               // }
              }
            },
            label: {
              normal: {
                show: true,
-               position: 'inside',
-               formatter: '{c}%'
+               position:'inside',
+               fontSize:16,
+               formatter:  function(value){
+                 return value.value;
+               }
              }
            },
          }]

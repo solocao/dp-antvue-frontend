@@ -186,7 +186,11 @@
     // });
   },
       mounted(){
+        window.onresize=function(){
 
+          var whei=$(window).width();
+          $("html").css({fontSize:whei/20})
+        }
         // $(".loading").fadeOut()
         // $(document).ready(function(){
         var that=this;

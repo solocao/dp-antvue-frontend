@@ -1,12 +1,12 @@
 <template>
-  <div class="body">
+  <div class="firstdp_body">
   <!--<div class="loading">-->
     <!--<div class="loadbox"> <img src="../dpimg/firstdp/picture/loading.gif" /> 页面加载中... </div>-->
   <!--</div>-->
 
-  <div class="head">
+  <div class="firstdp_head">
     <div class="weather_l ">
-      <span> <button @click="rebackclick" class="form_select_L1">返回主页</button></span>
+      <span> <button @click="rebackclick" class="form_select_L1">返回</button></span>
       <span></span>
       <sapn>
       <Select class="form_select_L1" @change="cityclick" id="city">
@@ -16,24 +16,28 @@
       </Select></sapn>
       <span >{{date1 | formatDateTime}}</span>
     </div>
-    <h1 style="color:#00BB00">配变站所智能预警平台</h1>
+    <button class="head_center_form" @click="backmap">
+    <h1 style="color:rgba(40,205,156,1)">配变站所智能预警平台</h1>
+    </button>
     <div class="weather ">
 
       <span > <Select id="site" class="form_select_R1" @change="testclick" v-model="selected.site" >
-        <option v-for="item in stationNames" :key="item.key" :label="item.label" :value="item.value"></option>
+        <option v-for="item in stationNames" :key="item.key" :label="item.label" :value="item.value" ></option>
      <!--<Option value="0" >全部站点</Option>-->
       <!--<Option value ="0574020B020238">骆城芳洲2</Option>-->
       <!--<Option value ="13373685112">奥林公馆开关站</Option>-->
       <!--<Option value ="马新二号">奥林公馆开关站</Option>-->
-      </Select></span></div>
+      </Select></span>
+      <el-button v-popover:popover4 class="form_select_L1">明细</el-button>
+    </div>
   </div>
-  <div class="mainbox">
+  <div class="firstmainbox">
     <ul class="clearfix">
       <li>
-        <div class="boxall" style="height: 4.2rem">
+        <div class="boxall" style="height: 4.2rem;width: 5rem;">
           <div class="alltitle">
             <img src="../dpimg/firstdp/bg-icon-L1.png"></img>
-            <span class="span_L1" style="color:#00BB00">站点统计信息</span>
+            <span class="span_L1" style="color:rgba(40,205,156,1)">站点统计信息</span>
             <span class="span_L2" style="color:#00CCFF">安全运维：</span>
             <span class="span_L3" style="color:#00CCFF">100</span>
           </div>
@@ -50,139 +54,155 @@
               <!--<li><h2>1920</h2><span>测试1</span></li>-->
               <!--<li><h2>19%</h2><span>测试1</span></li>-->
             <!--</ul>-->
-            <pieecharts ref="pieecharts"></pieecharts>
+            <pieecharts ref="pieecharts" @pieNum="setpieNum"></pieecharts>
+            <div class="firstNew_left_div">
+              <ul><!--
+                --><li><!--
+                  --><p>接入总数</p><!--
+                  --><span>{{totalCommit}}个</span><!--
+                --></li><!--
+                --><li><!--
+                  --><p>在线数</p><!--
+                  --><span>{{opennumCommit}}个</span><!--
+                --></li><!--
+                --><li><!--
+                  --><p>离线数</p><!--
+                  --><span>{{closenumCommit}}个</span><!--
+                --></li>
+              </ul>
+            </div>
 
           </div>
           <!--<div class="boxfoot"></div>-->
         </div>
-        <div class="boxall" style="height: 4rem">
+        <div class="boxall" style="height: 5rem;    width: 6rem;">
           <div class="alltitle">
             <img src="../dpimg/firstdp/bg-icon-L1.png"></img>
-            <span class="span_L1" style="color:#00BB00">视频监测分析</span>
+            <span class="span_L1" style="color:rgba(40,205,156,1)">视频监测分析</span>
             <span class="span_L2" style="color:#00CCFF">报警总数：</span>
             <span class="span_L3" style="color:#00CCFF">108</span>
           </div>
-          <div class="adduser">
+          <div class="video_div_left">
             <ul class="clearfix">
-              <!--<li class="clearfix"> <span class="pulll_left" style="color:#00CCFF"></span>奥林公馆 <span class="pulll_center" style="color:#00CCFF">异常 </span><img src="../dpimg/firstdp/bg-p-L2.png" ><span class="pulll_right" style="color:#00CCFF" ><button class="form_button_L" @click="rng">未按正常操作规范</button></span> </li>-->
-              <!--<li class="clearfix"> <span class="pulll_left" style="color:#00CCFF">奥林公馆</span> <span class="pulll_center" style="color:#00CCFF">异常 </span><img src="../dpimg/firstdp/bg-p-L2.png" ><span class="pulll_right" style="color:#00CCFF" ><button class="form_button_L" >未按正常操作规范</button></span> </li>-->
-              <!--<li class="clearfix"> <span class="pulll_left" style="color:#00CCFF">Camear02</span><img src="../dpimg/firstdp/bg-p-L2.png"> <span class="pulll_center" style="color:#00CCFF">异常 </span><span class="pulll_right" style="color:#00CCFF" ><button class="form_button_L" @click="rng">未按正常操作规范</button> </span> </li>-->
-              <!--<li class="clearfix"> <span class="pulll_left" style="color:#00CCFF">Camear03</span><img src="../dpimg/firstdp/bg-p-L2.png"> <span class="pulll_center" style="color:#00CCFF">异常 </span><span class="pulll_right" style="color:#00CCFF" ><button class="form_button_L" @click="rng">未按正常操作规范</button> </span> </li>-->
-              <!--<li class="clearfix"> <span class="pulll_left" style="color:#00CCFF">Camear04</span><img src="../dpimg/firstdp/bg-p-L2.png"> <span class="pulll_center" style="color:#00CCFF">异常 </span><span class="pulll_right" style="color:#00CCFF" ><button class="form_button_L" @click="rng">未按正常操作规范</button> </span> </li>-->
-              <!--<li class="clearfix"> <span class="pulll_left" style="color:#00CCFF">Camear01</span> <span class="pulll_center" style="color:#00CCFF">异常 </span><img src="../dpimg/firstdp/bg-p-L2.png" ><span class="pulll_right" style="color:#00CCFF" ><button class="form_button_L" @click="rng">未按正常操作规范</button> </span> </li>-->
-              <!--<li class="clearfix"> <span class="pulll_left" style="color:#00CCFF">Camear02</span><img src="../dpimg/firstdp/bg-p-L2.png"> <span class="pulll_center" style="color:#00CCFF">异常 </span><span class="pulll_right" style="color:#00CCFF" ><button class="form_button_L" @click="rng">未按正常操作规范</button> </span> </li>-->
-              <!--<li class="clearfix"> <span class="pulll_left" style="color:#00CCFF">Camear03</span><img src="../dpimg/firstdp/bg-p-L2.png"> <span class="pulll_center" style="color:#00CCFF">异常 </span><span class="pulll_right" style="color:#00CCFF" ><button class="form_button_L" @click="rng">未按正常操作规范</button> </span> </li>-->
-              <!--<li class="clearfix"> <span class="pulll_left" style="color:#00CCFF">Camear04</span><img src="../dpimg/firstdp/bg-p-L2.png"> <span class="pulll_center" style="color:#00CCFF">异常 </span><span class="pulll_right" style="color:#00CCFF" ><button class="form_button_L" @click="rng">未按正常操作规范</button> </span> </li>-->
-
+              <li class="clearfix">
+                <p>摄像头</p>
+                <span >10 </span>
+                <img src="../dpimg/firstdp/bg-video-icon.png" />
+              </li>
+              <li class="clearfix">
+                <p>温度</p>
+                <span >6 </span>
+                <img src="../dpimg/firstdp/bg-temp-icon.png" />
+              </li>
+              <li class="clearfix">
+                <p>湿度</p>
+                <span >2 </span>
+                <img src="../dpimg/firstdp/bg-hum-icon.png" />
+              </li>
+              <li class="clearfix ">
+                <p>门禁</p>
+                <span class="video_div_left_span_offset">5 </span>
+                <img src="../dpimg/firstdp/bg-access-icon.png" />
+              </li>
+              <li class="clearfix ">
+                <p>烟感</p>
+                <span class="video_div_left_span_offset">6 </span>
+                <img src="../dpimg/firstdp/bg-smoke-icon.png" />
+              </li>
+              <li class="clearfix ">
+                <p>水位</p>
+                <span class="video_div_left_span_offset">2 </span>
+                <img src="../dpimg/firstdp/bg-level-icon.png" />
+              </li>
             </ul>
           </div>
-          <!--<div class="boxfoot"></div>-->
+
         </div>
-        <!--<div class="boxall" style="height: 2.95rem">-->
-          <!--<div class="alltitle">-->
-            <!--<img src="../dpimg/firstdp/bg-icon-L1.png"></img>-->
-            <!--<span class="span_L1" style="color:#00BB00">空开实时信息</span>-->
-            <!--<span class="span_L2" style="color:#00CCFF">报警总数：</span>-->
-            <!--<span class="span_L3" style="color:#00CCFF">68</span>-->
-          <!--</div>-->
-          <!--<div id="echarts4" style="height: 2.2rem; width: 100%;">-->
-            <!--<scatterecharts></scatterecharts>-->
-          <!--</div>-->
-          <!--&lt;!&ndash;<div class="boxfoot"></div>&ndash;&gt;-->
-        <!--</div>-->
+
       </li>
       <li >
-        <!--<div class="bar">-->
-          <!--<div class="barbox">-->
-            <!--<ul class="clearfix">-->
-              <!--<li class="pulll_left counter">12581189</li>-->
-              <!--<li class="pulll_left counter">3912410</li>-->
-            <!--</ul>-->
-          <!--</div>-->
-          <!--<div class="barbox2">-->
-            <!--<ul class="clearfix">-->
-              <!--<li class="pulll_left">在线</li>-->
-              <!--<li class="pulll_left">离线</li>-->
-            <!--</ul>-->
-          <!--</div>-->
-        <!--</div>-->
+
         <div class="map">
-          <!--<div class="map1"><img src="../dpimg/firstdp/picture/lbx.png"></div>-->
-          <!--<div class="map4" id="map_1"></div>-->
-          <!-- <mapecharts :cityName="cityName" :parameter="parameter"></mapecharts> -->
+
+
           <map-two :cityName="cityName"  :parameter="parameter"  :stationdata="stationdata" :dataJsonList="dataJsonList" ref="maptwo" ></map-two>
         </div>
       </li>
       <li>
-        <!--<div class="boxall" style="height:3rem">-->
 
-          <!--<img src="../dpimg/firstdp/bg-icon-L1.png"></img>-->
-          <!--<span class="span_R1" style="color:#00BB00">告警类型分析</span>-->
-          <!--<img src="../dpimg/firstdp/bg-form-R1.png"></img>-->
-          <!--&lt;!&ndash;<div class="alltitle1">&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--&lt;!&ndash;<div class="tabs">&ndash;&gt;-->
-            <!--&lt;!&ndash;<ul class="clearfix">&ndash;&gt;-->
-              <!--&lt;!&ndash;<li><a class="active" href="#">7天</a></li>&ndash;&gt;-->
-              <!--&lt;!&ndash;<li><a href="#">15天</a></li>&ndash;&gt;-->
-              <!--&lt;!&ndash;<li><a href="#">30天</a></li>&ndash;&gt;-->
-            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--<div class="clearfix">-->
-            <!--&lt;!&ndash;<div class="sy" id="echarts6"></div>&ndash;&gt;-->
-            <!--&lt;!&ndash;<div class="sy" id="echarts7"></div>&ndash;&gt;-->
-            <!--&lt;!&ndash;<div class="sy" id="echarts8"></div>&ndash;&gt;-->
-            <!--<pie3decharts></pie3decharts>-->
-          <!--</div>-->
-          <!--&lt;!&ndash;<div class="addnew">&ndash;&gt;-->
-            <!--&lt;!&ndash;<div class="tit02"><span>今日站点列表</span></div>&ndash;&gt;-->
-            <!--&lt;!&ndash;<div class="adduser">&ndash;&gt;-->
-              <!--&lt;!&ndash;<ul class="clearfix">&ndash;&gt;-->
-                <!--&lt;!&ndash;<li class="clearfix"> <span class="pulll_left"><img src="../dpimg/icon-g.png">马新一品</span> <span class="pulll_right">温度异常 </span> </li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li class="clearfix"> <span class="pulll_left"><img src="../dpimg/icon-g.png">马新一品</span> <span class="pulll_right">温度异常 </span> </li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li class="clearfix"> <span class="pulll_left"><img src="../dpimg/icon-g.png">马新一品</span> <span class="pulll_right">温度异常 </span> </li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li class="clearfix"> <span class="pulll_left"><img src="../dpimg/icon-g.png">马新一品</span> <span class="pulll_right">温度异常 </span> </li>&ndash;&gt;-->
-              <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--&lt;!&ndash;<div class="boxfoot"></div>&ndash;&gt;-->
-        <!--</div>-->
-        <div class="boxall1" style="height: 7rem;">
+        <div class="boxall1" style="height: 7.5rem;width: 5rem;">
           <img src="../dpimg/firstdp/bg-icon-L1.png"></img>
-          <span class="span_R1" style="color:#00BB00">24小时实时信息</span>
+          <span class="span_R1" style="color:rgba(40,205,156,1)" >24小时实时信息</span>
           <img src="../dpimg/firstdp/bg-form-R1.png"></img>
-          <!--<div class="alltitle">异常信息检测</div>-->
-          <!--<div class="clearfix">-->
-            <barecharts ref="barecharts"></barecharts>
-          <!--</div>-->
-          <!--<div class="wrap">-->
-            <!--<ul>-->
-              <!--<li>-->
-                <!--<p>马新一品-温度异常-2019.10.9 08:09:12</p>-->
-              <!--</li>-->
-              <!--<li>-->
-                <!--<p>马新一品-温度异常-2019.10.9 08:09:12</p>-->
-              <!--</li>-->
-              <!--<li>-->
-                <!--<p>马新一品-温度异常-2019.10.9 08:09:12</p>-->
-              <!--</li>-->
-              <!--<li>-->
-                <!--<p>马新一品-温度异常-2019.10.9 08:09:12</p>-->
-              <!--</li>-->
-              <!--<li>-->
-                <!--<p>马新一品-温度异常-2019.10.9 08:09:12</p>-->
-              <!--</li>-->
-              <!--<li>-->
-                <!--<p>马新一品-温度异常-2019.10.9 08:09:12</p>-->
-              <!--</li>-->
-            <!--</ul>-->
-          <!--</div>-->
-          <div class="addNewd" id="con" >
+
+          <pie3decharts ref="pie3decharts"  @pieClick="pieClick"></pie3decharts>
+
+          <el-popover
+            ref="popover4"
+            placement="right"
+            width="730"
+            popper-class="popperclass"
+            trigger="click">
+            <el-table :data="tableData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;max-height: 40rem;">
+              <el-table-column width="200" property="CREATEDATE" label="日期"  header-align="center" align="center"></el-table-column>
+              <el-table-column width="400" property="STATIONNAME" label="站点名称"  header-align="center" align="center"></el-table-column>
+              <el-table-column width="100" property="ALARMTYPE" label="告警类型"  header-align="center" align="center"></el-table-column>
+            </el-table>
+            <el-pagination
+              style="margin-top: 0.5rem"
+              @size-change="sizeChangeHandle"
+              @current-change="currentChangeHandle"
+              :current-page="pageIndex"
+              :page-sizes="[10]"
+              :page-size="pageSize"
+              :total="totalPage"
+              layout="total, sizes, prev, pager, next, jumper">
+            </el-pagination>
+          </el-popover>
+
+          <el-popover
+            ref="popover5"
+            placement="right"
+            width="730"
+            v-model="visible"
+            popper-class="popperclass1"
+            trigger="click">
+            <el-table :data="tablePieData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;max-height: 40rem;">
+              <el-table-column width="200" property="CREATEDATE" label="日期"  header-align="center" align="center"></el-table-column>
+              <el-table-column width="400" property="STATIONNAME" label="站点名称"  header-align="center" align="center"></el-table-column>
+              <el-table-column width="100" property="ALARMTYPE" label="告警类型"  header-align="center" align="center"></el-table-column>
+            </el-table>
+            <el-pagination
+              style="margin-top: 0.5rem"
+              @size-change="sizeChangeHandlePie"
+              @current-change="currentChangeHandlePie"
+              :current-page="pagePieIndex"
+              :page-sizes="[10]"
+              :page-size="pagePieSize"
+              :total="totalPiePage"
+              layout="total, sizes, prev, pager, next, jumper">
+            </el-pagination>
+          </el-popover>
+          <el-dialog
+            title=""
+            :visible.sync="dialogVisible"
+            custom-class="customdialog"
+            :before-close="handleClose"
+            width="30%"
+            center
+            :modal="false">
+            <!--:before-close="handleClose">-->
+
+            <span class="dialogstxt">{{dialogvalue}}</span>
+            <span slot="footer" class="dialog-footer">
+    <el-button @click="handleClose">忽 略</el-button>
+    <el-button type="primary" @click="handleClose">处 理</el-button>
+  </span>
+  </span>
+          </el-dialog>
+
+          <div class="firstdp_addNewd" id="con" @mouseenter="enter()" @mouseleave="leave()">
             <ul class="clearfix1">
-              <!--<li class="clearfix1"> <span class="pulll_left" style="color:#00CCFF">001</span> <span class="pulll_center1" style="color:#00CCFF">马新一区站点通讯故障 </span><span class="pulll_right" style="color:#00CCFF">2019-10-10 15:20</span><img src="../dpimg/firstdp/bg-icon-R1.png"></li>-->
-              <!--<li class="clearfix1"> <span class="pulll_left" style="color:#00CCFF">002</span> <span class="pulll_center1" style="color:#00CCFF">马新一区站点通讯故障 </span><span class="pulll_right" style="color:#00CCFF">2019-10-10 15:20</span><img src="../dpimg/firstdp/bg-icon-R1.png"> </li>-->
-              <!--<li class="clearfix1"> <span class="pulll_left" style="color:#00CCFF">003</span> <span class="pulll_center1" style="color:#00CCFF">马新一区站点通讯故障 </span><span class="pulll_right" style="color:#00CCFF">2019-10-10 15:20 </span><img src="../dpimg/firstdp/bg-icon-R1.png"> </li>-->
-              <!--<li class="clearfix1"> <span class="pulll_left" style="color:#00CCFF">004</span><span class="pulll_center1" style="color:#00CCFF">马新一区站点通讯故障 </span><span class="pulll_right" style="color:#00CCFF">2019-10-10 15:20</span><img src="../dpimg/firstdp/bg-icon-R1.png">  </li>-->
             </ul>
           </div>
           <div class="boxfoot"></div>
@@ -200,16 +220,25 @@
   import $ from 'jquery'
   import map from './map/map.vue'
   import mapTwo from './map/maptwo.vue'
-  import pie from './pie/piedou.vue'
+  import pie from './pie/stationinfo.vue'
   import scatter from './scatter/scatterL3.vue'
   import pie3d from './pie/pie3d.vue'
   import bar from './bar/bar.vue'
   import qs from 'qs'
-  // import echarts from 'echarts'
-  // import $echarts from '../../node_modules/echarts/dist/echarts'
     export default {
         data() {
             return {
+              dialogvalue:'',
+              rollnum:0,
+              dialogVisible: false,
+              pageIndex: 1,
+              pageSize: 10,
+              totalPage: 0,
+              tableData: [],
+              tablePieData: [],
+              pagePieIndex: 1,
+              pagePieSize: 10,
+              totalPiePage: 0,
               groupname:'',
               rolename:'',
               GroupID:'',
@@ -230,6 +259,11 @@
               flag:false,
               cityName:'宁波',
               stationdata:'',
+              visible:false,
+              alarmType:'',
+              totalCommit:'',
+              opennumCommit:'',
+              closenumCommit:'',
               parameter:{
                 start: 0,
                 limit: 100000,
@@ -265,25 +299,18 @@
         this.stationdata=datajson;
       }
     });
-    // $(window).load(function(){
-    //   $(".loading").fadeOut()
-    // })
 
-    // $(window).resize(function(){
-    //   var whei=$(window).width()
-    //   $("html").css({fontSize:whei/20})
-    // });
-    /****/
-    // $(document).ready(function(){
-    //   var whei=$(window).width()
-    //   $("html").css({fontSize:whei/20})
-    //   $(window).resize(function(){
-    //     var whei=$(window).width()
-    //     $("html").css({fontSize:whei/20})
-    //   });
-    // });
   },
       mounted(){
+        var that=this;
+        window.onresize=function(){
+          var whei=$(window).width();
+          $("html").css({fontSize:whei/20})
+          that.$refs.maptwo.resize(that.cityName);
+          // that.$refs.pieecharts.resize();
+
+
+        }
         this.groupname=sessionStorage.getItem('groupname');
         this.rolename=sessionStorage.getItem('rolename');
 
@@ -345,30 +372,9 @@
 
         }
 
-        // $(".loading").fadeOut()
-        // $(document).ready(function(){
-        var that=this;
+
         var whei=$(window).width();
         $("html").css({fontSize:whei/20})
-        //
-        //
-        //   var html=$(".addNewd ul").html()
-        //   $(".addNewd ul").append(html)
-        //   var ls=$(".addNewd li").length/2+1
-        //   var i=0
-        //   var ref = setInterval(function(){
-        //     i++
-        //     if(i==ls){
-        //       i=1
-        //       $(".addNewd ul").css({marginTop:0})
-        //       $(".addNewd ul").animate({marginTop:-'.52'*i+'rem'},1000)
-        //     }
-        //     $(".addNewd ul").animate({marginTop:-'.52'*i+'rem'},1000)
-        //
-        //
-        //   },2400);
-
-
 
       var params={params:{ start: 0,
         limit: 100000}
@@ -430,6 +436,15 @@
           return  y + "-" + MM + "-" + d + " "+h + ":" + m + ":" + s ;
         }
       },
+      watch:{
+        $route(){
+          //跳转到该页面后需要进行的操作
+          // $("html").css({fontSize:''});
+          // if (this.timer1) {
+          // clearInterval(this.timer1); // 在Vue实例销毁前，清除我们的定时器
+          // clearInterval(this.timer11);
+        }
+      },
       beforeDestroy() {
         $("html").css({fontSize:''});
         // if (this.timer1) {
@@ -438,6 +453,73 @@
         // }
       },
       methods:{
+        handleClose(){
+          this.dialogVisible=false;
+          var that = this;
+          var datajson = this.tableData
+          this.timer11 = setInterval(function () {
+
+            if (datajson.length - 1 == that.rollnum) {
+              clearInterval(that.timer11);
+            }
+            that.Roll(datajson[datajson.length - 1 - that.rollnum]);
+            that.rollnum++;
+          }, 1000);
+        },
+        enter(){
+          // clearInterval(this.timer1); // 在Vue实例销毁前，清除我们的定时器
+          clearInterval(this.timer11);
+        },
+        leave(){
+          if(!this.dialogVisible) {
+            var that = this;
+            var datajson = this.tableData
+            this.timer11 = setInterval(function () {
+
+              if (datajson.length - 1 == that.rollnum) {
+                clearInterval(that.timer11);
+              }
+              that.Roll(datajson[datajson.length - 1 - that.rollnum]);
+              that.rollnum++;
+            }, 1000);
+          }
+        },
+        pieClick(data){
+          if(this.alarmType==data.name){
+            this.visible=!this.visible;
+          }else{
+            this.visible=true;
+          }
+          if(this.visible) {
+            this.executePieTime(data.name);
+          }
+          this.alarmType=data.name;
+
+        },
+        setpieNum(totalCommit,opennumCommit,closenumCommit){
+          this.totalCommit=totalCommit;
+          this.opennumCommit=opennumCommit;
+          this.closenumCommit=closenumCommit;
+        },
+        sizeChangeHandle (val) {
+          this.pageSize = val
+          this.pageIndex = 1
+          this.getTableData()
+        },
+        sizeChangeHandlePie (val) {
+          this.pagePieSize = val
+          this.pagePieIndex = 1
+          this.getTableData()
+        },
+        // 当前页
+        currentChangeHandle (val) {
+          this.pageIndex = val
+          this.getTableData()
+        },
+        currentChangeHandlePie (val) {
+          this.pagePieIndex = val
+          this.getTableData()
+        },
           getgroupid(){
             var data=this.cityName;
             if(data=='鄞州'){
@@ -493,10 +575,6 @@
                 groupop.label=datajson[i].STATIONNAME;
                 this.stationNames.push(groupop);
               }
-              // this.cityName=this.stationNames[0].label;
-              // this.executeTime1();
-              // this.executeTime2();
-              // this.executeTime3();
             });
           },
         executeTime1(){
@@ -512,7 +590,7 @@
           }
 
           var now = new Date();
-  var alarmdatefrom = new Date((now/1000-86400*10)*1000);//前3天
+  var alarmdatefrom = new Date((now/1000-86400*1)*1000);//前3天
   var year = alarmdatefrom.getFullYear();    //获取完整的年份(4位,1970-????)
   var month = alarmdatefrom.getMonth()+1;       //获取当前月份(1-12)
   var day = alarmdatefrom.getDate();        //获取当前日(1-31)
@@ -533,23 +611,29 @@
     //   that.dblick=0;
     // }
 
-    var obj3='{"Table" '+response.substr(response.search('Table')+5,response.length-1);
-    var datajson=JSON.parse(obj3).Table;
+    // var obj3='{"Table" '+response.substr(response.search('Table')+5,response.length-1);
+    // var datajson=JSON.parse(obj3).Table;
+    var obj3= eval('(' + response + ')');
+    var datajson=obj3.Table;
     if(datajson.length>0) {
-      var l = 0;
+      this.totalPage = parseInt(obj3.RecordCount)
+      this.tableData = datajson
+      this.rollnum = 0;
       var that = this;
+      this.RollInit(datajson);
       that.timer11 = setInterval(function () {
 
-        if (datajson.length - 1 == l) {
+        if (datajson.length - 1 == that.rollnum) {
           clearInterval(that.timer11);
         }
-        that.Roll(datajson[datajson.length - 1 - l]);
-        l++;
+        that.Roll(datajson[datajson.length - 1 - that.rollnum]);
+        that.rollnum++;
       }, 1000);
 
     }else{
+      this.tableData = [];
       clearInterval(this.timer11);
-      var ul = $(".addNewd ul");
+      var ul = $(".firstdp_addNewd ul");
       window.setTimeout(function() {
         ul.find("li").remove();
       }, 1000);
@@ -557,6 +641,59 @@
     // }
   });
   },
+        cloneObjectFn(obj){
+          return JSON.parse(JSON.stringify(obj))
+        },
+          executePieTime(data){
+          var parms=this.cloneObjectFn(this.parameter);
+
+          if(this.parameter.stationNum=="0"||this.parameter.stationNum==""){
+            delete parms.stationNum;
+          }
+          if(this.cityName!='宁波') {
+            parms.groupName = this.cityName;
+          }else{
+            delete parms.groupName;
+          }
+           parms.alarmType=data;
+          var now = new Date();
+          var alarmdatefrom = new Date((now/1000-86400*1)*1000);//前3天
+          var year = alarmdatefrom.getFullYear();    //获取完整的年份(4位,1970-????)
+          var month = alarmdatefrom.getMonth()+1;       //获取当前月份(1-12)
+          var day = alarmdatefrom.getDate();        //获取当前日(1-31)
+          parms.alarmTime_from=year+"-"+month+"-"+day+" 00:00:00";
+
+          axiosKj({
+            url: '/GW.WIR/alarm/getKgzAlarmList.action',
+            method: 'post',
+            headers: {
+              'Content-Type': ' application/x-www-form-urlencoded;charset=UTF-8'
+            },
+            // data: parameter,
+            params: parms
+          }).then(response=>{
+            // if(this.dblick==1){
+            //   var ul = $(".addNewd ul");
+            //   ul.find("li").remove();
+            //   that.dblick=0;
+            // }
+
+            // var obj3='{"Table" '+response.substr(response.search('Table')+5,response.length-1);
+            // var datajson=JSON.parse(obj3).Table;
+            var obj3= eval('(' + response + ')');
+            var datajson=obj3.Table;
+            if(datajson.length>0) {
+              this.totalPiePage = parseInt(obj3.RecordCount)
+              this.tablePieData = datajson
+
+            }else{
+              this.tablePieData = [];
+            }
+            // }
+          });
+        },
+
+
         executeTime2(){
 
           var parms=this.parameter;
@@ -571,7 +708,7 @@
           }
 
           var now = new Date();
-          var alarmdatefrom = new Date((now/1000-86400*10)*1000);//前3天
+          var alarmdatefrom = new Date((now/1000-86400*1)*1000);//前3天
           var year = alarmdatefrom.getFullYear();    //获取完整的年份(4位,1970-????)
           var month = alarmdatefrom.getMonth()+1;       //获取当前月份(1-12)
           var day = alarmdatefrom.getDate();        //获取当前日(1-31)
@@ -588,7 +725,7 @@
           }).then(response=>{
 
             if(response.length>0) {
-              this.$refs.barecharts.setData(response);
+              this.$refs.pie3decharts.setData(response);
 
             }
           });
@@ -599,12 +736,6 @@
           if(this.parameter.stationNum=="0"||this.parameter.stationNum==""){
             delete parms.stationNum;
           }
-          // var now = new Date();
-          // var alarmdatefrom = new Date((now/1000-86400*3)*1000);//前3天
-          // var year = alarmdatefrom.getFullYear();    //获取完整的年份(4位,1970-????)
-          // var month = alarmdatefrom.getMonth()+1;       //获取当前月份(1-12)
-          // var day = alarmdatefrom.getDate();        //获取当前日(1-31)
-          // parms.alarmTime_from=year+"-"+month+"-"+day+" 00:00:00";
 
           axiosKj({
             url: '/GW.WIR/kgStation/getStatusStationList.action',
@@ -632,8 +763,12 @@
   },
         Roll(datajson){
 
-          var html = ' <li class="clearfix1"> <span class="pulll_left1" style="color:#00CCFF">' + datajson.CREATEDATE + '</span> <span class="pulll_center1" style="color:#00CCFF">' + datajson.STATIONNAME + ' </span><span class="pulll_right" style="color:#00CCFF">' + datajson.ALARMTYPE + '</span><img src="' + this.surl1 + '" id="testimg"></li>';
-          var ul = $(".addNewd ul");
+           if(typeof datajson === 'undefined'){
+                return;
+           }
+           var that=this;
+          var html = ' <li class="clearfix1"> <span class="pulll_left1" style="color:#00CCFF">' + datajson.CREATEDATE + '</span> <span class="pulll_center1" style="color:#00CCFF">' + datajson.STATIONNAME + ' </span><span class="pulll_right" style="color:#00CCFF">' + datajson.ALARMTYPE + '</span><img src="' + this.surl1 + '" id="testimg'+this.rollnum+'"  /></li>';
+          var ul = $(".firstdp_addNewd ul");
           var thistime=new Date(datajson.CREATEDATE).getTime();
           if(this.maxDate<thistime) {
             this.maxDate =thistime;
@@ -642,21 +777,73 @@
           ul.animate({
             marginTop: -liHeight + "px"
           }, 1000, function () {
-            if (lis > 8) {
+            if (lis > 12) {
               ul.find("li:first").remove();
             }
             ul.css({marginTop: 0});
             ul.find("li:last").fadeIn(liHeight);
-            ul.append(html);
-          });
 
+
+          });
+            ul.append(html);
+            // $("#testimg15").on("click",function(Index){
+            //   debugger
+            //   alert(that.tableData[that.tableData.length-1-Index.currentTarget.id.substr(7)].STATIONNAME)
+            // });
+          // debugger
+          //   alert(that.rollnum);
+            $("#testimg"+that.rollnum).on("click",function(Index){
+              that.dialogvalue=that.tableData[that.tableData.length-1-Index.currentTarget.id.substr(7)].STATIONNAME+'【'+that.tableData[that.tableData.length-1-Index.currentTarget.id.substr(7)].ALARMTYPE+'】'
+              that.dialogVisible=true;
+              // alert(that.tableData[that.tableData.length-1-Index.currentTarget.id.substr(7)].STATIONNAME)
+            });
         }
+        },
+        RollInit(datajson){
+
+          var that=this;
+          var ul = $(".firstdp_addNewd ul");
+             for(var i=0;i<datajson.length;i++){
+               if(i==13){
+                 break;
+               }
+               var data=datajson[datajson.length - 1 - i];
+               var html = ' <li class="clearfix1"> <span class="pulll_left1" style="color:#00CCFF">' + data.CREATEDATE + '</span> <span class="pulll_center1" style="color:#00CCFF">' + data.STATIONNAME + ' </span><span class="pulll_right" style="color:#00CCFF">' + data.ALARMTYPE + '</span><img src="' + this.surl1 + '" id="testimg'+this.rollnum+'" /></li>';
+
+
+               var thistime=new Date(data.CREATEDATE).getTime();
+               if(this.maxDate<thistime) {
+                 this.maxDate =thistime;
+                 var liHeight = ul.find("li:last").height();
+                 var lis = ul.find("li").length;
+
+                   ul.append(html);
+                 $("#testimg"+that.rollnum).on("click",function(Index){
+                   that.dialogvalue=that.tableData[that.tableData.length-1-Index.currentTarget.id.substr(7)].STATIONNAME+'【'+that.tableData[that.tableData.length-1-Index.currentTarget.id.substr(7)].ALARMTYPE+'】'
+
+                   that.dialogVisible=true;
+                   // alert(that.tableData[that.tableData.length-1-Index.currentTarget.id.substr(7)].STATIONNAME)
+                 });
+                 this.rollnum++;
+
+               }
+             }
         },
         rng(){
           alert('OK')
         },
         rebackclick(){
-          this.$router.push({ name: 'first',path:"/dp/first" })
+
+          // this.$router.push({ name: 'first-detail',path:"/dp/first-detail" })
+          this.$router.push({name: 'first'})
+
+          // $("html").css({fontSize:''});
+          // if (this.timer1) {
+          clearInterval(this.timer1); // 在Vue实例销毁前，清除我们的定时器
+          clearInterval(this.timer11);
+        },
+        backmap(){
+          this.$refs.maptwo.backmap();
         },
         testclick(){
           //右下滚动
@@ -669,9 +856,10 @@
 
           clearInterval(this.timer11);
           clearInterval(this.timer1);
-          var ul1 = $(".addNewd");
-          var ul = $(".addNewd ul");
+          var ul1 = $(".firstdp_addNewd");
+          var ul = $(".firstdp_addNewd ul");
           this.dblick=1;
+          this.visible=false;
           // ul.children().empty();
           // ul1.empty();
 
@@ -680,10 +868,14 @@
           }, 1000);
           // ul.find("li:last").remove();
           var that=this;
-          this.timer1=setInterval(function(){
+
+          window.setTimeout(function() {
+            that.executeTime1();
+          that.timer1=setInterval(function(){
             that.executeTime1();
           },30000);
-          this.executeTime1();
+          }, 1000);
+
 
           //右上bar
           this.executeTime2();
@@ -692,6 +884,9 @@
           this.$refs.maptwo.setcenterAndZoom(value);
 
           // this.$router.push({ name: 'detaildp',path:"/dp/detaildp" })
+        },
+        sleep(d) {
+          return new Promise((resolve) => setTimeout(resolve, d))
         },
         cityclick(){
             this.$refs.maptwo.backmap();
@@ -704,9 +899,10 @@
           this.parameter.stationNum='';
           clearInterval(this.timer11);
           clearInterval(this.timer1);
-          var ul1 = $(".addNewd");
-          var ul = $(".addNewd ul");
+          var ul1 = $(".firstdp_addNewd");
+          var ul = $(".firstdp_addNewd ul");
           this.dblick=1;
+          this.visible=false;
           window.setTimeout(function() {
             ul.find("li").remove();
           }, 1000);
@@ -716,23 +912,15 @@
           },30000);
           this.getgroupid();
           this.stationAction();
-          this.executeTime1();
+          window.setTimeout(function() {
+            that.executeTime1();
+          }, 1000);
           this.executeTime2();
           this.executeTime3();
         },
         capacityEachart : function () {
 
           setTimeout(function(){
-            // this.myChart6.clear();
-            // myChart6.clear();
-            // myChart7.clear();
-            // myChart8.clear();
-            // myChart6.resize();
-            // myChart7.resize();
-            // myChart8.resize();
-            // myChart6.setOption(option6);
-            // myChart7.setOption(option7);
-            // myChart8.setOption(option8);
           }, 500);
         }
       }

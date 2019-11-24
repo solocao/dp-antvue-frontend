@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const px2rem = require('postcss-px2rem-exclude')
 // const mapjson = require('src/views/dp/firstdp/map/chinamaincity')
 function resolve (dir) {
   return path.join(__dirname, dir)
@@ -84,7 +85,7 @@ module.exports = {
       },
       '/GW.WIR/': {
         target: 'https://61.153.144.212:8403',
-        // target: 'http://192.168.0.179:7777',
+        // target: 'http://192.168.73.1:7777',
         // ws: true,
         changeOrigin: true
       },

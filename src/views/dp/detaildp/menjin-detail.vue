@@ -1,6 +1,6 @@
 <template>
   <div class="Index_bgImg">
-    <p  class="Index_left_p2" style="color:#00BB00">配变站所智能预警平台</p>
+    <p  class="Index_left_p2" style="color:rgba(40,205,156,1)">配变站所智能预警平台</p>
     <div style="position: relative;top: 5rem;">
       <img style="position: absolute;top:0.28rem;" src="./img/icon-back.png">
       <span @click="backHandle" style="position: absolute;left:1rem;font-size: 16px;font-family:PingFang-SC;color:rgba(255,255,255,1);">返回</span>
@@ -117,7 +117,26 @@
       }
     },
     created(){
+      $("html").css({fontSize:''});
       this.getTableData()
+      // window.onresize = function(){
+      //   if(document.documentElement.baseURI.match('-detail').length>=1){
+      //     document.documentElement.style.cssText='';
+      //     document.documentElement.style.fontSize='';
+      //
+      //     // var fakeBody = document.createElement('body')
+      //     // docEl.removeChild(fakeBody)
+      //   }
+      // }
+    },
+    watch:{
+      $route(){
+        //跳转到该页面后需要进行的操作
+        $("html").css({fontSize:''});
+        // if (this.timer1) {
+        // clearInterval(this.timer1); // 在Vue实例销毁前，清除我们的定时器
+        // clearInterval(this.timer11);
+      }
     },
     methods:{
       sizeChangeHandle (val) {

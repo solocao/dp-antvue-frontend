@@ -6,7 +6,7 @@ import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import { PageView } from '@/components/layouts'
-
+import  {axiosKj}  from '@/utils/requestKj'
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['login', 'register', 'registerResult','dplogin'] // no redirect whitelist
@@ -42,6 +42,7 @@ export const addRoutes = (newRoutes) => {
 router.beforeEach((to, from, next) => {
 
   NProgress.start() // start progress bar
+
   if (to.path === '/') {
     next({path: '/user/dplogin', query: {redirect: to.fullPath}})
   }
@@ -57,7 +58,20 @@ router.beforeEach((to, from, next) => {
     } else {
      const issuccess = sessionStorage.getItem('success')
       if(issuccess=='true'){
-        next()
+
+        axiosKj({
+          url: '/GW.WIR/cabTGroup/getGroupList.action',
+          method: 'post'
+        }).then((res)=>{
+
+          next()
+        }).catch((res)=> {
+
+          // next()
+          next({path: '/user/dplogin', query: {redirect: to.fullPath}})
+          // this.$router.push({name: 'dplogin'})
+        })
+
       }else {
         // alert(store.getters.nickname);
         // if (!store.getters.nickname){

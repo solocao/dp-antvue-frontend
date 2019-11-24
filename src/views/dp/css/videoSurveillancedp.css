@@ -155,7 +155,7 @@ a:hover{ color:#06c; text-decoration: none!important}
   background: url('../dpimg/firstdp/bg-select-R1.png')  no-repeat;background-size:100% 100%;
   /*background-size: 1rem;*/
   color: #00CCFF;
-  width:1.7rem;
+  width:2.2rem;
   font-size: .2rem;
   height:0.5rem;
   text-align: center;
@@ -163,7 +163,7 @@ a:hover{ color:#06c; text-decoration: none!important}
 
 .weather_l{position:absolute; left:1.2rem; top:.2rem; line-height: .1rem;height:1rem}
 .weather_l span{color: #00CCFF; font-size: .18rem; padding-left: .1rem;}
-.weather{ position:absolute; right:2.2rem; top:.2rem; line-height: .1rem;}
+.weather{ position:absolute; right:1.8rem; top:.2rem; line-height: .1rem;}
 .weather span{color: #00CCFF; font-size: .18rem; padding-right: .1rem;}
 
 .mainbox{ padding:.4rem .4rem 0rem .4rem;}

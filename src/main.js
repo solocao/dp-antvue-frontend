@@ -5,6 +5,7 @@ import store from './store/'
 import { VueAxios } from '@/utils/request' // axios 不建议引入到 Vue 原型链上
 // mock
 // import './mock'
+
 import './core/use'
 import bootstrap from './core/bootstrap'
 import '@/permission' // permission control
@@ -24,6 +25,12 @@ import axios from 'axios'
 // Vue.prototype.echarts = Echarts
 // Vue.http.options.credentials = true
 // Vue.http.options.xhr = { withCredentials: true }
+// import VideoPlayer from 'vue-video-player'
+import 'amfe-flexible'
+// import './rem'
+// require('video.js/dist/video-js.css')
+// require('vue-video-player/src/custom-theme.css')
+// Vue.use(VideoPlayer)
 Vue.prototype.$axios = axios;
 axios.defaults.withCredentials=true;
 Vue.use(echarts)
