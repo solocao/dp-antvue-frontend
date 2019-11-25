@@ -333,14 +333,14 @@ export default {
               // },
               itemStyle: {
                 normal: {
-                  areaColor: '#3A76FD',//113173,0059bd
-                  borderColor: '#097cc0',//097cc0,113173,0F1BDD
-                  borderWidth: 6,
+                  areaColor: '#1360ff',//113173,0059bd
+                  borderColor: '#001eec',//097cc0,113173,0F1BDD
+                  borderWidth: 5,
                   shadowColor: 'rgba(63, 218, 255, 0.8)',
-                  shadowBlur: 30
+                  shadowBlur: 15
                 },
                 emphasis: {
-                  areaColor: '#2B91B7',
+                  areaColor: '#001eec', //hover颜色
                 }
               },
               label: {
@@ -402,7 +402,7 @@ export default {
                   }),
                   position:'top',
                   textStyle:{
-                    color:'#00ffff',
+                    color:'#ffffff',
                     fontSize:16,
                   }
                 },

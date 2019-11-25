@@ -107,7 +107,7 @@
           enabled: false
         },
         legend: {  // 图例位置和样式
-          enabled: true,
+          enabled: false,
           layout: 'horizontal',
           align: 'center',
           itemStyle: {
