@@ -130,6 +130,8 @@
           text: ''
         },
         tooltip: {
+          show: false, //显示提示框
+          showContent:false,  
           pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
         },
         plotOptions: {
@@ -143,7 +145,7 @@
               },
               zIndex:10,
               borderWidth: 0,
-              enabled: true,
+              enabled: false,
               backgroundColor: 'rgba(252, 255, 255, 0)',
             },
             cursor: 'pointer',

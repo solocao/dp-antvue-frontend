@@ -153,6 +153,7 @@ export default {
           return;
         }
         this.loadmap2D(map.mapCode, map.mapName);
+        console.log(1111111)
         this.isbmap=0;
         this.style1=''
       },
@@ -335,9 +336,9 @@ export default {
                 normal: {
                   areaColor: '#1360ff',//113173,0059bd
                   borderColor: '#001eec',//097cc0,113173,0F1BDD
-                  borderWidth: 5,
+                  borderWidth: 3,
                   shadowColor: 'rgba(63, 218, 255, 0.8)',
-                  shadowBlur: 15
+                  shadowBlur: 5
                 },
                 emphasis: {
                   areaColor: '#001eec', //hover颜色

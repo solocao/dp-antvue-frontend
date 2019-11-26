@@ -775,7 +775,7 @@
                 return;
            }
            var that=this;
-          var html = ' <li class="clearfix1"> <span class="pulll_left1" style="color:#00CCFF">' + datajson.CREATEDATE + '</span> <span class="pulll_center1" style="color:#00CCFF">' + datajson.STATIONNAME + ' </span><span class="pulll_right" style="color:#00CCFF">' + datajson.ALARMTYPE + '</span><img src="' + this.surl1 + '" id="testimg'+this.rollnum+'"  /></li>';
+          var html = ' <li class="clearfix1"> <span class="pulll_left1" style="color:#fff">' + datajson.CREATEDATE + '</span> <span class="pulll_center1" style="color:#fff">' + datajson.STATIONNAME + ' </span><span class="pulll_right" style="color:#fff">' + datajson.ALARMTYPE + '</span><img src="' + this.surl1 + '" id="testimg'+this.rollnum+'"  /></li>';
           var ul = $(".firstdp_addNewd ul");
           var thistime=new Date(datajson.CREATEDATE).getTime();
           if(this.maxDate<thistime) {
@@ -816,7 +816,7 @@
                  break;
                }
                var data=datajson[datajson.length - 1 - i];
-               var html = ' <li class="clearfix1"> <span class="pulll_left1" style="color:#00CCFF">' + data.CREATEDATE + '</span> <span class="pulll_center1" style="color:#00CCFF">' + data.STATIONNAME + ' </span><span class="pulll_right" style="color:#00CCFF">' + data.ALARMTYPE + '</span><img src="' + this.surl1 + '" id="testimg'+this.rollnum+'" /></li>';
+               var html = ' <li class="clearfix1"> <span class="pulll_left1" style="color:#fff">' + data.CREATEDATE + '</span> <span class="pulll_center1" style="color:#fff">' + data.STATIONNAME + ' </span><span class="pulll_right" style="color:#fff">' + data.ALARMTYPE + '</span><img src="' + this.surl1 + '" id="testimg'+this.rollnum+'" /></li>';
 
 
                var thistime=new Date(data.CREATEDATE).getTime();
