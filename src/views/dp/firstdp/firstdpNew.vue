@@ -233,7 +233,7 @@
         dataJsonList: [],
         groupOp: {},
         selected: {
-          site: 0
+          site: ""
         },
         timer1: '',
         timer11: '',
@@ -252,6 +252,8 @@
         totalCommit: '',
         opennumCommit: '',
         closenumCommit: '',
+        parameterLat:"",
+        parameterLng:"",
         parameter: {
           start: 0,
           limit: 100000,
@@ -814,6 +816,41 @@
         // var value = site_.options[site_.selectedIndex].value;
 
         this.parameter.stationNum = value;
+
+        console.log("this.parameter.stationNum---",this.parameter.stationNum)
+
+        const str = this.parameter.stationNum
+        
+
+        console.log("this.stationdata---",this.stationdata)
+        for ( let i = 0 ; i < this.stationdata.length ; i++) {
+          
+          if( str == this.stationdata[i].stationNum ) {
+            console.log("iiii---",i)
+            console.log("iiii---",this.stationdata[i].stationNum)
+            this.parameterLat = this.stationdata[i].lat
+            this.parameterLng = this.stationdata[i].lng
+            console.log(this.parameterLat,this.parameterLng)
+            // //单独设定图标的样式
+            // var icon = new BMap.Icon('http://wx.58haha.cn/1.png', new BMap.Size(20, 32), {
+            //   anchor: new BMap.Size(10, 30)
+            // });
+            // //创建一个图像标注实例。point参数指定了图像标注所在的地理位置
+            // var mkr = new BMap.Marker(new BMap.Point(116.498752,39.900157), {
+            // icon: icon
+            // });
+            // //将覆盖物添加到地图中
+            // map.addOverlay(mkr);
+            //设置地图级别（1-18）
+
+            this.$refs.maptwo.panTo(this.parameterLng,this.parameterLat);
+            break;
+          }
+        }
+
+
+
+        return;
 
         clearInterval(this.timer11);
         clearInterval(this.timer1);

@@ -61,6 +61,7 @@
                     // backgroundColor: '#2c343c',
                     title: {
                         text: 'Customized Pie',
+                        show:false,
                         // left: 'center',
                         top: 20,
                         textStyle: {
@@ -80,11 +81,11 @@
                         }
                     },
                     grid: [{
-       left: '0',
-       bottom: '0',
-       top: '20%',
-       right: '0'
-   }],
+                        left: '0',
+                        bottom: '0',
+                        top: '20%',
+                        right: '0'
+                    }],
                     series: [{
                         name: '访问来源',
                         type: 'pie',
@@ -92,25 +93,26 @@
                         top: [0, 200],
                         // center: ['50%', '50%'],
                         data: [{
-                                value: 335,
-                                name: '直接访问'
+                                value: 285,
+                                name: "已处理",
+                                itemStyle:{
+                                    color:"#f0f"
+                                }
                             },
                             {
-                                value: 310,
-                                name: '邮件营销'
+                                value: 1,
+                                name: '未处理',
+                                itemStyle:{
+                                    color:"#f00"
+                                }
                             },
                             {
-                                value: 274,
-                                name: '联盟广告'
+                                value: 1,
+                                name: '忽略',
+                                itemStyle:{
+                                    color:"#0f0"
+                                }
                             },
-                            {
-                                value: 235,
-                                name: '视频广告'
-                            },
-                            {
-                                value: 400,
-                                name: '搜索引擎'
-                            }
                         ].sort(function(a, b) {
                             return a.value - b.value;
                         }),

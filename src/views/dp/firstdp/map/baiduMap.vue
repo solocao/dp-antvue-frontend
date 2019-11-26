@@ -38,7 +38,8 @@ export default {
     methods:{
       panTo(lng,lat){
         var panTopoint=new BMap.Point(lng,lat);
-        this.map.panTo(panTopoint);
+        // this.map.panTo(panTopoint);
+        this.map.centerAndZoom(new BMap.Point(lng,lat),20)
       },
       setdatajson(datajson){
         this.datajson=datajson;
