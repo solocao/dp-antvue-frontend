@@ -1,6 +1,6 @@
 <template>
   <div class="Index_bgImg">
-    <p class="Index_left_p2" style="color:rgba(40,205,156,1)">配变站所智能预警平台</p>
+    <p class="Index_left_p2" style="color:rgba(255,255,255,1)">配变站所智能预警平台</p>
     <div style="position: relative;top: 5rem;">
       <img style="position: absolute;top:0.28rem;" src="./img/icon-back.png">
       <span @click="backHandle" style="position: absolute;left:1rem;font-size: 16px;font-family:PingFang-SC;color:rgba(255,255,255,1);">返回</span>
@@ -19,20 +19,20 @@
     <div style="position: absolute;top: 18.6rem;width: 50%;height: 45rem">
       <v-chart style="width: 100%;height: 100%" :options="tempOption" />
     </div>
-    <div style="position: relative;top: 18rem;left:60rem">
+    <div style="position: relative;top: 13rem;left:60rem">
       <div style="position: relative;top:-4rem">
         <img style="position: absolute;top:0.28rem;" src="./img/menjin-shaixuan.png">
         <span style="position: absolute;left:2rem;top:0.8rem;font-size: 16px;font-family:PingFang-SC;color:rgba(255,255,255,1);">查询时间</span>
         <div style="position: relative;left: 11rem">
           <el-date-picker style="position: absolute;top:0.29rem;left:0;width: 12rem" v-model="dataForm.startTime" type="date" placeholder="选择生效日期">
           </el-date-picker>
-          <el-date-picker style="position: absolute;top:0.29rem;left:15rem;width: 12rem" v-model="dataForm.endTime" type="date" placeholder="选择失效日期">
+          <el-date-picker style="position: absolute;top:0.29rem;left:15rem;top:0.29rem;width: 12rem" v-model="dataForm.endTime" type="date" placeholder="选择失效日期">
           </el-date-picker>
           <el-button @click="searchHandle" style="position: absolute;top:0.29rem;left: 30rem" type="primary" icon="el-icon-search">搜索</el-button>
           <img style="position: absolute;top:0.8rem;left: 40rem" src="./img/yangan-export.png">
         </div>
       </div>
-      <el-table :data="tableData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" :cell-class-name="cellClassHandle" style="width: 55rem;max-height: 40rem;">
+      <el-table :data="tableData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" :cell-class-name="cellClassHandle" style="width: 55rem;max-height: 48rem;">
         <el-table-column prop="stationname" label="开关站名称">
         </el-table-column>
         <el-table-column prop="temperature" label="温度" header-align="center" align="center" width="180">
@@ -51,11 +51,11 @@
         </el-table-column>
       </el-table>
       <el-pagination
-        style="margin-top: 3rem"
+        style="margin-top: 1rem"
         @size-change="sizeChangeHandle"
         @current-change="currentChangeHandle"
         :current-page="pageIndex"
-        :page-sizes="[10]"
+        :page-sizes="[15]"
         :page-size="pageSize"
         :total="totalPage"
         layout="total, sizes, prev, pager, next, jumper">
@@ -79,7 +79,7 @@
       const colors = ['rgba(79,247,214,0.6)']
       return {
         pageIndex: 1,
-        pageSize: 10,
+        pageSize: 15,
         totalPage: 0,
         dataForm: {
           stationID: '4',

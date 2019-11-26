@@ -1,6 +1,6 @@
 <template>
     <div >
-      <div id="pie3d" style="height:4.2rem;width:5rem; "></div>
+      <div id="pie3d" style="height:3rem;width:5rem; "></div>
     </div>
 
 </template>
@@ -129,8 +129,13 @@
         title: {
           text: ''
         },
+        grid:{
+              top:15,
+              bottom:15
+        },
         tooltip: {
-          show: false, //显示提示框
+          // show: false, //显示提示框
+          show:false,
           showContent:false,  
           pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
         },

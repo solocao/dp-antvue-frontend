@@ -146,7 +146,7 @@
             <img src="../dpimg/firstdp/bg-icon-L1.png"></img>
             <span class="span_R1" style="color:rgba(40,205,156,1)">告警类型分析</span>
             <img src="../dpimg/firstdp/bg-form-R1.png"></img>
-            <pie3decharts ref="pie3decharts" @pieClick="pieClick"></pie3decharts>
+            <pie3decharts class="pie3dechartsClass" ref="pie3decharts" @pieClick="pieClick"></pie3decharts>
             <img src="../dpimg/firstdp/bg-icon-L1.png"></img>
             <span class="span_R1" style="color:rgba(40,205,156,1)">24小时实时信息</span>
             <img src="../dpimg/firstdp/bg-form-R1.png"></img>
@@ -865,7 +865,7 @@
 
 <style lang="less" scoped>
   .span_R1_r {
-    margin-bottom: 15px;
+    // margin-bottom: 15px;
     font-size: .2rem;
     color: #fff;
     .span_R1_r_1 {
@@ -876,6 +876,9 @@
     }
     .span_R1_r_3 {
       margin-right: .4rem;
+    }
+    .pie3dechartsClass {
+      margin-top: -105px;
     }
   }
 </style>
