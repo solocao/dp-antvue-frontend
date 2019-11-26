@@ -24,13 +24,17 @@
         <img style="position: absolute;top:0.28rem;" src="./img/menjin-shaixuan.png">
         <span style="position: absolute;left:2rem;top:0.8rem;font-size: 16px;font-family:PingFang-SC;color:rgba(255,255,255,1);">查询时间</span>
         <div style="position: relative;left: 11rem">
-          <el-date-picker
-            style="position: absolute;top:0.29rem;width: 25rem"
-              v-model="dataForm.time"
-            type="daterange"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期">
+                                        <el-date-picker
+            style="position: absolute;top:0.29rem;left:0;width: 12rem"
+            v-model="dataForm.startTime"
+            type="date"
+            placeholder="选择生效日期">
+          </el-date-picker>
+                    <el-date-picker
+            style="position: absolute;top:0.29rem;left:15rem;width: 12rem"
+            v-model="dataForm.endTime"
+            type="date"
+            placeholder="选择失效日期">
           </el-date-picker>
           <el-button @click="searchHandle" style="position: absolute;top:0.29rem;left: 27rem" type="primary" icon="el-icon-search">搜索</el-button>
           <img style="position: absolute;top:0.8rem;left: 40rem" src="./img/yangan-export.png">
@@ -98,6 +102,8 @@
         dataForm:{
           stationID:'',
           time:[],
+                                        startTime:"",
+          endTime:""
         },
         humidityOption: {
           color: colors,
@@ -193,7 +199,8 @@
       }
     },
     created(){
-      this.dataForm.time = [new Date(new Date().getTime()-3*24*60*60*1000),new Date()]
+        this.dataForm.startTime = new Date(new Date().getTime()-3*24*60*60*1000)
+      this.dataForm.endTime =new Date()
       this.getHumidity()
     },
     methods:{
@@ -215,8 +222,8 @@
         axios.get('/GW.WIR/show/getHumidityReport.action', {
           params: {
             stationID: this.dataForm.stationID,
-            startDt: this.formatDate(this.dataForm.time[0]),
-            endDt:this.formatDate( this.dataForm.time[1]),
+                       startDt: this.dataForm.startTime,
+            endDt: this.dataForm.endTime,
             start: 0,
             limit: 100000
           }

@@ -34,13 +34,17 @@
         <img style="position: absolute;top:0.28rem;" src="./img/menjin-shaixuan.png">
         <span style="position: absolute;left:2rem;top:0.8rem;font-size: 16px;font-family:PingFang-SC;color:rgba(255,255,255,1);">查询时间</span>
         <div style="position: relative;left: 9rem">
-          <el-date-picker
-            style="position: absolute;top:0.29rem;width: 22rem"
+                                       <el-date-picker
+            style="position: absolute;top:0.29rem;left:0;width: 12rem"
             v-model="dataForm.startTime"
-            type="daterange"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期">
+            type="date"
+            placeholder="选择生效日期">
+          </el-date-picker>
+                    <el-date-picker
+            style="position: absolute;top:0.29rem;left:15rem;width: 12rem"
+            v-model="dataForm.endTime"
+            type="date"
+            placeholder="选择失效日期">
           </el-date-picker>
           <el-button style="position: absolute;top:0.29rem;left: 23rem" type="primary" icon="el-icon-search">搜索</el-button>
           <img style="position: absolute;top:0.8rem;left: 32rem" src="./img/yangan-export.png">

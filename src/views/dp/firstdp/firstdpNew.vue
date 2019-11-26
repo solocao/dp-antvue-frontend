@@ -132,18 +132,26 @@
 
         <div class="boxall1" style="height: 7.5rem;width: 5rem;">
           <img src="../dpimg/firstdp/bg-icon-L1.png"></img>
-          <span class="span_R1" style="color:rgba(40,205,156,1)" >24小时实时信息</span>
+          <span class="span_R1" style="color:rgba(40,205,156,1)" >告警类型分析</span>
           <img src="../dpimg/firstdp/bg-form-R1.png"></img>
 
           <pie3decharts ref="pie3decharts"  @pieClick="pieClick"></pie3decharts>
 
+
+<img src="../dpimg/firstdp/bg-icon-L1.png"></img>
+          <span class="span_R1" style="color:rgba(40,205,156,1)" >24小时实时信息</span>
+          <img src="../dpimg/firstdp/bg-form-R1.png"></img>
+          <div class="span_R1_r">
+              <span class="span_R1_r_1">日期</span>      <span class="span_R1_r_2">站点名称</span>  <span class="span_R1_r_3">类型</span>   <span>状态</span>
+          </div>
+          <!-- <span class="span_R1 span_R1_r" style="color:rgba(40,205,156,1)" >日期</span>  -->
           <el-popover
             ref="popover4"
             placement="right"
             width="730"
             popper-class="popperclass"
             trigger="click">
-            <el-table :data="tableData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;max-height: 40rem;">
+            <el-table :data="tableData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;color:#fff;max-height: 40rem;" height="200">
               <el-table-column width="200" property="CREATEDATE" label="日期"  header-align="center" align="center"></el-table-column>
               <el-table-column width="400" property="STATIONNAME" label="站点名称"  header-align="center" align="center"></el-table-column>
               <el-table-column width="100" property="ALARMTYPE" label="告警类型"  header-align="center" align="center"></el-table-column>
@@ -167,7 +175,7 @@
             v-model="visible"
             popper-class="popperclass1"
             trigger="click">
-            <el-table :data="tablePieData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;max-height: 40rem;">
+            <el-table :data="tablePieData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;color:#fff;max-height: 40rem;">
               <el-table-column width="200" property="CREATEDATE" label="日期"  header-align="center" align="center"></el-table-column>
               <el-table-column width="400" property="STATIONNAME" label="站点名称"  header-align="center" align="center"></el-table-column>
               <el-table-column width="100" property="ALARMTYPE" label="告警类型"  header-align="center" align="center"></el-table-column>
@@ -928,5 +936,18 @@
 </script>
 
 <style lang="less" scoped>
-
+    .span_R1_r {
+      margin-bottom: 15px;
+      font-size: .2rem;
+      color: #fff;
+      .span_R1_r_1 {
+        margin-right: 1.8rem;
+      }
+      .span_R1_r_2 {
+         margin-right: .8rem;
+      }
+      .span_R1_r_3 {
+        margin-right: .4rem;
+      }
+    }
 </style>
