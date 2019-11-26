@@ -96,12 +96,12 @@
           <div class="boxall" style="height: 5rem;    width: 6rem;">
             <div class="alltitle">
               <img src="../dpimg/firstdp/bg-icon-L1.png"></img>
-              <span class="span_L1" style="color:rgba(40,205,156,1)">视频监测分析</span>
+              <span class="span_L1" style="color:rgba(40,205,156,1)">故障处理情况</span>
               <span class="span_L2" style="color:#00CCFF">报警总数：</span>
               <span class="span_L3" style="color:#00CCFF">108</span>
             </div>
             <div class="video_div_left">
-              <ul class="clearfix">
+              <!-- <ul class="clearfix">
                 <li class="clearfix">
                   <p>摄像头</p>
                   <span>10 </span>
@@ -132,7 +132,10 @@
                   <span class="video_div_left_span_offset">2 </span>
                   <img src="../dpimg/firstdp/bg-level-icon.png" />
                 </li>
-              </ul>
+              </ul> -->
+              <div>
+                <pieGuzhang style="margin-top:30px;"></pieGuzhang>
+              </div>
             </div>
           </div>
         </li>
@@ -205,6 +208,7 @@
   import pie from './pie/stationinfo.vue'
   import scatter from './scatter/scatterL3.vue'
   import pie3d from './pie/pie3d.vue'
+  import pieGuzhang from './pie/pieGuzhang.vue'
   import bar from './bar/bar.vue'
   import qs from 'qs'
   export default {
@@ -264,6 +268,7 @@
       "scatterecharts": scatter,
       "pie3decharts": pie3d,
       'barecharts': bar,
+      'pieGuzhang': pieGuzhang,
       mapTwo
     },
     //用于数据初始化
