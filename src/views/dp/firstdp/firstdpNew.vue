@@ -98,7 +98,7 @@
               <img src="../dpimg/firstdp/bg-icon-L1.png"></img>
               <span class="span_L1" style="color:rgba(40,205,156,1)">故障处理情况</span>
               <span class="span_L2" style="color:#00CCFF">报警总数：</span>
-              <span class="span_L3" style="color:#00CCFF">108</span>
+              <span class="span_L3" style="color:#00CCFF">296</span>
             </div>
             <div class="video_div_left">
               <!-- <ul class="clearfix">
@@ -934,5 +934,19 @@
     .pie3dechartsClass {
       margin-top: -105px;
     }
+  }
+
+  /deep/ .el-scrollbar__wrap{
+        
+    background-color: rgba(0,0,0,1) !important;
+    font-size: 50px;
+  }
+</style>
+
+<style >
+.el-scrollbar__wrap{
+        
+    background-color: rgba(0,0,0,.7) !important;
+    font-size: 50px;
   }
 </style>

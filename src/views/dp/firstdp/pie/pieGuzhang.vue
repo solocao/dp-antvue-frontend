@@ -1,6 +1,6 @@
 <template>
     <div class="demo1">
-        <div id="demo1" style="width:500px;height:300px"></div>
+        <div id="demo1" style="width:470px;height:300px"></div>
     </div>
 </template>
 
@@ -69,17 +69,18 @@
                         }
                     },
                     tooltip: {
+                        show:true,
                         trigger: 'item',
-                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                        formatter: "{b} : {c} ({d}%)"
                     },
-                    visualMap: {
-                        show: false,
-                        min: 80,
-                        max: 600,
-                        inRange: {
-                            colorLightness: [0, 1]
-                        }
-                    },
+                    // visualMap: {
+                    //     show: false,
+                    //     min: 80,
+                    //     max: 600,
+                    //     inRange: {
+                    //         colorLightness: [0, 1]
+                    //     }
+                    // },
                     grid: [{
                         left: '0',
                         bottom: '0',
@@ -96,29 +97,32 @@
                                 value: 285,
                                 name: "已处理",
                                 itemStyle:{
-                                    color:"#f0f"
+                                    color:"#56D0E3"
                                 }
                             },
+                            // ['#1089E7', '#F57474', '#56D0E3', '#F8B448', '#8B78F6','#00CCFF']
                             {
                                 value: 1,
                                 name: '未处理',
                                 itemStyle:{
-                                    color:"#f00"
+                                    color:"#F57474"
                                 }
                             },
                             {
-                                value: 1,
+                                value: 10,
                                 name: '忽略',
                                 itemStyle:{
-                                    color:"#0f0"
+                                    color:"#F8B448"
                                 }
                             },
                         ].sort(function(a, b) {
                             return a.value - b.value;
                         }),
-                        roseType: 'radius',
+
+                        // roseType: 'radius',
                         label: {
                             normal: {
+                                formatter: '{b}:{d}%',
                                 textStyle: {
                                     color: 'rgba(255, 255, 255, 1)',
                                     fontSize: 20
