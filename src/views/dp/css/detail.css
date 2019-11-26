@@ -38,7 +38,7 @@
 .el-table th, .el-table tr{
   background-color: rgba(0,0,0,0);
   border-color: rgba(79,247,214,0.6)!important;
-  color: #4ff7d6;
+  color: #fff;
   font-size: 16px;
 }
 .el-table td, .el-table th{
