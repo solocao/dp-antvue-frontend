@@ -149,6 +149,9 @@ export default {
         });
     },
     methods:{
+      panTo(lng,lat){
+        this.$refs.bmap.panTo(lng,lat)
+      },
       backmap(){
         var map = this.mapStack.pop();
         if (!this.mapStack.length && !map) {

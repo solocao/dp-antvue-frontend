@@ -36,6 +36,10 @@ export default {
         // })
     },
     methods:{
+      panTo(lng,lat){
+        var panTopoint=new BMap.Point(lng,lat);
+        this.map.panTo(panTopoint);
+      },
       setdatajson(datajson){
         this.datajson=datajson;
       },

@@ -20,13 +20,13 @@
       <h1 style="color:rgba(40,205,156,1)">配变站所智能预警平台</h1>
       </button>
       <div class="weather ">
-        <span> <Select id="site" class="form_select_R1" @change="testclick" v-model="selected.site" >
-          <option v-for="item in stationNames" :key="item.key" :label="item.label" :value="item.value" ></option>
+        <span> <el-Select id="site"  filterable  @change="testclick" v-model="selected.site" >
+          <el-option v-for="item in stationNames" :key="item.key" :label="item.label" :value="item.value" ></el-option>
        <!--<Option value="0" >全部站点</Option>-->
         <!--<Option value ="0574020B020238">骆城芳洲2</Option>-->
         <!--<Option value ="13373685112">奥林公馆开关站</Option>-->
         <!--<Option value ="马新二号">奥林公馆开关站</Option>-->
-        </Select></span>
+        </el-Select></span>
         <el-button v-popover:popover4 class="form_select_L1">明细</el-button>
       </div>
     </div>
@@ -292,6 +292,13 @@
         that.$refs.maptwo.resize(that.cityName);
         // that.$refs.pieecharts.resize();
       }
+
+      // $("#site").editableSelect({
+      //   onSelect: function (element) {
+      //     alert("Selected!");
+      //   }
+      // });
+
       this.groupname = sessionStorage.getItem('groupname');
       this.rolename = sessionStorage.getItem('rolename');
       // sessionStorage.getItem('loginname', retdata.loginname);
@@ -773,7 +780,7 @@
         alert('OK')
       },
       rebackclick() {
-        
+
         if (sessionStorage.getItem("isBack")) {
           console.log(1111)
           this.$refs.maptwo.backmap();
@@ -793,13 +800,16 @@
       backmap() {
         this.$refs.maptwo.backmap();
       },
-      testclick() {
+      testclick(value) {
         //右下滚动
         this.maxDate = 0;
+
         let site_ = document.getElementById('site')
-        var name = site_.options[site_.selectedIndex].label;
-        var value = site_.options[site_.selectedIndex].value;
+        // var name = site_.options[site_.selectedIndex].label;
+        // var value = site_.options[site_.selectedIndex].value;
+
         this.parameter.stationNum = value;
+
         clearInterval(this.timer11);
         clearInterval(this.timer1);
         var ul1 = $(".firstdp_addNewd");
@@ -822,6 +832,8 @@
         //右上bar
         this.executeTime2();
         this.$refs.maptwo.setcenterAndZoom(value);
+        // this.$refs.maptwo.panTo(lng,lat);
+
         // this.$router.push({ name: 'detaildp',path:"/dp/detaildp" })
       },
       sleep(d) {
