@@ -105,6 +105,8 @@ export default {
         var cityMap=this.cityMap;
         let myChart = echarts.init(document.getElementById('chartMap'));
         myChart.on("click", (params) =>{
+          console.log(11111)
+          sessionStorage.setItem("isBack",true)
           var that = this
           chartMap.style.width  = '0px';
           chartMap.style.height = '0px';
@@ -152,8 +154,9 @@ export default {
         if (!this.mapStack.length && !map) {
           return;
         }
+                console.log(1111111)
         this.loadmap2D(map.mapCode, map.mapName);
-        console.log(1111111)
+
         this.isbmap=0;
         this.style1=''
       },
