@@ -154,27 +154,27 @@
             <span class="span_R1" style="color:rgba(40,205,156,1)">24小时实时信息</span>
             <img src="../dpimg/firstdp/bg-form-R1.png"></img>
             <div class="span_R1_r">
-              <span class="span_R1_r_1">日期</span> <span class="span_R1_r_2">站点名称</span> <span class="span_R1_r_3">类型</span> <span>状态</span>
+              <span class="span_R1_r_1">日期</span> <span class="span_R1_r_2">站点名称</span> <span class="span_R1_r_3">类型</span> <span class="span_R1_r_4">状态</span>
             </div>
             <!-- <span class="span_R1 span_R1_r" style="color:rgba(40,205,156,1)" >日期</span>  -->
-            <el-popover ref="popover4" placement="right" width="730" popper-class="popperclass" trigger="click">
+            <el-popover ref="popover4" placement="right" width="760" popper-class="popperclass" trigger="click">
               <el-table :data="tableData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;color:#fff;max-height: 40rem;" height="200">
-                <el-table-column width="200" property="CREATEDATE" label="日期" header-align="center" align="center"></el-table-column>
-                <el-table-column width="400" property="STATIONNAME" label="站点名称" header-align="center" align="center"></el-table-column>
-                <el-table-column width="100" property="ALARMTYPE" label="告警类型" header-align="center" align="center"></el-table-column>
+                <el-table-column width="200" property="CREATEDATE" label="日333期"  ></el-table-column>
+                <el-table-column width="430" property="STATIONNAME" label="站点名称"  ></el-table-column>
+                <el-table-column width="100" property="ALARMTYPE" label="告警类型"  ></el-table-column>
               </el-table>
               <el-pagination style="margin-top: 0.5rem" @size-change="sizeChangeHandle" @current-change="currentChangeHandle" :current-page="pageIndex" :page-sizes="[10]" :page-size="pageSize" :total="totalPage" layout="total, sizes, prev, pager, next, jumper">
               </el-pagination>
             </el-popover>
-            <el-popover ref="popover5" placement="right" width="730" v-model="visible" popper-class="popperclass1" trigger="click">
+            <!-- <el-popover ref="popover5" placement="right" width="760" v-model="visible" popper-class="popperclass1" trigger="click">
               <el-table :data="tablePieData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;color:#fff;max-height: 40rem;">
-                <el-table-column width="200" property="CREATEDATE" label="日期" header-align="center" align="center"></el-table-column>
-                <el-table-column width="400" property="STATIONNAME" label="站点名称" header-align="center" align="center"></el-table-column>
-                <el-table-column width="100" property="ALARMTYPE" label="告警类型" header-align="center" align="center"></el-table-column>
+                <el-table-column width="200" property="CREATEDATE" label="日333期"  ></el-table-column>
+                <el-table-column width="430" property="STATIONNAME" label="站点名称"  ></el-table-column>
+                <el-table-column width="100" property="ALARMTYPE" label="告警类型"   ></el-table-column>
               </el-table>
               <el-pagination style="margin-top: 0.5rem" @size-change="sizeChangeHandlePie" @current-change="currentChangeHandlePie" :current-page="pagePieIndex" :page-sizes="[10]" :page-size="pagePieSize" :total="totalPiePage" layout="total, sizes, prev, pager, next, jumper">
               </el-pagination>
-            </el-popover>
+            </el-popover> -->
             <el-dialog title="" :visible.sync="dialogVisible" custom-class="customdialog" :before-close="handleClose" width="30%" center :modal="false">
               <!--:before-close="handleClose">-->
               <span class="dialogstxt">{{dialogvalue}}</span>
@@ -182,7 +182,7 @@
       <el-button @click="handleClose">忽 略</el-button>
       <el-button type="primary" @click="handleClose">处 理</el-button>
     </span>
-              </span>
+              <!-- </span> -->
             </el-dialog>
             <div class="firstdp_addNewd" id="con" @mouseenter="enter()" @mouseleave="leave()">
               <ul class="clearfix1">
@@ -767,7 +767,7 @@
             break;
           }
           var data = datajson[datajson.length - 1 - i];
-          var html = ' <li class="clearfix1"> <span class="pulll_left1" style="color:#fff">' + data.CREATEDATE + '</span> <span class="pulll_center1" style="color:#fff">' + data.STATIONNAME + ' </span><span class="pulll_right" style="color:#fff">' + data.ALARMTYPE + '</span><img src="' + this.surl1 + '" id="testimg' + this.rollnum + '" /></li>';
+          var html = ' <li alt="'+data.STATIONNAME+'" class="clearfix1"> <span class="pulll_left1" style="color:#fff">' + data.CREATEDATE + '</span> <span class="pulll_center1" style="color:#fff">' + data.STATIONNAME + ' </span><span class="pulll_right" style="color:#fff">' + data.ALARMTYPE + '</span><img src="' + this.surl1 + '" id="testimg' + this.rollnum + '"  /></li>';
           var thistime = new Date(data.CREATEDATE).getTime();
           if (this.maxDate < thistime) {
             this.maxDate = thistime;
@@ -923,15 +923,19 @@
     font-size: .2rem;
     color: #fff;
     .span_R1_r_1 {
-      margin-right: 1.8rem;
+      margin-left: -.1rem;
     }
     .span_R1_r_2 {
-      margin-right: .8rem;
+      margin-left: 1.6rem;
     }
     .span_R1_r_3 {
-      margin-right: .4rem;
+      margin-left: 1.22rem;
+    }
+    .span_R1_r_4 {
+      margin-left: .2rem;
     }
     .pie3dechartsClass {
+      //  margin-left: .4rem;
       margin-top: -105px;
     }
   }

@@ -50,8 +50,8 @@ a:hover{ color:#06c; text-decoration: none!important}
   font-size: .2rem;}
 .pulll_center{float:left;padding-left:0.8rem}
 .pulll_center1{    float: left;
-  padding-left: 0.4rem;
-  width: 2rem;}
+  padding-left: 0.2rem;
+  width: 2.2rem;}
 .pulll_right{    float: right;
   padding-right: 0.4rem;
   width: 1.2rem;}
@@ -380,12 +380,12 @@ select option{
 .video_div_left_span_offset{
   /*margin-top: 2.5rem !important;*/
 }
-.firstdp_addNewd{ height:6rem; overflow: hidden;width:5rem;}
+.firstdp_addNewd{ height:6rem; overflow: hidden;width:5.2rem;margin-left: -10px;}
 .firstdp_addNewd li{height:.5rem;}
 .firstdp_addNewd span{  line-height:.4rem; font-size: .18rem;color: rgba(255,255,255,.6); }
 .firstdp_addNewd img{    width: .15rem;
   border-radius: .5rem;
-  margin-left: 4.7rem;
+  margin-left: 4.8rem;
   display: inline-block;
   margin-top: -.55rem;
   vertical-align: middle;}

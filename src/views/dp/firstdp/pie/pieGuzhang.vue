@@ -94,7 +94,7 @@
                         top: [0, 200],
                         // center: ['50%', '50%'],
                         data: [{
-                                value: 285,
+                                value: 265,
                                 name: "已处理",
                                 itemStyle:{
                                     color:"#56D0E3"
@@ -102,14 +102,14 @@
                             },
                             // ['#1089E7', '#F57474', '#56D0E3', '#F8B448', '#8B78F6','#00CCFF']
                             {
-                                value: 1,
+                                value: 11,
                                 name: '未处理',
                                 itemStyle:{
                                     color:"#F57474"
                                 }
                             },
                             {
-                                value: 10,
+                                value: 20,
                                 name: '忽略',
                                 itemStyle:{
                                     color:"#F8B448"
