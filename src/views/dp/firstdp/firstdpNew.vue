@@ -454,7 +454,8 @@
         let city_ = document.getElementById('city')
         // city_.options.label=cityName;
         // city_.options.value=cityName;
-        $("#city").val(cityName)
+        $("#city").val(cityName);
+
         clearInterval(this.timer11);
         clearInterval(this.timer1);
         var ul1 = $(".firstdp_addNewd");
@@ -465,16 +466,18 @@
           ul.find("li").remove();
         }, 1000);
         var that = this;
-        this.timer1 = setInterval(function() {
-          that.executeTime1();
-        }, 30000);
-        this.getgroupid();
-        this.stationAction();
         window.setTimeout(function() {
           that.executeTime1();
+          that.timer1 = setInterval(function() {
+            that.executeTime1();
+          }, 30000);
         }, 1000);
+        this.getgroupid();
+        this.stationAction();
         this.executeTime2();
         this.executeTime31();
+        this.selected.site='全部站点'
+        // $("#site").val('全部站点');
       },
       handleClose() {
         this.dialogVisible = false;
@@ -564,10 +567,13 @@
           this.GroupID = 61
         } else if (data == '镇海') {
           this.GroupID = 81
+        } else if (data == '象山'){
+          this.GroupID = 101
         }
       },
       stationAction() {
         this.stationNames = [];
+
         var parm = {
           GroupID: this.GroupID
         };
