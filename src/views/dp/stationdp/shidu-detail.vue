@@ -209,7 +209,7 @@
           params: {
             stationID: this.dataForm.stationID,
             startDt:  this.formatDateT(this.dataForm.startTime),
-            endDt: this.formatDateT(this.dataForm.endTime),
+            endDt: this.formatDateT(new Date(new Date(this.dataForm.endTime.toLocaleDateString()).getTime()+24*60*60*1000)),
             start: 0,
             limit: 100000
           }
