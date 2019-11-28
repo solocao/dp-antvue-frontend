@@ -141,7 +141,7 @@
         </li>
         <li>
           <div class="map">
-            <map-two :cityName="cityName" :parameter="parameter" :stationdata="stationdata" :dataJsonList="dataJsonList" ref="maptwo"></map-two>
+            <map-two :cityName="cityName" :parameter="parameter" :stationdata="stationdata" :dataJsonList="dataJsonList" ref="maptwo" @mapClick="mapClick" ></map-two>
           </div>
         </li>
         <li>
@@ -211,6 +211,7 @@
   import pieGuzhang from './pie/pieGuzhang.vue'
   import bar from './bar/bar.vue'
   import qs from 'qs'
+  import echarts from "echarts";
   export default {
     data() {
       return {
@@ -286,6 +287,7 @@
         if (datajson.length > 0) {
           this.$refs.maptwo.setstationdata(datajson);
           this.stationdata = datajson;
+
         }
       });
     },
@@ -439,6 +441,44 @@
       // }
     },
     methods: {
+      mapback(cityName){
+
+      },
+      mapClick(cityName){
+        // let myChart = echarts.init(document.getElementById('chartMap'));
+        // myChart.clear();
+
+      this.cityName=cityName;
+        this.maxDate = 0;
+        this.parameter.stationNum = '';
+        let city_ = document.getElementById('city')
+        // city_.options.label=cityName;
+        // city_.options.value=cityName;
+        $("#city").val(cityName);
+
+        clearInterval(this.timer11);
+        clearInterval(this.timer1);
+        var ul1 = $(".firstdp_addNewd");
+        var ul = $(".firstdp_addNewd ul");
+        this.dblick = 1;
+        this.visible = false;
+        window.setTimeout(function() {
+          ul.find("li").remove();
+        }, 1000);
+        var that = this;
+        window.setTimeout(function() {
+          that.executeTime1();
+          that.timer1 = setInterval(function() {
+            that.executeTime1();
+          }, 30000);
+        }, 1000);
+        this.getgroupid();
+        this.stationAction();
+        this.executeTime2();
+        this.executeTime31();
+        this.selected.site='全部站点'
+        // $("#site").val('全部站点');
+      },
       handleClose() {
         this.dialogVisible = false;
         var that = this;
@@ -527,10 +567,13 @@
           this.GroupID = 61
         } else if (data == '镇海') {
           this.GroupID = 81
+        } else if (data == '象山'){
+          this.GroupID = 101
         }
       },
       stationAction() {
         this.stationNames = [];
+
         var parm = {
           GroupID: this.GroupID
         };
@@ -562,6 +605,7 @@
         });
       },
       executeTime1() {
+        clearInterval(this.timer11);
         var parms = this.parameter;
         if (this.parameter.stationNum == "0" || this.parameter.stationNum == "") {
           delete parms.stationNum;
@@ -720,6 +764,29 @@
           }
         });
       },
+      executeTime31() {
+        var parms = this.parameter;
+        if (this.parameter.stationNum == "0" || this.parameter.stationNum == "") {
+          delete parms.stationNum;
+        }
+        axiosKj({
+          url: '/GW.WIR/kgStation/getStatusStationList.action',
+          method: 'post',
+          headers: {
+            'Content-Type': ' application/x-www-form-urlencoded;charset=UTF-8'
+          },
+          // data: parameter,
+          params: parms
+        }).then(response => {
+          var obj3 = '{"Table" ' + response.substr(response.search('Table') + 5, response.length - 1);
+          var datajson = JSON.parse(obj3).Table;
+          this.dataJsonList = datajson;
+          this.flag = true;
+          if (datajson.length > 0) {
+            this.$refs.pieecharts.setData(datajson, this.cityName);
+          }
+        });
+      },
       processing(arrayData) {
       },
       Roll(datajson) {
@@ -820,11 +887,11 @@
         console.log("this.parameter.stationNum---",this.parameter.stationNum)
 
         const str = this.parameter.stationNum
-        
+
 
         console.log("this.stationdata---",this.stationdata)
         for ( let i = 0 ; i < this.stationdata.length ; i++) {
-          
+
           if( str == this.stationdata[i].stationNum ) {
             console.log("iiii---",i)
             console.log("iiii---",this.stationdata[i].stationNum)
@@ -850,8 +917,6 @@
 
 
 
-        return;
-
         clearInterval(this.timer11);
         clearInterval(this.timer1);
         var ul1 = $(".firstdp_addNewd");
@@ -873,7 +938,6 @@
         }, 1000);
         //右上bar
         this.executeTime2();
-        this.$refs.maptwo.setcenterAndZoom(value);
         // this.$refs.maptwo.panTo(lng,lat);
 
         // this.$router.push({ name: 'detaildp',path:"/dp/detaildp" })
@@ -941,7 +1005,7 @@
   }
 
   /deep/ .el-scrollbar__wrap{
-        
+
     background-color: rgba(0,0,0,1) !important;
     font-size: 50px;
   }
@@ -949,7 +1013,7 @@
 
 <style >
 .el-scrollbar__wrap{
-        
+
     background-color: rgba(0,0,0,.7) !important;
     font-size: 50px;
   }

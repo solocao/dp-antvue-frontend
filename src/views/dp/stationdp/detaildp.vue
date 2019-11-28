@@ -290,10 +290,10 @@
       },
       openMask(num){
         if(num==1){
-          this.camid = '331004005'
+          this.camid = '330225001'
           this.title = 'Camera1'
         }else if(num==2){
-          this.camid = '331004004'
+          this.camid = '330225002'
           this.title = 'Camera2'
         }
         this.$nextTick(()=>{

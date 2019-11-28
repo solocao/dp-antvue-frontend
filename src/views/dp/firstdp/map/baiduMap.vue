@@ -13,6 +13,17 @@ export default {
             map:null,
             stationNumgroup:{},
             datajson:'',
+          stationdataqz:[],
+          stationdatahs:[],
+          stationdatafh:[],
+          stationdatayy:[],
+          stationdatacx:[],
+          stationdatanh:[],
+          stationdatajd:[],
+          stationdatajb:[],
+          stationdatabl:[],
+          stationdatazh:[],
+          stationdataxs:[],
              isload:0
         }
     },
@@ -41,8 +52,19 @@ export default {
         // this.map.panTo(panTopoint);
         this.map.centerAndZoom(new BMap.Point(lng,lat),20)
       },
-      setdatajson(datajson){
+      setdatajson(datajson,stationdataqz,stationdatahs,stationdatafh,stationdatayy,stationdatacx,stationdatanh,stationdatajd,stationdatajb,stationdatabl,stationdatazh,stationdataxs){
         this.datajson=datajson;
+        this.stationdataqz=stationdataqz;
+        this.stationdatahs=stationdatahs;
+        this.stationdatafh=stationdatafh;
+        this.stationdatayy=stationdatayy;
+        this.stationdatacx=stationdatacx;
+        this.stationdatanh=stationdatanh;
+        this.stationdatajd=stationdatajd;
+        this.stationdatajb=stationdatajb;
+        this.stationdatabl=stationdatabl;
+        this.stationdatazh=stationdatazh;
+        this.stationdataxs=stationdataxs;
       },
       setcenterAndZoom(cityName){
 
@@ -1257,15 +1279,42 @@ export default {
         addMaker(cityName){
           // this.init()
           this.setcenterAndZoom(cityName);
-          if(this.isload==0) {
-            for (var i = 0; i < this.datajson.length; i++) {
-              var stationv = this.datajson[i];
+          var data='';
+          // if(this.isload==0) {
+
+            if(cityName=='象山县'){
+              data=this.stationdataxs
+            }else if(cityName=='奉化市'){
+              data=this.stationdatafh
+            }else if(cityName=='余姚市'){
+              data=this.stationdatayy
+            }else if(cityName=='慈溪市'){
+              data=this.stationdatacx
+            }else if(cityName=='宁海县'){
+              data=this.stationdatanh
+            }else if(cityName=='北仑区'){
+              data=this.stationdatabl
+            } else if(cityName=='鄞州区'){
+              data=this.stationdataqz
+            }else if(cityName=='海曙区'){
+              data=this.stationdatahs
+            }else if(cityName=='江东区'){
+              data=this.stationdatajd
+            }else if(cityName=='江北区'){
+              data=this.stationdatajb
+            }else if(cityName=='镇海区'){
+              data=this.stationdatazh
+            }
+            this.map.clearOverlays();
+            for (var i = 0; i < data.length; i++) {
+              var stationv = data[i];
+
               // 创建标注
               this.addPoint(stationv)
               this.isload=1;
               // this.addMaker()
             }
-          }
+          // }
         }
     }
 }

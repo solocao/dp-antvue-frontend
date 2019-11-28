@@ -114,6 +114,7 @@ export default {
           myChart.clear();
           that.isbmap=1;
           that.style1='height:9rem;width:8.5rem;'
+          this.$emit('mapClick',params.name.substr(0,2));
           this.$refs.bmap.addMaker(params.name);
             let name = ''
             let code = ''
@@ -152,7 +153,7 @@ export default {
       panTo(lng,lat){
         this.$refs.bmap.panTo(lng,lat)
       },
-      
+
       backmap(){
         var map = this.mapStack.pop();
         if (!this.mapStack.length && !map) {
@@ -162,7 +163,8 @@ export default {
         this.loadmap2D(map.mapCode, map.mapName);
 
         this.isbmap=0;
-        this.style1=''
+        this.style1='';
+        this.$emit('mapClick',map.mapName.substr(0,2));
       },
       resize(name){
         let chartMap=document.getElementById('chartMap');
@@ -176,10 +178,45 @@ export default {
 
       },
       setstationdata(datajson){
-        this.$refs.bmap.setdatajson(datajson);
-      },
-      setcenterAndZoom(stationNum){
+        var stationdataqz=[];
+        var stationdatahs=[];
+        var stationdatafh=[];
+        var stationdatayy=[];
+        var stationdatacx=[];
+        var stationdatanh=[];
+        var stationdatajd=[];
+        var stationdatajb=[];
+        var stationdatabl=[];
+        var stationdatazh=[];
+        var stationdataxs=[];
 
+        for(var i=0;i<datajson.length;i++){
+          if(datajson[i].areaName=='鄞州'){
+            stationdataqz.push(datajson[i]);
+          }else if(datajson[i].areaName=='海曙'){
+            stationdatahs.push(datajson[i]);
+          }else if(datajson[i].areaName=='奉化'){
+            stationdatafh.push(datajson[i]);
+          }else if(datajson[i].areaName=='余姚'){
+            stationdatayy.push(datajson[i]);
+          }else if(datajson[i].areaName=='慈溪'){
+            stationdatacx.push(datajson[i]);
+          }else if(datajson[i].areaName=='宁海'){
+            stationdatanh.push(datajson[i]);
+          }else if(datajson[i].areaName=='江东'){
+            stationdatajd.push(datajson[i]);
+          }else if(datajson[i].areaName=='江北'){
+            stationdatajb.push(datajson[i]);
+          }else if(datajson[i].areaName=='北仑'){
+            stationdatabl.push(datajson[i]);
+          }else if(datajson[i].areaName=='镇海'){
+            stationdatazh.push(datajson[i]);
+          }else if(datajson[i].areaName=='象山'){
+            stationdataxs.push(datajson[i]);
+          }
+
+        }
+        this.$refs.bmap.setdatajson(datajson,stationdataqz,stationdatahs,stationdatafh,stationdatayy,stationdatacx,stationdatanh,stationdatajd,stationdatajb,stationdatabl,stationdatazh,stationdataxs);
       },
       load(cityName,datajson){
        this.dataJsonList=datajson;
