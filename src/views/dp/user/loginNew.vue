@@ -126,12 +126,13 @@
 <script type="es6">
   import md5 from 'md5'
   import base64 from 'js-base64'
+    import '@/views/dp/css/login.css'
   import TwoStepCaptcha from '@/components/tools/TwoStepCaptcha'
   import { mapActions } from 'vuex'
   import { timeFix } from '@/utils/util'
   import { getSmsCaptcha, get2step } from '@/api/login'
   import  {axiosKj}  from '@/utils/requestKj'
-  import '@/views/dp/css/login.css'
+
   export default {
     components: {
       TwoStepCaptcha
