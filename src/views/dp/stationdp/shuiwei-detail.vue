@@ -204,7 +204,7 @@
       },
       getTemp() {
         var that = this
-        debugger
+
         this.dataForm.stationID = sessionStorage.getItem('stationID');
         axios.get('/GW.WIR/show/getTemperatureReport.action', {
           params: {
