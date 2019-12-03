@@ -106,7 +106,17 @@ module.exports = {
         pathRewrite: {
           '^/viptz': ''
         }
-      }
+      },
+      '/second': {
+
+        target: 'http://183.136.142.180:8000/',
+        // target: 'http://192.168.1.107:8080/GW.WIR',
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/second': ''
+        }
+      },
     }
   },
   lintOnSave: false,

@@ -11,7 +11,7 @@ const notification = Vue.prototype.$notification
 
 // 创建 axios 实例
 const service = axios.create({
-  // baseURL: baseURL, // api base_url
+  baseURL: baseURL, // api base_url
   timeout: 30000 // 请求超时时间
 })
 service.defaults.withCredentials=true;

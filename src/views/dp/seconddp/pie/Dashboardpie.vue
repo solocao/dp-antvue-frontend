@@ -10,8 +10,10 @@
 
   <script type="es6">　　 // 在之前已经单独引入了echarts文件　　 // 在此只需引入需要的地区的json文件
   import echarts from "echarts";
+  import  {axiosKj}  from '@/utils/requestKj'
   import '@/views/dp/css/seconddp.css'
-
+  import dfaultSettings from '@/config/defaultSettings'
+  import  axios  from 'axios'
   export default {
 
     data () {
@@ -33,6 +35,18 @@
     },
     watch: {},
     methods: {
+      getMessage() {
+          let parmas = {
+            start:"2019-06-15",
+            end:"2019-07-07"
+          }
+
+        axios.get('/second/sas/api/asset/room-alarm', {
+          params: parmas
+        }).then(({ data }) => {
+          console.log("data---",data)
+        })
+      },
       setData(data,cityname){
         var totalAll=0,opennumAll=0,closenumAll=0;
         var total=0,opennum=0,closenum=0;
@@ -436,8 +450,9 @@
       // });
     },
     mounted () {
-
-      this.setpieData();
+         console.log("---------------------mounted请求",dfaultSettings.baseURL.dev)
+      // this.setpieData();
+      this.getMessage()
 
     },
     destroyed () {}
