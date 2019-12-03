@@ -37,11 +37,11 @@
     methods: {
       getMessage() {
           let parmas = {
-            start:"2019-06-15",
-            end:"2019-07-07"
+            "start":"2019-06-01",
+            "end":"2019-07-07"
           }
 
-        axios.get('/second/sas/api/asset/room-alarm', {
+        axios.get('/aaa/sas/api/asset/room-alarm', {
           params: parmas
         }).then(({ data }) => {
           console.log("data---",data)

@@ -8,11 +8,16 @@
         <span> <button @click="rebackclick" class="form_select_L1">返回</button></span>
         <span></span>
         <sapn>
-          <Select class="form_select_L1" @change="cityclick" id="city">
-          <option v-for="item in groupNames" :key="item.key" :label="item.label" :value="item.value"></option>
-        <!--<Option value ="宁波">宁波</Option>-->
-        <!--<Option value ="慈溪">慈溪</Option>-->
-        </Select>
+
+          
+
+          <el-Select width="220" filterable  @change="cityclick" v-model="selectCiyt" >
+          <el-option class="bluesss" v-for="item in groupNames" :key="item.key" :label="item.label" :value="item.value"></el-option>
+        </el-Select>
+
+          <!-- <Select class="form_select_L1" @change="cityclick">
+          <option class="bluesss" v-for="item in groupNames" :key="item.key" :label="item.label" :value="item.value"></option>
+        </Select> -->
         </sapn>
         <span>{{date1 | formatDateTime}}</span>
       </div>
@@ -223,6 +228,7 @@
         totalPage: 0,
         tableData: [],
         tablePieData: [],
+        selectCiyt:"宁波",
         pagePieIndex: 1,
         pagePieSize: 10,
         totalPiePage: 0,
@@ -336,6 +342,7 @@
             this.groupNames.push(groupop);
           }
           this.cityName = this.groupNames[0].label;
+          console.log("this.groupNames",this.groupNames)
           this.getgroupid();
           this.stationAction();
           this.executeTime1();
@@ -447,14 +454,13 @@
       mapClick(cityName){
         // let myChart = echarts.init(document.getElementById('chartMap'));
         // myChart.clear();
-
       this.cityName=cityName;
         this.maxDate = 0;
         this.parameter.stationNum = '';
         let city_ = document.getElementById('city')
         // city_.options.label=cityName;
         // city_.options.value=cityName;
-        $("#city").val(cityName);
+        // $("#city").val(cityName);
 
         clearInterval(this.timer11);
         clearInterval(this.timer1);
@@ -947,10 +953,7 @@
       },
       cityclick() {
         this.$refs.maptwo.backmap();
-        let city_ = document.getElementById('city')
-        var name = city_.options[city_.selectedIndex].label;
-        var value = city_.options[city_.selectedIndex].value;
-        this.cityName = name;
+        this.cityName = this.selectCiyt
         this.maxDate = 0;
         this.parameter.stationNum = '';
         clearInterval(this.timer11);
@@ -1005,7 +1008,6 @@
   }
 
   /deep/ .el-scrollbar__wrap{
-
     background-color: rgba(0,0,0,1) !important;
     font-size: 50px;
   }
@@ -1013,7 +1015,6 @@
 
 <style >
 .el-scrollbar__wrap{
-
     background-color: rgba(0,0,0,.7) !important;
     font-size: 50px;
   }

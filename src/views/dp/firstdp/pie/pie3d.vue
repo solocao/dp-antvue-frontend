@@ -1,6 +1,6 @@
 <template>
     <div >
-      <div id="pie3d" style="height:3rem;width:5rem; "></div>
+      <div id="pie3d" style="height:2.8rem;width:5rem; "></div>
     </div>
 
 </template>

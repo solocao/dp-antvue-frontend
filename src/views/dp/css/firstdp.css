@@ -108,10 +108,10 @@ a:hover{ color:#06c; text-decoration: none!important}
   /*float:right;width: 1px;height: 30px; background: #00CCFF; display: inline-block;*/
 /*}*/
 .popperclass{
-  background-color: #606266;
+  background-color: rgba(0,0,0,.7) !important;
 }
 .popperclass1{
-  background-color: #606266;
+  background-color: rgba(0,0,0,.7) !important;
   left: -8rem;
   top: .2rem;
 }
@@ -193,9 +193,9 @@ a:hover{ color:#06c; text-decoration: none!important}
   text-align: center;
 }
 
-select option{
-  background-color: #606266;
-  color:rgba(79,247,214,0.6);
+.bluesss{
+  background-color: rgba(0,0,0,.7) !important;
+  color:#fff;
 }
 
 .weather_l{position:absolute; left:1.2rem; top:.2rem; line-height: .1rem;height:1rem}

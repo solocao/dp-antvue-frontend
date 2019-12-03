@@ -153,13 +153,12 @@ export default {
       panTo(lng,lat){
         this.$refs.bmap.panTo(lng,lat)
       },
-
       backmap(){
         var map = this.mapStack.pop();
         if (!this.mapStack.length && !map) {
           return;
         }
-                console.log(1111111)
+        
         this.loadmap2D(map.mapCode, map.mapName);
 
         this.isbmap=0;

@@ -107,14 +107,14 @@ module.exports = {
           '^/viptz': ''
         }
       },
-      '/second': {
+      '/aaa': {
 
-        target: 'http://183.136.142.180:8000/',
-        // target: 'http://192.168.1.107:8080/GW.WIR',
+        // target: 'http://183.136.142.180:8000/',
+        target: 'http://183.136.142.180:8000',
         ws: true,
         changeOrigin: true,
         pathRewrite: {
-          '^/second': ''
+          '^/aaa': ''
         }
       },
     }
