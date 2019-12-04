@@ -40,6 +40,7 @@ service.interceptors.request.use(config => {
   const token = Vue.ls.get(ACCESS_TOKEN)
   if (token) {
     config.headers[ 'X-TOKEN' ] = token // 让每个请求携带自定义 token 请根据实际情况自行修改
+    config.headers[ 'AUTHORIZATION' ] = "7e110ae6-8f23-4319-b2c6-350c47a4b191" 
   }
   return config
 }, err)

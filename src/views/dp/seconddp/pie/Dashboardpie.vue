@@ -47,6 +47,18 @@
           console.log("data---",data)
         })
       },
+      getMessage1() {
+          let parmas = {
+            "switch_monitor_token":"642820dc43f28508753dabeba6380bd7",
+            "stationCode":"331003001"
+          }
+
+        axios.get('/bbb/switch-monitor/sw/swcollectdata/getTrend', {
+          params: parmas
+        }).then(({ data }) => {
+          console.log("data---",data)
+        })
+      },
       setData(data,cityname){
         var totalAll=0,opennumAll=0,closenumAll=0;
         var total=0,opennum=0,closenum=0;
@@ -452,8 +464,9 @@
     mounted () {
          console.log("---------------------mounted请求",dfaultSettings.baseURL.dev)
       // this.setpieData();
+      this.getMessage1()
       this.getMessage()
-
+      
     },
     destroyed () {}
   }

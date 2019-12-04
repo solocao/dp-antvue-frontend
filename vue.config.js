@@ -115,8 +115,18 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           '^/aaa': ''
-        }
+        },
+
       },
+      '/bbb': {
+        // target: 'http://183.136.142.180:8000/',
+        target: 'http://192.168.0.5:8082',
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/bbb': ''
+        }
+     },
     }
   },
   lintOnSave: false,

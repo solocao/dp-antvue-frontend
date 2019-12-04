@@ -9,8 +9,7 @@
         <span></span>
         <sapn>
 
-          
-
+        
           <el-Select width="220" filterable  @change="cityclick" v-model="selectCiyt" >
           <el-option class="bluesss" v-for="item in groupNames" :key="item.key" :label="item.label" :value="item.value"></el-option>
         </el-Select>
@@ -19,7 +18,7 @@
           <option class="bluesss" v-for="item in groupNames" :key="item.key" :label="item.label" :value="item.value"></option>
         </Select> -->
         </sapn>
-        <span>{{date1 | formatDateTime}}</span>
+        <!-- <span>{{date1 | formatDateTime}}</span> -->
       </div>
       <button class="head_center_form" @click="backmap">
       <h1 style="color:rgba(40,205,156,1)">配变站所智能预警平台</h1>
