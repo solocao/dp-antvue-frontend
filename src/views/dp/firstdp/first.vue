@@ -57,7 +57,7 @@
         this.$router.push({name:'VideoSurveillancedp'})
       },
       tothreeDp(){
-        window.location.href = "http://localhost:8010/#/"
+        window.location.href = "https://115.236.28.75:47094/#/"
       }
     }
   }
