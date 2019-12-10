@@ -162,23 +162,23 @@
             </div>
             <!-- <span class="span_R1 span_R1_r" style="color:rgba(40,205,156,1)" >日期</span>  -->
             <el-popover ref="popover4" placement="right" width="760" popper-class="popperclass" trigger="click">
-              <el-table :data="tableData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;color:#fff;max-height: 40rem;" height="200">
-                <el-table-column width="200" property="CREATEDATE" label="日333期"  ></el-table-column>
+              <el-table :data="tableData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;color:#fff;max-height: 40rem;" height="530">
+                <el-table-column width="200" property="CREATEDATE" label="日期"  ></el-table-column>
                 <el-table-column width="430" property="STATIONNAME" label="站点名称"  ></el-table-column>
                 <el-table-column width="100" property="ALARMTYPE" label="告警类型"  ></el-table-column>
               </el-table>
               <el-pagination style="margin-top: 0.5rem" @size-change="sizeChangeHandle" @current-change="currentChangeHandle" :current-page="pageIndex" :page-sizes="[10]" :page-size="pageSize" :total="totalPage" layout="total, sizes, prev, pager, next, jumper">
               </el-pagination>
             </el-popover>
-            <!-- <el-popover ref="popover5" placement="right" width="760" v-model="visible" popper-class="popperclass1" trigger="click">
+            <el-popover ref="popover5" placement="right" width="760" v-model="visible" popper-class="popperclass1" trigger="click">
               <el-table :data="tablePieData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;color:#fff;max-height: 40rem;">
-                <el-table-column width="200" property="CREATEDATE" label="日333期"  ></el-table-column>
+                <el-table-column width="200" property="CREATEDATE" label="日期"  ></el-table-column>
                 <el-table-column width="430" property="STATIONNAME" label="站点名称"  ></el-table-column>
                 <el-table-column width="100" property="ALARMTYPE" label="告警类型"   ></el-table-column>
               </el-table>
               <el-pagination style="margin-top: 0.5rem" @size-change="sizeChangeHandlePie" @current-change="currentChangeHandlePie" :current-page="pagePieIndex" :page-sizes="[10]" :page-size="pagePieSize" :total="totalPiePage" layout="total, sizes, prev, pager, next, jumper">
               </el-pagination>
-            </el-popover> -->
+            </el-popover>
             <el-dialog title="" :visible.sync="dialogVisible" custom-class="customdialog" :before-close="handleClose" width="30%" center :modal="false">
               <!--:before-close="handleClose">-->
               <span class="dialogstxt">{{dialogvalue}}</span>
