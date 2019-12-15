@@ -8,29 +8,26 @@
         <span> <button @click="rebackclick" class="form_select_L1">返回</button></span>
         <span></span>
         <sapn>
-
-        
-          <el-Select width="220" filterable  @change="cityclick" v-model="selectCiyt" >
-          <el-option class="bluesss" v-for="item in groupNames" :key="item.key" :label="item.label" :value="item.value"></el-option>
-        </el-Select>
-
+          <el-Select width="220" filterable @change="cityclick" v-model="selectCiyt">
+            <el-option class="bluesss" v-for="item in groupNames" :key="item.key" :label="item.label" :value="item.value"></el-option>
+          </el-Select>
           <!-- <Select class="form_select_L1" @change="cityclick">
-          <option class="bluesss" v-for="item in groupNames" :key="item.key" :label="item.label" :value="item.value"></option>
-        </Select> -->
+                <option class="bluesss" v-for="item in groupNames" :key="item.key" :label="item.label" :value="item.value"></option>
+              </Select> -->
         </sapn>
         <!-- <span>{{date1 | formatDateTime}}</span> -->
       </div>
       <button class="head_center_form" @click="backmap">
-      <h1 style="color:rgba(40,205,156,1)">配变站所智能预警平台</h1>
-      </button>
+            <h1 style="color:rgba(40,205,156,1)">配变站所智能预警平台</h1>
+            </button>
       <div class="weather ">
         <span> <el-Select id="site"  filterable  @change="testclick" v-model="selected.site" >
-          <el-option v-for="item in stationNames" :key="item.key" :label="item.label" :value="item.value" ></el-option>
-       <!--<Option value="0" >全部站点</Option>-->
-        <!--<Option value ="0574020B020238">骆城芳洲2</Option>-->
-        <!--<Option value ="13373685112">奥林公馆开关站</Option>-->
-        <!--<Option value ="马新二号">奥林公馆开关站</Option>-->
-        </el-Select></span>
+                <el-option v-for="item in stationNames" :key="item.key" :label="item.label" :value="item.value" ></el-option>
+             <!--<Option value="0" >全部站点</Option>-->
+              <!--<Option value ="0574020B020238">骆城芳洲2</Option>-->
+              <!--<Option value ="13373685112">奥林公馆开关站</Option>-->
+              <!--<Option value ="马新二号">奥林公馆开关站</Option>-->
+              </el-Select></span>
         <el-button v-popover:popover4 class="form_select_L1">明细</el-button>
       </div>
     </div>
@@ -45,54 +42,21 @@
               <span class="span_L3" style="color:#00CCFF">100</span>
             </div>
             <div class="sycm">
-              <!--<ul class="clearfix">-->
-              <!--<li><h2>1824</h2><span>测试1</span></li>-->
-              <!--<li><h2>1920</h2><span>测试1</span></li>-->
-              <!--<li><h2>19%</h2><span>测试1</span></li>-->
-              <!--</ul>-->
-              <!--<div style="border-bottom: 1px solid rgba(255,255,255,.1)"></div>-->
-              <!--<ul class="clearfix">-->
-              <!--<li><h2>1824</h2><span>测试1</span></li>-->
-              <!--<li><h2>1920</h2><span>测试1</span></li>-->
-              <!--<li><h2>19%</h2><span>测试1</span></li>-->
-              <!--</ul>-->
               <pieecharts ref="pieecharts" @pieNum="setpieNum"></pieecharts>
-              <div class="firstNew_left_div">
-                <ul>
-                  <!--
-                  -->
-                  <li>
-                    <!--
-                    -->
-                    <p>接入总数</p>
-                    <!--
-                    --><span>{{totalCommit}}个</span>
-                    <!--
-                  -->
-                  </li>
-                  <!--
-                  -->
-                  <li>
-                    <!--
-                    -->
-                    <p>在线数</p>
-                    <!--
-                    --><span>{{opennumCommit}}个</span>
-                    <!--
-                  -->
-                  </li>
-                  <!--
-                  -->
-                  <li>
-                    <!--
-                    -->
-                    <p>离线数</p>
-                    <!--
-                    --><span>{{closenumCommit}}个</span>
-                    <!--
-                  -->
-                  </li>
-                </ul>
+              <!-- 接入总数 totalCommit  在线 opennumCommit  离线 closenumCommit -->
+              <div class="left-top">
+              </div>
+              <div class="left-middle">{{totalCommit}}</div>
+              <div class="left-bottom">
+                <div class="opennumCommit">
+                  <p class="opennumCommit_p1">在线</p>
+                  <p class="opennumCommit_p2">{{opennumCommit}}</p>
+                </div>
+                <div class="left-bottom_middle"></div>
+                <div class="closenumCommit">
+                  <p class="closenumCommit_p1">离线</p>
+                  <p class="closenumCommit_p2">{{closenumCommit}}</p>
+                </div>
               </div>
             </div>
             <!--<div class="boxfoot"></div>-->
@@ -106,46 +70,61 @@
             </div>
             <div class="video_div_left">
               <!-- <ul class="clearfix">
-                <li class="clearfix">
-                  <p>摄像头</p>
-                  <span>10 </span>
-                  <img src="../dpimg/firstdp/bg-video-icon.png" />
-                </li>
-                <li class="clearfix">
-                  <p>温度</p>
-                  <span>6 </span>
-                  <img src="../dpimg/firstdp/bg-temp-icon.png" />
-                </li>
-                <li class="clearfix">
-                  <p>湿度</p>
-                  <span>2 </span>
-                  <img src="../dpimg/firstdp/bg-hum-icon.png" />
-                </li>
-                <li class="clearfix ">
-                  <p>门禁</p>
-                  <span class="video_div_left_span_offset">5 </span>
-                  <img src="../dpimg/firstdp/bg-access-icon.png" />
-                </li>
-                <li class="clearfix ">
-                  <p>烟感</p>
-                  <span class="video_div_left_span_offset">6 </span>
-                  <img src="../dpimg/firstdp/bg-smoke-icon.png" />
-                </li>
-                <li class="clearfix ">
-                  <p>水位</p>
-                  <span class="video_div_left_span_offset">2 </span>
-                  <img src="../dpimg/firstdp/bg-level-icon.png" />
-                </li>
-              </ul> -->
+                      <li class="clearfix">
+                        <p>摄像头</p>
+                        <span>10 </span>
+                        <img src="../dpimg/firstdp/bg-video-icon.png" />
+                      </li>
+                      <li class="clearfix">
+                        <p>温度</p>
+                        <span>6 </span>
+                        <img src="../dpimg/firstdp/bg-temp-icon.png" />
+                      </li>
+                      <li class="clearfix">
+                        <p>湿度</p>
+                        <span>2 </span>
+                        <img src="../dpimg/firstdp/bg-hum-icon.png" />
+                      </li>
+                      <li class="clearfix ">
+                        <p>门禁</p>
+                        <span class="video_div_left_span_offset">5 </span>
+                        <img src="../dpimg/firstdp/bg-access-icon.png" />
+                      </li>
+                      <li class="clearfix ">
+                        <p>烟感</p>
+                        <span class="video_div_left_span_offset">6 </span>
+                        <img src="../dpimg/firstdp/bg-smoke-icon.png" />
+                      </li>
+                      <li class="clearfix ">
+                        <p>水位</p>
+                        <span class="video_div_left_span_offset">2 </span>
+                        <img src="../dpimg/firstdp/bg-level-icon.png" />
+                      </li>
+                    </ul> -->
               <div>
-                <pieGuzhang style="margin-top:30px;"></pieGuzhang>
+                <!-- <pieGuzhang style="margin-top:30px;"></pieGuzhang> -->
+                <div class="bottom">
+                  <div class="bottom_bgImg"></div>
+                  <div class="bottom_left">
+                    <p class="bottom_p1">89%</p>
+                    <p class="bottom_p2">已处理</p>
+                  </div>
+                  <div class="bottom_center">
+                    <p class="bottom_p1">4%</p>
+                    <p class="bottom_p2">未处理</p>
+                  </div>
+                  <div class="bottom_right">
+                    <p class="bottom_p1">7%</p>
+                    <p class="bottom_p2">忽略</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </li>
         <li>
           <div class="map">
-            <map-two :cityName="cityName" :parameter="parameter" :stationdata="stationdata" :dataJsonList="dataJsonList" ref="maptwo" @mapClick="mapClick" ></map-two>
+            <map-two :cityName="cityName" :parameter="parameter" :stationdata="stationdata" :dataJsonList="dataJsonList" ref="maptwo" @mapClick="mapClick"></map-two>
           </div>
         </li>
         <li>
@@ -153,7 +132,12 @@
             <img src="../dpimg/firstdp/bg-icon-L1.png"></img>
             <span class="span_R1" style="color:rgba(40,205,156,1)">告警类型分析</span>
             <img src="../dpimg/firstdp/bg-form-R1.png"></img>
-            <pie3decharts class="pie3dechartsClass" ref="pie3decharts" @pieClick="pieClick"></pie3decharts>
+
+
+            <!-- <pie3decharts class="pie3dechartsClass" ref="pie3decharts" @pieClick="pieClick"></pie3decharts> -->
+            <pie2decharts class="pie3dechartsClass" ref="pie3decharts" @pieClick="pieClick"></pie2decharts>
+
+
             <img src="../dpimg/firstdp/bg-icon-L1.png"></img>
             <span class="span_R1" style="color:rgba(40,205,156,1)">24小时实时信息</span>
             <img src="../dpimg/firstdp/bg-form-R1.png"></img>
@@ -163,18 +147,18 @@
             <!-- <span class="span_R1 span_R1_r" style="color:rgba(40,205,156,1)" >日期</span>  -->
             <el-popover ref="popover4" placement="right" width="760" popper-class="popperclass" trigger="click">
               <el-table :data="tableData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;color:#fff;max-height: 40rem;" height="530">
-                <el-table-column width="200" property="CREATEDATE" label="日期"  ></el-table-column>
-                <el-table-column width="430" property="STATIONNAME" label="站点名称"  ></el-table-column>
-                <el-table-column width="100" property="ALARMTYPE" label="告警类型"  ></el-table-column>
+                <el-table-column width="200" property="CREATEDATE" label="日期"></el-table-column>
+                <el-table-column width="430" property="STATIONNAME" label="站点名称"></el-table-column>
+                <el-table-column width="100" property="ALARMTYPE" label="告警类型"></el-table-column>
               </el-table>
               <el-pagination style="margin-top: 0.5rem" @size-change="sizeChangeHandle" @current-change="currentChangeHandle" :current-page="pageIndex" :page-sizes="[10]" :page-size="pageSize" :total="totalPage" layout="total, sizes, prev, pager, next, jumper">
               </el-pagination>
             </el-popover>
             <el-popover ref="popover5" placement="right" width="760" v-model="visible" popper-class="popperclass1" trigger="click">
               <el-table :data="tablePieData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;color:#fff;max-height: 40rem;">
-                <el-table-column width="200" property="CREATEDATE" label="日期"  ></el-table-column>
-                <el-table-column width="430" property="STATIONNAME" label="站点名称"  ></el-table-column>
-                <el-table-column width="100" property="ALARMTYPE" label="告警类型"   ></el-table-column>
+                <el-table-column width="200" property="CREATEDATE" label="日期"></el-table-column>
+                <el-table-column width="430" property="STATIONNAME" label="站点名称"></el-table-column>
+                <el-table-column width="100" property="ALARMTYPE" label="告警类型"></el-table-column>
               </el-table>
               <el-pagination style="margin-top: 0.5rem" @size-change="sizeChangeHandlePie" @current-change="currentChangeHandlePie" :current-page="pagePieIndex" :page-sizes="[10]" :page-size="pagePieSize" :total="totalPiePage" layout="total, sizes, prev, pager, next, jumper">
               </el-pagination>
@@ -183,9 +167,9 @@
               <!--:before-close="handleClose">-->
               <span class="dialogstxt">{{dialogvalue}}</span>
               <span slot="footer" class="dialog-footer">
-      <el-button @click="handleClose">忽 略</el-button>
-      <el-button type="primary" @click="handleClose">处 理</el-button>
-    </span>
+            <el-button @click="handleClose">忽 略</el-button>
+            <el-button type="primary" @click="handleClose">处 理</el-button>
+          </span>
               <!-- </span> -->
             </el-dialog>
             <div class="firstdp_addNewd" id="con" @mouseenter="enter()" @mouseleave="leave()">
@@ -212,6 +196,7 @@
   import pie from './pie/stationinfo.vue'
   import scatter from './scatter/scatterL3.vue'
   import pie3d from './pie/pie3d.vue'
+  import pie2d from './pie/pie2d.vue'
   import pieGuzhang from './pie/pieGuzhang.vue'
   import bar from './bar/bar.vue'
   import qs from 'qs'
@@ -227,7 +212,7 @@
         totalPage: 0,
         tableData: [],
         tablePieData: [],
-        selectCiyt:"宁波",
+        selectCiyt: "宁波",
         pagePieIndex: 1,
         pagePieSize: 10,
         totalPiePage: 0,
@@ -258,8 +243,8 @@
         totalCommit: '',
         opennumCommit: '',
         closenumCommit: '',
-        parameterLat:"",
-        parameterLng:"",
+        parameterLat: "",
+        parameterLng: "",
         parameter: {
           start: 0,
           limit: 100000,
@@ -275,6 +260,8 @@
       "pieecharts": pie,
       "scatterecharts": scatter,
       "pie3decharts": pie3d,
+      "pie2decharts": pie2d,
+
       'barecharts': bar,
       'pieGuzhang': pieGuzhang,
       mapTwo
@@ -292,7 +279,6 @@
         if (datajson.length > 0) {
           this.$refs.maptwo.setstationdata(datajson);
           this.stationdata = datajson;
-
         }
       });
     },
@@ -306,13 +292,11 @@
         that.$refs.maptwo.resize(that.cityName);
         // that.$refs.pieecharts.resize();
       }
-
       // $("#site").editableSelect({
       //   onSelect: function (element) {
       //     alert("Selected!");
       //   }
       // });
-
       this.groupname = sessionStorage.getItem('groupname');
       this.rolename = sessionStorage.getItem('rolename');
       // sessionStorage.getItem('loginname', retdata.loginname);
@@ -341,7 +325,7 @@
             this.groupNames.push(groupop);
           }
           this.cityName = this.groupNames[0].label;
-          console.log("this.groupNames",this.groupNames)
+          console.log("this.groupNames", this.groupNames)
           this.getgroupid();
           this.stationAction();
           this.executeTime1();
@@ -447,20 +431,17 @@
       // }
     },
     methods: {
-      mapback(cityName){
-
-      },
-      mapClick(cityName){
+      mapback(cityName) {},
+      mapClick(cityName) {
         // let myChart = echarts.init(document.getElementById('chartMap'));
         // myChart.clear();
-      this.cityName=cityName;
+        this.cityName = cityName;
         this.maxDate = 0;
         this.parameter.stationNum = '';
         let city_ = document.getElementById('city')
         // city_.options.label=cityName;
         // city_.options.value=cityName;
         // $("#city").val(cityName);
-
         clearInterval(this.timer11);
         clearInterval(this.timer1);
         var ul1 = $(".firstdp_addNewd");
@@ -481,7 +462,7 @@
         this.stationAction();
         this.executeTime2();
         this.executeTime31();
-        this.selected.site='全部站点'
+        this.selected.site = '全部站点'
         // $("#site").val('全部站点');
       },
       handleClose() {
@@ -572,13 +553,12 @@
           this.GroupID = 61
         } else if (data == '镇海') {
           this.GroupID = 81
-        } else if (data == '象山'){
+        } else if (data == '象山') {
           this.GroupID = 101
         }
       },
       stationAction() {
         this.stationNames = [];
-
         var parm = {
           GroupID: this.GroupID
         };
@@ -792,8 +772,7 @@
           }
         });
       },
-      processing(arrayData) {
-      },
+      processing(arrayData) {},
       Roll(datajson) {
         if (typeof datajson === 'undefined') {
           return;
@@ -839,7 +818,7 @@
             break;
           }
           var data = datajson[datajson.length - 1 - i];
-          var html = ' <li alt="'+data.STATIONNAME+'" class="clearfix1"> <span class="pulll_left1" style="color:#fff">' + data.CREATEDATE + '</span> <span class="pulll_center1" style="color:#fff">' + data.STATIONNAME + ' </span><span class="pulll_right" style="color:#fff">' + data.ALARMTYPE + '</span><img src="' + this.surl1 + '" id="testimg' + this.rollnum + '"  /></li>';
+          var html = ' <li alt="' + data.STATIONNAME + '" class="clearfix1"> <span class="pulll_left1" style="color:#fff">' + data.CREATEDATE + '</span> <span class="pulll_center1" style="color:#fff">' + data.STATIONNAME + ' </span><span class="pulll_right" style="color:#fff">' + data.ALARMTYPE + '</span><img src="' + this.surl1 + '" id="testimg' + this.rollnum + '"  /></li>';
           var thistime = new Date(data.CREATEDATE).getTime();
           if (this.maxDate < thistime) {
             this.maxDate = thistime;
@@ -859,7 +838,6 @@
         alert('OK')
       },
       rebackclick() {
-
         if (sessionStorage.getItem("isBack")) {
           console.log(1111)
           this.$refs.maptwo.backmap();
@@ -882,27 +860,20 @@
       testclick(value) {
         //右下滚动
         this.maxDate = 0;
-
         let site_ = document.getElementById('site')
         // var name = site_.options[site_.selectedIndex].label;
         // var value = site_.options[site_.selectedIndex].value;
-
         this.parameter.stationNum = value;
-
-        console.log("this.parameter.stationNum---",this.parameter.stationNum)
-
+        console.log("this.parameter.stationNum---", this.parameter.stationNum)
         const str = this.parameter.stationNum
-
-
-        console.log("this.stationdata---",this.stationdata)
-        for ( let i = 0 ; i < this.stationdata.length ; i++) {
-
-          if( str == this.stationdata[i].stationNum ) {
-            console.log("iiii---",i)
-            console.log("iiii---",this.stationdata[i].stationNum)
+        console.log("this.stationdata---", this.stationdata)
+        for (let i = 0; i < this.stationdata.length; i++) {
+          if (str == this.stationdata[i].stationNum) {
+            console.log("iiii---", i)
+            console.log("iiii---", this.stationdata[i].stationNum)
             this.parameterLat = this.stationdata[i].lat
             this.parameterLng = this.stationdata[i].lng
-            console.log(this.parameterLat,this.parameterLng)
+            console.log(this.parameterLat, this.parameterLng)
             // //单独设定图标的样式
             // var icon = new BMap.Icon('http://wx.58haha.cn/1.png', new BMap.Size(20, 32), {
             //   anchor: new BMap.Size(10, 30)
@@ -914,14 +885,10 @@
             // //将覆盖物添加到地图中
             // map.addOverlay(mkr);
             //设置地图级别（1-18）
-
-            this.$refs.maptwo.panTo(this.parameterLng,this.parameterLat);
+            this.$refs.maptwo.panTo(this.parameterLng, this.parameterLat);
             break;
           }
         }
-
-
-
         clearInterval(this.timer11);
         clearInterval(this.timer1);
         var ul1 = $(".firstdp_addNewd");
@@ -944,7 +911,6 @@
         //右上bar
         this.executeTime2();
         // this.$refs.maptwo.panTo(lng,lat);
-
         // this.$router.push({ name: 'detaildp',path:"/dp/detaildp" })
       },
       sleep(d) {
@@ -984,6 +950,161 @@
 </script>
 
 <style lang="less" scoped>
+  .left-top {
+    height: 153px;
+    width: 329px; // background-color: red;
+    background: url("../dpimg/firstdp/left-top.png");
+    background-size: 100% 100%;
+    margin-top: 50px;
+    margin-left: 40%;
+    transform: translateX(-50%);
+  }
+  .left-middle {
+    width: 123px;
+    height: 76px;
+    margin-left: 40%;
+    transform: translateX(-50%);
+    margin-top: -50px;
+    background: url("../dpimg/firstdp/juxing.png");
+    background-size: 100% 100%;
+    font-size: 30px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 76px;
+  }
+  .left-bottom {
+    height: 104px;
+    width: 329px;
+    margin-top: 20px;
+    margin-left: 40%;
+    transform: translateX(-50%);
+    background: url("../dpimg/firstdp/online.png");
+    background-size: 100% 100%;
+    border-top: 1px solid transparent;
+    position: relative;
+    .opennumCommit {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 45%;
+      left: 10px;
+      height: .9rem;
+      line-height: .45rem;
+      text-align: center;
+      .opennumCommit_p1 {
+        font-size: 18px;
+        color: rgba(255, 255, 255, .73);
+      }
+      .opennumCommit_p2 {
+        font-size: 30px;
+        color: #02EEFF;
+      }
+    }
+    .left-bottom_middle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 2px;
+      height: 70px;
+      background: url("../dpimg/firstdp/middle.png");
+      background-size: 100% 100%;
+    }
+    .closenumCommit {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 45%;
+      right: 10px;
+      height: .9rem;
+      line-height: .45rem;
+      text-align: center;
+      .closenumCommit_p1 {
+        font-size: 18px;
+        color: rgba(255, 255, 255, .73);
+      }
+      .closenumCommit_p2 {
+        font-size: 30px;
+        color: #EF1D1D;
+      }
+    }
+  }
+  .bottom {
+    height: 333px;
+    width: 452px;
+    position: relative;
+    top: 20px;
+    .bottom_bgImg {
+      left: 0;
+      top: 55%;
+      position: absolute;
+      width: 100%;
+      height: 80px;
+      background: url("../dpimg/firstdp/bottom_bgImg.png");
+      background-size: 100% 100%;
+    }
+    .bottom_left {
+      height: 300px;
+      width: 30%;
+      position: absolute;
+      margin-right: 3%;
+      left: 3%;
+      top: 0;
+      background: url("../dpimg/firstdp/work.png");
+      background-size: 100% 90%;
+      z-index: 100;
+      text-align: center;
+      .bottom_p1 {
+        color: #02EEFF;
+        font-size: 22px;
+        line-height: 275px;
+      }
+      .bottom_p2 {
+        font-size: 18px;
+        color: #ffffff;
+      }
+    }
+    .bottom_center {
+      height: 300px;
+      width: 30%;
+      position: absolute;
+      left: 33%;
+      top: 0;
+      background: url("../dpimg/firstdp/work.png");
+      background-size: 100% 90%;
+      text-align: center;
+      z-index: 100;
+      .bottom_p1 {
+        color: #02EEFF;
+        font-size: 22px;
+        line-height: 275px;
+      }
+      .bottom_p2 {
+        font-size: 18px;
+        color: #ffffff;
+      }
+    }
+    .bottom_right {
+      height: 300px;
+      width: 30%;
+      position: absolute;
+      left: 66%;
+      top: 0;
+      background: url("../dpimg/firstdp/work.png");
+      background-size: 100% 90%;
+      z-index: 100;
+      text-align: center;
+      .bottom_p1 {
+        color: #02EEFF;
+        font-size: 22px;
+        line-height: 275px;
+      }
+      .bottom_p2 {
+        font-size: 18px;
+        color: #ffffff;
+      }
+    }
+  }
   .span_R1_r {
     // margin-bottom: 15px;
     font-size: .2rem;
@@ -1002,19 +1123,18 @@
     }
     .pie3dechartsClass {
       //  margin-left: .4rem;
-      margin-top: -105px;
+      margin-top: 55px;
     }
   }
-
-  /deep/ .el-scrollbar__wrap{
-    background-color: rgba(0,0,0,1) !important;
+  /deep/ .el-scrollbar__wrap {
+    background-color: rgba(0, 0, 0, 1) !important;
     font-size: 50px;
   }
 </style>
 
-<style >
-.el-scrollbar__wrap{
-    background-color: rgba(0,0,0,.7) !important;
+<style>
+  .el-scrollbar__wrap {
+    background-color: rgba(0, 0, 0, .7) !important;
     font-size: 50px;
   }
 </style>

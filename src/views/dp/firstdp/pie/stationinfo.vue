@@ -1,6 +1,6 @@
 <template>
     <div >
-      <div id="stationinfopie" style="height:2.8rem;width:5rem; "></div>
+      <div id="stationinfopie" style="height:0rem;width:0rem; "></div>
     </div>
 
 </template>

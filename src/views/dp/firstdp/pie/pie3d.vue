@@ -82,6 +82,7 @@
       },
     getPie3d(data) {
         var that=this;
+        console.log("3333333333333333333",data)
       var titlename = ['红外报警', '湿度报警', '温度报警', '水位报警', '门磁报警','电源告警'];
       var valdata=[['红外报警',data[0].HWBJ],
                 ['湿度报警',data[0].SDBJ],
@@ -98,10 +99,10 @@
           backgroundColor: 'rgba(255, 255, 255, 0)', // 改变整体背景颜色
           renderTo: name,
           type: 'pie',
-          options3d: {
-            enabled: true,
-            alpha: 50
-          }
+          // options3d: {
+          //   enabled: true,
+          //   alpha: 50
+          // }
         },
         credits:{
           enabled: false
@@ -142,10 +143,10 @@
         plotOptions: {
           series: {
             dataLabels: {
-              color:'white',
+              color:'#0EFCFF',
               style: {
-                fontWeight: 'bold',
-                fontSize: '18px',
+                // fontWeight: 'bold',
+                fontSize: '16px',
                 color: 'red'
               },
               zIndex:10,
