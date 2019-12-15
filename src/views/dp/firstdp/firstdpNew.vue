@@ -18,7 +18,7 @@
         <!-- <span>{{date1 | formatDateTime}}</span> -->
       </div>
       <button class="head_center_form" @click="backmap">
-            <h1 style="color:rgba(40,205,156,1)">配变站所智能预警平台</h1>
+            <h1 style="color:rgba(40,205,156,1)">智能预警平台</h1>
             </button>
       <div class="weather ">
         <span> <el-Select id="site"  filterable  @change="testclick" v-model="selected.site" >
@@ -495,6 +495,7 @@
         }
       },
       pieClick(data) {
+        console.log("父组件---------",data)
         if (this.alarmType == data.name) {
           this.visible = !this.visible;
         } else {
@@ -998,6 +999,7 @@
       .opennumCommit_p2 {
         font-size: 30px;
         color: #02EEFF;
+        margin-top: -5px;
       }
     }
     .left-bottom_middle {
@@ -1026,6 +1028,7 @@
       .closenumCommit_p2 {
         font-size: 30px;
         color: #EF1D1D;
+        margin-top: -5px;
       }
     }
   }
@@ -1033,7 +1036,7 @@
     height: 333px;
     width: 452px;
     position: relative;
-    top: 20px;
+    top: 50px;
     .bottom_bgImg {
       left: 0;
       top: 55%;

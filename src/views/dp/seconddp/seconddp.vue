@@ -15,7 +15,7 @@
         </sapn>
         <span>{{date1 | formatDateTime}}</span>
       </div>
-      <h1 style="color:rgba(40,205,156,1)">配变站所智能预警平台</h1>
+      <h1 style="color:rgba(40,205,156,1)">智能预警平台</h1>
       <div class="weather ">
         <span> <Select id="site" class="form_select_R1" @change="testclick" v-model="selected.site" >
        <Option value="0" >全部站点</Option>

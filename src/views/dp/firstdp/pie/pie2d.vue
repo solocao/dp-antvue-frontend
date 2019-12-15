@@ -16,7 +16,7 @@
                 show: false,
                 borderHeight: 5,
                 borderWidth: 5,
-                powerInfoEchart:null,
+                powerInfoEchart: null,
                 id: 'test2',
                 dataForm: {
                     page: 1,
@@ -61,7 +61,7 @@
         },
         methods: {
             clickEvent(event) {
-                this.$emit('pieClick', event.point)
+                this.$emit('pieClick', event)
             },
             setData(data) {
                 // var valdata=[data[0].HWBJ,data[0].SDBJ,data[0].WDBJ,data[0].SWBJ,data[0].MCBJ,data[0].DYGJ];
@@ -79,36 +79,39 @@
                 console.log("3333333333333333333", data)
                 var titlename = ['红外报警', '湿度报警', '温度报警', '水位报警', '门磁报警', '电源告警'];
                 var valdata = [{
-                                    value: data[0].HWBJ,
-                                    name: '红外报警',
-                                },
-                                {
-                                    value: data[0].SDBJ,
-                                    name: '湿度报警'
-                                },
-                                {
-                                    value: data[0].WDBJ,
-                                    name: '温度报警'
-                                },
-                                {
-                                    value: data[0].SWBJ,
-                                    name: '水位报警'
-                                },
-                                {
-                                    value: data[0].MCBJ,
-                                    name: '门磁报警'
-                                },
-                                {
-                                    value: data[0].DYGJ,
-                                    name: '电源告警'
-                                },
-                            ]
-
+                        value: data[0].HWBJ,
+                        name: '红外报警',
+                    },
+                    {
+                        value: data[0].SDBJ,
+                        name: '湿度报警'
+                    },
+                    {
+                        value: data[0].WDBJ,
+                        name: '温度报警'
+                    },
+                    {
+                        value: data[0].SWBJ,
+                        name: '水位报警'
+                    },
+                    {
+                        value: data[0].MCBJ,
+                        name: '门磁报警'
+                    },
+                    {
+                        value: data[0].DYGJ,
+                        name: '电源告警'
+                    },
+                ]
                 this.powerInfoEchart = this.$echarts.init(document.getElementById("powerInfoEchart"))
-                var colorList = ['#afa3f5', '#00d488', '#3feed4', '#3bafff', '#f1bb4c', "rgba(250,250,250,0.5)","#0f0"];
+                this.powerInfoEchart.on('click', (params) => {
+                    console.log("-----", params)
+                    this.clickEvent(params.data)
+                })
+                var colorList = ['#afa3f5', '#00d488', '#3feed4', '#3bafff', '#f1bb4c', "rgba(250,250,250,0.5)", "#0f0"];
                 this.powerInfoEchart.setOption({
                     grid: {
-                        top:"50%",
+                        top: "50%",
                         bottom: "0%",
                         left: 0,
                         right: '10%'
@@ -139,7 +142,7 @@
                             labelLine: {
                                 normal: {
                                     show: true,
-                                    length: 15,
+                                    length: 5,
                                     length2: 120,
                                     lineStyle: {
                                         color: '#d3d3d3'
@@ -157,28 +160,28 @@
                                         var str = '';
                                         switch (params.name) {
                                             case '红外报警':
-                                                str = '{a|}\n{nameStyle|红外报警 }' +''+ '{rate|' + params.value + '%}';
+                                                str = '{a|}\n{nameStyle|红外报警 }' + '' + '{rate|' + params.value + '%}';
                                                 break;
                                             case '湿度报警':
-                                                str = '{b|}\n{nameStyle|湿度报警 }' +''+ '{rate|' + params.value + '%}';
+                                                str = '{b|}\n{nameStyle|湿度报警 }' + '' + '{rate|' + params.value + '%}';
                                                 break;
                                             case '温度报警':
-                                                str = '{c|}\n{nameStyle|温度报警 }' +''+ '{rate|' + params.value + '%}';
+                                                str = '{c|}\n{nameStyle|温度报警 }' + '' + '{rate|' + params.value + '%}';
                                                 break;
                                             case '水位报警':
-                                                str = '{d|}\n{nameStyle|水位报警 }' +''+ '{rate|' + params.value + '%}';
+                                                str = '{d|}\n{nameStyle|水位报警 }' + '' + '{rate|' + params.value + '%}';
                                                 break;
                                             case '门磁报警':
-                                                str = '{e|}\n{nameStyle|门磁报警 }' +''+ '{rate|' + params.value + '%}';
+                                                str = '{e|}\n{nameStyle|门磁报警 }' + '' + '{rate|' + params.value + '%}';
                                                 break;
                                             case '电源告警':
-                                                str = '{e|}\n{nameStyle|电源告警 }' +''+ '{rate|' + params.value + '%}';
+                                                str = '{e|}\n{nameStyle|电源告警 }' + '' + '{rate|' + params.value + '%}';
                                                 break;
                                         }
                                         return str
                                     },
-                                    padding: [0, -110],
-                                    height: 165,
+                                    padding: [-5, -110],
+                                    height: 135,
                                     rich: {
                                         a: {
                                             width: 38,
