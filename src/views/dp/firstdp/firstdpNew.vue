@@ -727,6 +727,7 @@
           // data: parameter,
           params: parms
         }).then(response => {
+          console.log("返回-----",response)
           if (response.length > 0) {
             this.$refs.pie3decharts.setData(response);
           }

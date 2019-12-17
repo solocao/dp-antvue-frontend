@@ -152,7 +152,7 @@ export const constantRouterMap = [
       {
         path: '/dp/yangan-detail',
         name: 'yangan-detail',
-        component: () => import('@/views/dp/stationdp/yangan-detail'),
+        component: () => import('@/views/dp/detaildp/yangan-detail'),
         meta: { title: '烟感详情页', keepAlive: false, permission: [ 'user' ] }
       },
       {
@@ -183,12 +183,18 @@ export const constantRouterMap = [
         path: '/dp/zaoyin-detail',
         name: 'zaoyin-detail',
         component: () => import('@/views/dp/detaildp/zaoyin-detail'),
-        meta: { title: '温度详情页', keepAlive: false, permission: [ 'user' ] }
+        meta: { title: '噪音详情页', keepAlive: false, permission: [ 'user' ] }
       },
       {
         path: '/dp/mupaiwendu-detail',
         name: 'mupaiwendu-detail',
         component: () => import('@/views/dp/detaildp/mupaiwendu-detail'),
+        meta: { title: '母排详情页', keepAlive: false, permission: [ 'user' ] }
+      },
+      {
+        path: '/dp/nil-detail',
+        name: 'nil-detail',
+        component: () => import('@/views/dp/detaildp/nil-detail'),
         meta: { title: '温度详情页', keepAlive: false, permission: [ 'user' ] }
       },
       {

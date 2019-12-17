@@ -207,7 +207,7 @@
         this.dataForm.stationID = sessionStorage.getItem('stationID');
         axios.get('/GW.WIR/show/getZaoShengData.action', {
           params: {
-            stationID: this.dataForm.stationID,
+            stationId: this.dataForm.stationID,
             startDt:  this.formatDateT(this.dataForm.startTime),
             endDt: this.formatDateT(new Date(new Date(this.dataForm.endTime.toLocaleDateString()).getTime()+24*60*60*1000)),
             start: 0,

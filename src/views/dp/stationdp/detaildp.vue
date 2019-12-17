@@ -66,7 +66,7 @@
                   <!--<img src="./img/icon-L5.png" class="li2-img1"/>-->
                   <button  @click="detailHandle3" class="li2-img1 icon-4 btn btn-default ripple btn-lg " style="cursor:pointer;"></button>
                   <span class="li2-span1">烟感</span>
-                  <span class="li2-span2"><img src="./img/icon-sucess.png" class="li2-span2-img1"/><img src="./img/icon-err.png" class="li2-span2-img2"/></span>
+                  <span class="li2-span2"><img src="./img/icon-sucess.png" class="li2-span2-img1"/></span>
                   <img src="./img/line-L1.png" class="li2-img2"/>
                 </li>
                 <li>
