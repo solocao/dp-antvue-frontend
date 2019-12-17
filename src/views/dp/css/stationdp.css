@@ -324,7 +324,10 @@ a:hover{ color:#06c; text-decoration: none!important}
 .addNewd li{height:.5rem;}
 .addNewd span{  line-height:.4rem; font-size: .18rem;color: rgba(255,255,255,.6); }
 .addNewd img{ width: .15rem; border-radius: .5rem; margin-left: 5rem; display: inline-block;margin-top:-.5rem; vertical-align: middle;}
-
+.station_sycm {
+  height:650px;
+  overflow: auto;
+}
 .station_sycm ul{ margin-left:-.5rem;margin-right:-.5rem;  padding: .16rem 0;}
 .station_sycm li{ float: left; text-align: center; position: relative;height:.58rem;}
 .station_sycm li:nth-child(1){

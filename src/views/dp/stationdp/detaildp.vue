@@ -32,7 +32,7 @@
             <span class="span_text_L1_1">设备状态检测</span>
             <span class="span_num">7个</span>
             <div class="station_sycm">
-              <ul>
+              <ul >
                 <li>
                   <button  @click="openMask(1)" class="li1-img1 btn btn-default ripple btn-lg " style="cursor:pointer;"></button>
                   <span class="li1-span1">摄像头1</span>
@@ -67,6 +67,27 @@
                   <button  @click="detailHandle3" class="li2-img1 icon-4 btn btn-default ripple btn-lg " style="cursor:pointer;"></button>
                   <span class="li2-span1">烟感</span>
                   <span class="li2-span2"><img src="./img/icon-sucess.png" class="li2-span2-img1"/><img src="./img/icon-err.png" class="li2-span2-img2"/></span>
+                  <img src="./img/line-L1.png" class="li2-img2"/>
+                </li>
+                <li>
+                  <!--<img src="./img/icon-L5.png" class="li2-img1"/>-->
+                  <button  @click="zaoyin" class="li2-img1 icon-4 btn btn-default ripple btn-lg " style="cursor:pointer;"></button>
+                  <span class="li2-span1">噪音</span>
+                  <span class="li2-span2"><img src="./img/icon-sucess.png" class="li2-span2-img1"/></span>
+                  <img src="./img/line-L1.png" class="li2-img2"/>
+                </li>
+                <li>
+                  <!--<img src="./img/icon-L5.png" class="li2-img1"/>-->
+                  <button  @click="mupaiwendu" class="li2-img1 icon-4 btn btn-default ripple btn-lg " style="cursor:pointer;"></button>
+                  <span class="li2-span1">母排温度</span>
+                  <span class="li2-span2"><img src="./img/icon-sucess.png" class="li2-span2-img1"/></span>
+                  <img src="./img/line-L1.png" class="li2-img2"/>
+                </li>
+                <li>
+                  <!--<img src="./img/icon-L5.png" class="li2-img1"/>-->
+                  <button  class="li2-img1 icon-4 btn btn-default ripple btn-lg " style="cursor:pointer;"></button>
+                  <span class="li2-span1">凝露</span>
+                  <span class="li2-span2"><img src="./img/icon-sucess.png" class="li2-span2-img1"/></span>
                   <img src="./img/line-L1.png" class="li2-img2"/>
                 </li>
                 <li>
@@ -275,6 +296,12 @@
       },
       detailHandle1() {
         this.$router.push({ name: 'shidu-detail' })
+      },
+      zaoyin() {
+        this.$router.push({ name: 'zaoyin-detail' })
+      },
+      mupaiwendu() {
+        this.$router.push({ name: 'mupaiwendu-detail' })
       },
       detailHandle2() {
         this.$router.push({ name: 'wendu-detail' })

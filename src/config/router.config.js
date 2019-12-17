@@ -77,6 +77,18 @@ export const asyncRouterMap = [
             meta: { title: '湿度详情页', keepAlive: false, permission: [ 'user' ] }
           },
           {
+            path: '/dp/zaoyin-detail',
+            name: 'zaoyin-detail',
+            component: () => import('@/views/dp/detaildp/zaoyin-detail'),
+            meta: { title: '湿度详情页', keepAlive: false, permission: [ 'user' ] }
+          },
+          {
+            path: '/dp/mupaiwendu-detail',
+            name: 'mupaiwendu-detail',
+            component: () => import('@/views/dp/detaildp/mupaiwendu-detail'),
+            meta: { title: '湿度详情页', keepAlive: false, permission: [ 'user' ] }
+          },
+          {
             path: '/dp/seconddp',
             name: 'seconddp',
             component: () => import('@/views/dp/seconddp/seconddp'),
@@ -168,6 +180,18 @@ export const constantRouterMap = [
         meta: { title: '湿度详情页', keepAlive: false, permission: [ 'user' ] }
       },
       {
+        path: '/dp/zaoyin-detail',
+        name: 'zaoyin-detail',
+        component: () => import('@/views/dp/detaildp/zaoyin-detail'),
+        meta: { title: '温度详情页', keepAlive: false, permission: [ 'user' ] }
+      },
+      {
+        path: '/dp/mupaiwendu-detail',
+        name: 'mupaiwendu-detail',
+        component: () => import('@/views/dp/detaildp/mupaiwendu-detail'),
+        meta: { title: '温度详情页', keepAlive: false, permission: [ 'user' ] }
+      },
+      {
         path: '/dp/seconddp',
         name: 'seconddp',
         component: () => import('@/views/dp/seconddp/seconddp'),
@@ -178,7 +202,14 @@ export const constantRouterMap = [
         name: 'VideoSurveillancedp',
         component: () => import('@/views/dp/VideoSurveillancedp/VideoSurveillancedp'),
         meta: { title: '视频监控', keepAlive: false, permission: [ 'user' ] }
-      }
+      },
+      {
+        path: '/dp/liveplayer',
+        name: 'liveplayer',
+        component: () => import('@/views/dp/VideoSurveillancedp/liveplayer'),
+        meta: { title: '视频监控', keepAlive: false, permission: [ 'user' ] }
+      },
+
     ]
   },
   {

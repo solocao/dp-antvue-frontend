@@ -1,7 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const px2rem = require('postcss-px2rem-exclude')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+// const px2rem = require('postcss-px2rem-exclude')
 // const mapjson = require('src/views/dp/firstdp/map/chinamaincity')
 function resolve (dir) {
   return path.join(__dirname, dir)
@@ -27,7 +28,12 @@ module.exports = {
     plugins: [
       // Ignore all locale files of moment.js
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-      new BundleAnalyzerPlugin()
+      new BundleAnalyzerPlugin(),
+      new CopyWebpackPlugin([
+        { from: 'node_modules/@liveqing/liveplayer/dist/component/crossdomain.xml'},
+        { from: 'node_modules/@liveqing/liveplayer/dist/component/liveplayer.swf'},
+        { from: 'node_modules/@liveqing/liveplayer/dist/component/liveplayer-lib.min.js', to: 'js/'}
+     ])
     ],
     externals: {
       'vue': 'Vue',
@@ -86,7 +92,7 @@ module.exports = {
       '/GW.WIR/': {
         target: 'https://61.153.144.212:8403',
         // target: 'http://192.168.73.1:7777',
-        // ws: true,
+        ws: false,
         changeOrigin: true
       },
       '/video/': {
@@ -127,6 +133,19 @@ module.exports = {
           '^/bbb': ''
         }
      },
+     '/ddkj': {
+      target: 'http://115.236.28.77:10000', //
+      ws: true,
+      changeOrigin: true,
+      pathRewrite: {
+        '^/ddkj': ''
+      }
+    },
+     '/sms': {
+      target: 'http://115.236.28.77:10000', //
+      ws: true,
+      changeOrigin: true,
+    },
     }
   },
   lintOnSave: false,

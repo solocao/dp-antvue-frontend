@@ -696,6 +696,12 @@
           // }
         });
       },
+      aaaa() {
+        this.$router.push({
+          path:"/dp/liveplayer",
+          query:{}
+        })
+      },
       executeTime2() {
         var parms = this.parameter;
         if (this.parameter.stationNum == "0" || this.parameter.stationNum == "") {
