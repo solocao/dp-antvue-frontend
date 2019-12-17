@@ -142,6 +142,7 @@
           params:{start:this.pageIndex,limit:this.pageSize,queryCardString :""}
         }).then(({data})=>{
           data = eval('(' + data + ')')
+           console.log("data-----",data)
           if(data.Table.length>0){
             this.totalPage = parseInt(data.RecordCount)
             this.tableData = data.Table

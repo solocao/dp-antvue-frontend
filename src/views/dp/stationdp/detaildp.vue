@@ -316,16 +316,21 @@
         this.$router.push({ name: 'shuiwei-detail'})
       },
       openMask(num){
-        if(num==1){
-          this.camid = '330225001'
-          this.title = 'Camera1'
-        }else if(num==2){
-          this.camid = '330225002'
-          this.title = 'Camera2'
-        }
-        this.$nextTick(()=>{
-          this.sendVal = true;
+             
+        this.$router.push({
+          path:"/dp/liveplayer",
+          query:{}
         })
+        // if(num==1){
+        //   this.camid = '330225001'
+        //   this.title = 'Camera1'
+        // }else if(num==2){
+        //   this.camid = '330225002'
+        //   this.title = 'Camera2'
+        // }
+        // this.$nextTick(()=>{
+        //   this.sendVal = true;
+        // })
       },
       clickCancel(){
         console.log('点击了取消');

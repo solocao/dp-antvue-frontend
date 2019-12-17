@@ -219,6 +219,7 @@
         params:{start:0,limit:1,kgStationId:4,queryString:""}
       }).then(({data})=>{
         data = eval('(' + data + ')')
+        console.log("data-----",data)
         if(data.Table.length>0){
           this.dataForm = data.Table[0]
         }
