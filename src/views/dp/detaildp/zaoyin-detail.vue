@@ -203,11 +203,13 @@
         })
       },
       getzaoSheng() {
+        this.pageIndex=1;
         var that = this;
         this.dataForm.stationID = sessionStorage.getItem('stationID');
         axios.get('/GW.WIR/show/getZaoShengData.action', {
           params: {
             stationId: this.dataForm.stationID,
+            alarmTime_from: this.formatDateT(this.dataForm.startTime),
             startDt:  this.formatDateT(this.dataForm.startTime),
             endDt: this.formatDateT(new Date(new Date(this.dataForm.endTime.toLocaleDateString()).getTime()+24*60*60*1000)),
             start: 0,

@@ -146,7 +146,7 @@ export const constantRouterMap = [
       {
         path: '/dp/menjin-detail',
         name: 'menjin-detail',
-        component: () => import('@/views/dp/stationdp/menjin-detail'),
+        component: () => import('@/views/dp/detaildp/menjin-detail'),
         meta: { title: '门禁详情页', keepAlive: false, permission: [ 'user' ] }
       },
       {
@@ -158,7 +158,7 @@ export const constantRouterMap = [
       {
         path: '/dp/shuiwei-detail',
         name: 'shuiwei-detail',
-        component: () => import('@/views/dp/stationdp/shuiwei-detail'),
+        component: () => import('@/views/dp/detaildp/shuiwei-detail'),
         meta: { title: '水位详情页', keepAlive: false, permission: [ 'user' ] }
       },
       {
@@ -170,13 +170,13 @@ export const constantRouterMap = [
       {
         path: '/dp/wendu-detail',
         name: 'wendu-detail',
-        component: () => import('@/views/dp/stationdp/wendu-detail'),
+        component: () => import('@/views/dp/detaildp/wendu-detail'),
         meta: { title: '温度详情页', keepAlive: false, permission: [ 'user' ] }
       },
       {
         path: '/dp/shidu-detail',
         name: 'shidu-detail',
-        component: () => import('@/views/dp/stationdp/shidu-detail'),
+        component: () => import('@/views/dp/detaildp/shidu-detail'),
         meta: { title: '湿度详情页', keepAlive: false, permission: [ 'user' ] }
       },
       {

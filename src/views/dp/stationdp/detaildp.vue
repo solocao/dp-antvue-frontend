@@ -66,36 +66,35 @@
                   <!--<img src="./img/icon-L5.png" class="li2-img1"/>-->
                   <button  @click="detailHandle3" class="li2-img1 icon-4 btn btn-default ripple btn-lg " style="cursor:pointer;"></button>
                   <span class="li2-span1">烟感</span>
-                  <span class="li2-span2"><img src="./img/icon-sucess.png" class="li2-span2-img1"/></span>
+                  <span class="li2-span2"><img src="./img/icon-sucess.png" class="li2-span2-img2"/></span>
                   <img src="./img/line-L1.png" class="li2-img2"/>
                 </li>
                 <li>
                   <!--<img src="./img/icon-L5.png" class="li2-img1"/>-->
                   <button  @click="zaoyin" class="li2-img1 icon-4 btn btn-default ripple btn-lg " style="cursor:pointer;"></button>
                   <span class="li2-span1">噪音</span>
-                  <span class="li2-span2"><img src="./img/icon-sucess.png" class="li2-span2-img1"/></span>
+                  <span class="li2-span2"><img src="./img/icon-sucess.png" class="li2-span2-img2"/></span>
                   <img src="./img/line-L1.png" class="li2-img2"/>
                 </li>
                 <li>
                   <!--<img src="./img/icon-L5.png" class="li2-img1"/>-->
                   <button  @click="mupaiwendu" class="li2-img1 icon-4 btn btn-default ripple btn-lg " style="cursor:pointer;"></button>
-                  <span class="li2-span1">母排温度</span>
-                  <span class="li2-span2"><img src="./img/icon-sucess.png" class="li2-span2-img1"/></span>
+                  <span class="li2-span1">母排</span>
+                  <span class="li2-span2"><img src="./img/icon-sucess.png" class="li2-span2-img2"/></span>
                   <img src="./img/line-L1.png" class="li2-img2"/>
                 </li>
-                
                 <li>
                   <!--<img src="./img/icon-L5.png" class="li2-img1"/>-->
-                  <button  class="li2-img1 icon-4 btn btn-default ripple btn-lg " style="cursor:pointer;"></button>
+                  <button @click="nil"  class="li2-img1 icon-4 btn btn-default ripple btn-lg " style="cursor:pointer;"></button>
                   <span class="li2-span1">凝露</span>
-                  <span class="li2-span2"><img src="./img/icon-sucess.png" class="li2-span2-img1"/></span>
+                  <span class="li2-span2"><img src="./img/icon-sucess.png" class="li2-span2-img2"/></span>
                   <img src="./img/line-L1.png" class="li2-img2"/>
                 </li>
                 <li>
                   <!--<img src="./img/icon-L6.png" class="li2-img1"/>-->
                   <button  @click="detailHandle4" class="li2-img1 icon-5 btn btn-default ripple btn-lg " style="cursor:pointer;"></button>
                   <span class="li2-span1">水位</span>
-                  <span class="li2-span2"><img :src="this.waterLevel=='正常' ? this.iconsucc : this.iconerr" class="li2-span2-img6" /></span>
+                  <span class="li2-span2"><img :src="this.waterLevel=='正常' ? this.iconsucc : this.iconerr" class="li2-span2-img2" /></span>
                   <img src="./img/line-L1.png" class="li2-img2"/>
                 </li>
                 <li>
@@ -211,6 +210,7 @@
         this.temp=sessionStorage.getItem('temp')
       }else{
         this.stationName=this.$route.params.stationName;
+        sessionStorage.setItem('stationName',this.$route.params.stationName);
         this.stationNum=this.$route.params.stationNum;
         this.stationID=this.$route.params.stationID;
         this.waterLevel=this.$route.params.waterLevel;
@@ -237,6 +237,9 @@
       // this.getTemp();
     },
     methods:{
+      nil() {
+        this.$router.push({ name: 'nil-detail' })
+      },
       getTime(){
         var now = new Date();
         var alarmdatefrom = new Date((now/1000-3*24*60*60)*1000);//前1天

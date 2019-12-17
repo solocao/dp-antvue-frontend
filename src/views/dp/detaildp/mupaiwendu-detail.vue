@@ -34,10 +34,13 @@
       </div>
       <el-table :data="tableData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" :cell-class-name="cellClassHandle" style="width: 55rem;max-height: 48rem;">
         <el-table-column prop="stationname" label="开关站名称">
+           <template slot-scope="scope">
+                <span>{{stationName}}</span>
+            </template>
         </el-table-column>
         <el-table-column prop="temp" label="母排温度" header-align="center" align="center" width="180">
           <template slot-scope="scope">
-                <span>{{scope.row.temp+'%'}}</span>
+                <span>{{scope.row.temp}}</span>
 </template>
         </el-table-column>
         <el-table-column
@@ -100,6 +103,7 @@
           region: ''
         },
         pageIndex: 1,
+        stationName:"",
         pageSize: 15,
         totalPage: 0,
         dataForm: {
@@ -216,6 +220,7 @@
       this.dataForm.endTime = new Date()
       // this.gettemp()
       this.dialogFormVisible = true
+      this.stationName = sessionStorage.getItem('stationName');
     },
     methods: {
       sizeChangeHandle(val) {

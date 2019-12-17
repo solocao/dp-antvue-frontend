@@ -9,15 +9,15 @@
       <img style="position: absolute;top:0.8rem;left: 1rem" src="./img/icon2_select.png">
       <img style="position: absolute;top:0.28rem;" src="./img/menjin-titel-1.png">
       <span style="position: absolute;left:4rem;top:1.28rem;font-size: 16px;font-weight:bold;font-family:PingFang-SC;color:rgba(255,255,255,1);">门 禁 卡</span>
-<!--      <img style="position: absolute;top:0.7rem;left: 15.5rem;" src="./img/menjin-add.png">-->
-<!--      <span style="position: absolute;left:17.8rem;top:1.2rem;font-size: 16px;font-weight:bold;font-family:PingFang-SC;color:rgba(255,255,255,1);">+门禁卡添加</span>-->
+      <!--      <img style="position: absolute;top:0.7rem;left: 15.5rem;" src="./img/menjin-add.png">-->
+      <!--      <span style="position: absolute;left:17.8rem;top:1.2rem;font-size: 16px;font-weight:bold;font-family:PingFang-SC;color:rgba(255,255,255,1);">+门禁卡添加</span>-->
     </div>
     <div style="position: relative;top: 8rem;">
       <div style="position: relative;top: 6rem;">
         <img style="position: absolute;top:0.28rem;" src="./img/menjin-shaixuan.png">
         <span style="position: absolute;left:2rem;top:0.8rem;font-size: 16px;font-family:PingFang-SC;color:rgba(255,255,255,1);">开关站点</span>
         <div style="position: relative;left: 9rem">
-<!--          <img style="position: absolute;top:0.2rem;" src="./img/menjin-shaixuan-2.png">-->
+          <!--          <img style="position: absolute;top:0.2rem;" src="./img/menjin-shaixuan-2.png">-->
           <el-select v-model="dataForm.station" style="position: absolute;top:0.29rem;width: 18rem" placeholder="请选择开关站点">
             <el-option v-for="item in stationOptions" :key="item.key" :label="item.label" :value="item.value"></el-option>
           </el-select>
@@ -58,31 +58,20 @@
       </div>
     </div>
     <div style="position: relative;top: 20rem;">
-    <el-table
-      :data="tableData"
-      style="width: 100%;max-height: 40rem;">
-      <el-table-column prop="cardnum" label="门禁卡编号" header-align="center" align="center"/>
-      <el-table-column prop="hostnum" label="责任人工号" header-align="center" align="center"/>
-      <el-table-column prop="uesrname" label="用户名称" header-align="center" align="center" width="180"/>
-      <el-table-column prop="operatype" label="操作类型" header-align="center" align="center" width="180"/>
-      <el-table-column prop="operator" label="操作人" header-align="center" align="center" width="180"/>
-      <el-table-column prop="operatime" label="操作时间" header-align="center" align="center" width="180">
-        <template slot-scope="scope">
-          <span>{{formatDate(new Date(scope.row.operatime))}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column prop="effectivetime" label="生效时间" header-align="center" align="center" width="180">
-        <template slot-scope="scope">
-          <span>{{formatDate(new Date(scope.row.effectivetime))}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column prop="uneffectivetime" label="失效时间" header-align="center" align="center" width="180">
-        <template slot-scope="scope">
-          <span>{{formatDate(new Date(scope.row.uneffectivetime))}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column prop="hostflag" label="是否责任人" header-align="center" align="center" width="180"/>
-    </el-table>
+      <el-table
+        :data="tableData"
+        style="width: 100%;max-height: 40rem;">
+        <el-table-column prop="stationname" label="天关站名称" header-align="center" align="center" />
+        <el-table-column prop="hostnum" label="巡检人编号" header-align="center" align="center"　width="180"/>
+        <el-table-column prop="hostname" label="巡检人" header-align="center" align="center"/>
+        <el-table-column prop="examinetime" label="巡检时间" header-align="center" align="center" width="180">
+          <template slot-scope="scope">
+            <span>{{formatDate(new Date(scope.row.examinetime))}}</span>
+          </template>
+        </el-table-column>
+
+        <el-table-column prop="examineinfo" label="巡检结果" header-align="center" align="center" width="180"/>
+      </el-table>
       <el-pagination
         style="margin-top: 2rem"
         @size-change="sizeChangeHandle"
@@ -99,6 +88,7 @@
 
 <script>
   import axios from 'axios'
+  import $ from 'jquery'
   export default {
     data(){
       return {
@@ -117,26 +107,10 @@
       }
     },
     created(){
-      $("html").css({fontSize:''});
       this.getTableData()
-      // window.onresize = function(){
-      //   if(document.documentElement.baseURI.match('-detail').length>=1){
-      //     document.documentElement.style.cssText='';
-      //     document.documentElement.style.fontSize='';
-      //
-      //     // var fakeBody = document.createElement('body')
-      //     // docEl.removeChild(fakeBody)
-      //   }
-      // }
     },
-    watch:{
-      $route(){
-        //跳转到该页面后需要进行的操作
-        $("html").css({fontSize:''});
-        // if (this.timer1) {
-        // clearInterval(this.timer1); // 在Vue实例销毁前，清除我们的定时器
-        // clearInterval(this.timer11);
-      }
+    mounted(){
+
     },
     methods:{
       sizeChangeHandle (val) {
@@ -153,10 +127,13 @@
         this.$router.push({ name: 'detaildp'})
       },
       getTableData(){
-        axios.get('/GW.WIR/card/getKgCardList.action',{
-          params:{start:this.pageIndex,limit:this.pageSize,queryCardString :""}
+        axios.get('/GW.WIR/inspection/getKgInspectionList.action',{
+          params:{start:this.pageIndex,limit: 100000,queryCardString :"",
+            stationID:sessionStorage.getItem('stationID')
+          }
         }).then(({data})=>{
           data = eval('(' + data + ')')
+          console.log("data-----",data)
           if(data.Table.length>0){
             this.totalPage = parseInt(data.RecordCount)
             this.tableData = data.Table

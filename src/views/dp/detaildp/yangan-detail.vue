@@ -17,13 +17,13 @@
         <img style="position: absolute;top:0.28rem;" src="./img/menjin-shaixuan.png">
         <span style="position: absolute;left:2rem;top:0.8rem;font-size: 16px;font-family:PingFang-SC;color:rgba(255,255,255,1);">查询时间</span>
         <div style="position: relative;left: 11rem">
-                                       <el-date-picker
+          <el-date-picker
             style="position: absolute;top:0.29rem;left:0;width: 12rem"
             v-model="dataForm.startTime"
             type="date"
             placeholder="选择生效日期">
           </el-date-picker>
-                    <el-date-picker
+          <el-date-picker
             style="position: absolute;top:0.29rem;left:15rem;width: 12rem"
             v-model="dataForm.endTime"
             type="date"
@@ -38,27 +38,14 @@
       <el-table
         :data="tableData"
         style="width: 100%;max-height: 40rem;">
-        <el-table-column prop="cardnum" label="门禁卡编号" header-align="center" align="center"/>
-        <el-table-column prop="hostnum" label="责任人工号" header-align="center" align="center"/>
-        <el-table-column prop="uesrname" label="用户名称" header-align="center" align="center" width="180"/>
-        <el-table-column prop="operatype" label="操作类型" header-align="center" align="center" width="180"/>
-        <el-table-column prop="operator" label="操作人" header-align="center" align="center" width="180"/>
-        <el-table-column prop="operatime" label="操作时间" header-align="center" align="center" width="180">
+        <el-table-column prop="ALARMTYPE" label="报警类型" header-align="center" align="center"　width="300"/>
+        <el-table-column prop="STATIONNAME" label="站点名称" header-align="center" align="center" width="400"/>
+        <el-table-column prop="STATIONNUM" label="站点编号" header-align="center" align="center" width="400"/>
+        <el-table-column prop="ALARMTIME" label="报警时间" header-align="center" align="center" width="180">
           <template slot-scope="scope">
-            <span>{{formatDate(new Date(scope.row.operatime))}}</span>
+            <span>{{formatDate(new Date(scope.row.ALARMTIME))}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="effectivetime" label="生效时间" header-align="center" align="center" width="180">
-          <template slot-scope="scope">
-            <span>{{formatDate(new Date(scope.row.effectivetime))}}</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="uneffectivetime" label="失效时间" header-align="center" align="center" width="180">
-          <template slot-scope="scope">
-            <span>{{formatDate(new Date(scope.row.uneffectivetime))}}</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="hostflag" label="是否责任人" header-align="center" align="center" width="180"/>
       </el-table>
       <el-pagination
         style="margin-top: 2rem"
@@ -85,8 +72,8 @@
         dataForm:{
           station:'1',
           person:'',
-          startTime:'2019-10-06',
-          endTime:'2019-10-06'
+          startTime:'',
+          endTime:''
         },
         stationOptions:[{key:'1',value:'1',label:'A站'},{key:'2',value:'2',label:'B站'}],
         personOptions:[{key:'1',value:'1',label:'A负责人'},{key:'2',value:'2',label:'B负责人'}],
@@ -94,9 +81,14 @@
       }
     },
     created(){
+      this.dataForm.startTime = new Date(new Date().getTime() - 3 * 24 * 60 * 60 * 1000)
+      this.dataForm.endTime = new Date()
       this.getTableData()
     },
     methods:{
+      searchHandle(){
+        this. getTableData();
+      },
       sizeChangeHandle (val) {
         this.pageSize = val
         this.pageIndex = 1
@@ -111,11 +103,33 @@
         this.$router.push({ name: 'detaildp'})
       },
       getTableData(){
-        axios.get('/GW.WIR/card/getKgCardList.action',{
-          params:{start:this.pageIndex,limit:this.pageSize,queryCardString :""}
-        }).then(({data})=>{
+
+        // parameter: {
+        //   start: 0,
+        //     limit: 100000,
+        //     stationNum: '',
+        //     alarmTime_from: new Date()
+        // },
+        // var now = new Date();
+        // var alarmdatefrom = new Date((now / 1000 - 86400 * 1) * 1000); //前3天
+        // var year = alarmdatefrom.getFullYear(); //获取完整的年份(4位,1970-????)
+        // var month = alarmdatefrom.getMonth() + 1; //获取当前月份(1-12)
+        // var day = alarmdatefrom.getDate(); //获取当前日(1-31)
+
+        var alarmdatefrom=this.formatDate(this.dataForm.startTime);
+        var parm={
+          // stationID:sessionStorage.getItem('stationID'),
+          // stationName:
+          stationNum:sessionStorage.getItem('stationNum'),
+          alarmType:'烟雾报警',
+          start: 0,
+          limit: 100000,
+          alarmTime_from:alarmdatefrom
+        }
+
+        axios.get('/GW.WIR/alarm/getKgzAlarmList.action', {params:parm}
+        ).then(({data})=>{
           data = eval('(' + data + ')')
-          console.log("烟感返回信息----",data)
           if(data.Table.length>0){
             this.totalPage = parseInt(data.RecordCount)
             this.tableData = data.Table
