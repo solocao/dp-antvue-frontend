@@ -1,8 +1,8 @@
 <template>
   <div class="timebox">
     <div class="box-header">
-      <div class="backbtn" @click="backHandle()"><i class="el-icon-back"></i> 返回 </div>
-      <h4 class="">设备录像时间轴({{ devid }}-{{ channel }})</h4>
+      <!-- <div class="backbtn" @click="backHandle()"><i class="el-icon-back"></i> 返回 </div> -->
+      <!-- <h4 class="">设备录像时间轴({{ devid }}-{{ channel }})</h4> -->
     </div>
     <div class="datapicker">
       <el-date-picker
@@ -313,6 +313,7 @@ export default {
     color: #fff;
   }
   .backbtn {
+    position: relative;
     color: #4ff7d6;
     position: absolute;
     font-size: .2rem;
