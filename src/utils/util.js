@@ -90,4 +90,42 @@ export function streamStop(serial, code, token) {
       },
   });
 }
+export function recordlist(serial, code, token,timeout,starttime,endtime) {
+  return axios({
+      method: 'get',
+      url: '/ddkj/api/v1/playback/recordlist',
+      params: {
+          serial,
+          code,
+          token,
+          timeout,
+          starttime,
+          endtime
+      },
+  });
+}
+export function playbackStop(streamid, token) {
+  return axios({
+      method: 'get',
+      url: '/ddkj/api/v1/playback/stop',
+      params: {
+          streamid,
+          token
+      },
+  });
+}
+export function playbackStart(serial, code, token,starttime,endtime) {
+  return axios({
+      method: 'get',
+      url: '/ddkj/api/v1/playback/start',
+      params: {
+        serial,
+        code,
+        token,
+        starttime,
+        endtime
+      },
+  });
+}
+
 

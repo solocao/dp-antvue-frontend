@@ -1,8 +1,9 @@
 <!--  -->
 <template>
     <div class="video-container">
-        <div class="videoPlay">
-            <live-player class="video" ref="player" :videoUrl="videoUrl" v-loading="loading" fluent autoplay live stretch></live-player>
+        <div class="videoPlay" >
+            <playBack v-if="playBackVisible" :devid="serial" :channel="code" :streamID="streamID" @closePlayBack="closePlayBack" :token="token"></playBack>
+            <live-player v-if="!playBackVisible" class="video" ref="player" :videoUrl="videoUrl" v-loading="loading" fluent autoplay live stretch></live-player>
         </div>
         <div class="videoControl" id="video_dialog">
             <div class="video_button">
@@ -19,6 +20,12 @@
                 <el-button type="primary" @click="ptzControl('right')"> 右</el-button>
                 <el-button type="primary" @click="ptzControl('down')">下</el-button>
             </div>
+            <div class="video_button">
+                 <el-button v-for="(item,index) in players" :key="index" type="primary" @click="shuld(item)">{{ item.Model }}{{item.Channel}}</el-button>
+            </div>
+            <div class="video_button">
+                <el-button type="primary" @click="lookHistory()">历史回放</el-button>
+            </div>
         </div>
     </div>
 </template>
@@ -33,6 +40,7 @@
         controlPtz,
         streamStop
     } from '../../../utils/util'
+    import playBack from './PlaybackTimebox'
     export default {
         data() {
             return {
@@ -44,16 +52,25 @@
                 command: '',
                 streamID: '',
                 videoUrl: '',
-                loading: false
+                loading: false,
+                playBackVisible: false
             }
         },
         components: {
-            LivePlayer
+            LivePlayer,
+            playBack
         },
         mounted() {
             this.getChannels()
         },
         methods: {
+            camera(){
+               
+            },
+            closePlayBack () {},
+            lookHistory () {
+                this.playBackVisible = true
+            },
             getChannels() {
                 // 接口需要token  调用登录接口获取token
                 this.loading = true
@@ -64,7 +81,10 @@
                 Login(parmas.username, parmas.password).then(res => {
                     this.token = res.data.URLToken
                     getChannelList(this.token, 'true').then(res => {
-                        this.players = res.data.ChannelList
+                        console.log(res)
+                        this.players = res.data.ChannelList.filter(function (value) {
+                            return value.DeviceID === '34020000001110000009'
+                            })
                         this.shuld(this.players[0])
                     })
                 })
