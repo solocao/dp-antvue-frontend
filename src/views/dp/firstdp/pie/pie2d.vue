@@ -77,7 +77,7 @@
             getPie3d(data) {
                 var that = this;
                 console.log("3333333333333333333", data)
-                var titlename = ['红外报警', '湿度报警', '温度报警', '水位报警', '门磁报警', '电源告警'];
+                var titlename = ['红外报警', '湿度报警', '温度报警', '水位报警', '门磁报警', '电源告警',"烟雾报警","凝露报警"];
                 var valdata = [{
                         value: data[0].HWBJ,
                         name: '红外报警',
@@ -102,13 +102,21 @@
                         value: data[0].DYGJ,
                         name: '电源告警'
                     },
+                    {
+                        value: data[0].YWBJ,
+                        name: '烟雾报警'
+                    },
+                    {
+                        value: data[0].NLBJ,
+                        name: '凝露报警'
+                    },
                 ]
                 this.powerInfoEchart = this.$echarts.init(document.getElementById("powerInfoEchart"))
                 this.powerInfoEchart.on('click', (params) => {
                     console.log("-----", params)
                     this.clickEvent(params.data)
                 })
-                var colorList = ['#afa3f5', '#00d488', '#3feed4', '#3bafff', '#f1bb4c', "rgba(250,250,250,0.5)", "#0f0"];
+                var colorList = ['#afa3f5', '#00d488', '#3feed4', '#3bafff', '#f1bb4c', "rgba(250,250,250,0.5)", "#0f0","#daa520","red"];
                 this.powerInfoEchart.setOption({
                     grid: {
                         top: "50%",
@@ -176,6 +184,12 @@
                                                 break;
                                             case '电源告警':
                                                 str = '{e|}\n{nameStyle|电源告警 }' + '' + '{rate|' + params.value + '%}';
+                                                break;
+                                            case '烟雾报警':
+                                                str = '{e|}\n{nameStyle|烟雾报警 }' + '' + '{rate|' + params.value + '%}';
+                                                break;
+                                            case '凝露报警':
+                                                str = '{e|}\n{nameStyle|凝露报警 }' + '' + '{rate|' + params.value + '%}';
                                                 break;
                                         }
                                         return str

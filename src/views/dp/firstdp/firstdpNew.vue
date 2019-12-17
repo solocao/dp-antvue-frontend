@@ -155,6 +155,9 @@
               </el-pagination>
             </el-popover>
             <el-popover ref="popover5" placement="right" width="760" v-model="visible" popper-class="popperclass1" trigger="click">
+              <div @click="closePopover" style="margin-left:auto;margin-right:0px">
+                  关闭
+              </div>
               <el-table :data="tablePieData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;color:#fff;max-height: 40rem;">
                 <el-table-column width="200" property="CREATEDATE" label="日期"></el-table-column>
                 <el-table-column width="430" property="STATIONNAME" label="站点名称"></el-table-column>
@@ -501,6 +504,7 @@
         } else {
           this.visible = true;
         }
+        // this.visible = true
         if (this.visible) {
           this.executePieTime(data.name);
         }
@@ -652,6 +656,9 @@
       cloneObjectFn(obj) {
         return JSON.parse(JSON.stringify(obj))
       },
+      closePopover() {
+           this.visible = false
+      },
       executePieTime(data) {
         var parms = this.cloneObjectFn(this.parameter);
         if (this.parameter.stationNum == "0" || this.parameter.stationNum == "") {
@@ -669,6 +676,8 @@
         var month = alarmdatefrom.getMonth() + 1; //获取当前月份(1-12)
         var day = alarmdatefrom.getDate(); //获取当前日(1-31)
         parms.alarmTime_from = year + "-" + month + "-" + day + " 00:00:00";
+        // parms.alarmTime_from = "2019-12-12 00:00:00"
+        console.log("-------------------",parms)
         axiosKj({
           url: '/GW.WIR/alarm/getKgzAlarmList.action',
           method: 'post',

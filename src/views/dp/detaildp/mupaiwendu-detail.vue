@@ -179,26 +179,26 @@
                 color: 'rgba(255,12,0,1)'
               }
             },
-            areaStyle: {
-              color: {
-                type: 'linear',
-                x: 0,
-                y: 0,
-                x2: 0,
-                y2: 1,
-                colorStops: [{
-                  offset: 0,
-                  color: 'rgba(79,247,214,1)' // 0% 处的颜色
-                }, {
-                  offset: 0.5,
-                  color: 'rgba(79,247,214,0.5)' // 5% 处的颜色
-                }, {
-                  offset: 1,
-                  color: 'rgba(79,247,214,0)' // 100% 处的颜色
-                }],
-                global: false // 缺省为 false
-              }
-            }
+            // areaStyle: {
+            //   color: {
+            //     type: 'linear',
+            //     x: 0,
+            //     y: 0,
+            //     x2: 0,
+            //     y2: 1,
+            //     colorStops: [{
+            //       offset: 0,
+            //       color: 'rgba(79,247,214,1)' // 0% 处的颜色
+            //     }, {
+            //       offset: 0.5,
+            //       color: 'rgba(79,247,214,0.5)' // 5% 处的颜色
+            //     }, {
+            //       offset: 1,
+            //       color: 'rgba(79,247,214,0)' // 100% 处的颜色
+            //     }],
+            //     global: false // 缺省为 false
+            //   }
+            // }
           }]
         },
         tableData: []
@@ -257,7 +257,8 @@
         data.Table.sort((a, b) => {
           return a.tempTime - b.tempTime
         })
-        const tempList = data.Table
+        const tempList = NewList
+        console.log("maxtempValue---",maxtempValue)
         const xtempList = []
         const ytempList = []
         tempList.forEach((item, index) => {
@@ -266,6 +267,9 @@
           xtempList.push(x)
           ytempList.push(item.temp)
         })
+        
+        console.log("maxtempValue---",maxtempValue)
+        console.log("ytempList---",ytempList)
         const maxtempValue = ytempList.length == 0 ? 0 : Math.max.apply(null, ytempList)
         that.tempOption.title.subtext = '{a|时间范围内最大湿度是' + maxtempValue + '%}'
         that.tempOption.xAxis.data = xtempList
