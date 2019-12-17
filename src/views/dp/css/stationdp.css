@@ -325,10 +325,11 @@ a:hover{ color:#06c; text-decoration: none!important}
 .addNewd span{  line-height:.4rem; font-size: .18rem;color: rgba(255,255,255,.6); }
 .addNewd img{ width: .15rem; border-radius: .5rem; margin-left: 5rem; display: inline-block;margin-top:-.5rem; vertical-align: middle;}
 .station_sycm {
+  overflow-y: auto;
   height:650px;
-  overflow: auto;
+  /* overflow: hidden; */
 }
-.station_sycm ul{ margin-left:-.5rem;margin-right:-.5rem;  padding: .16rem 0;}
+.station_sycm ul{ margin-left:-.5rem;margin-right:-.5rem;  padding: .16rem 0;width: 114%;}
 .station_sycm li{ float: left; text-align: center; position: relative;height:.58rem;}
 .station_sycm li:nth-child(1){
   margin-top:.25rem;
@@ -404,7 +405,7 @@ margin-top:.2rem;
   margin-left:.1rem;
 }
 .li1-span1{
-margin-left:.3rem;
+margin-left:.6rem;
 }
 .li1-span2{
 margin-left:.8rem;
