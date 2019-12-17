@@ -33,11 +33,11 @@
         </div>
       </div>
       <el-table :data="tableData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" :cell-class-name="cellClassHandle" style="width: 55rem;max-height: 48rem;">
-        <el-table-column prop="stationname" label="开关站名称">
+        <el-table-column prop="stationName" label="开关站名称">
         </el-table-column>
         <el-table-column prop="zaoSheng" label="噪声" header-align="center" align="center" width="180">
           <template slot-scope="scope">
-              <span>{{scope.row.zaoSheng+'%'}}</span>
+              <span>{{scope.row.zaoSheng/10}}</span>
 </template>
         </el-table-column>
         <el-table-column
@@ -102,7 +102,7 @@
             }
           },
           legend: {
-            data: ['湿度'],
+            data: ['噪声'],
             bottom: '0px',
             textStyle: {
               color: '#fff'
@@ -141,7 +141,7 @@
             type: 'value'
           },
           series: [{
-            name: '湿度',
+            name: '噪声',
             data: [],
             type: 'line',
             lineStyle: {
@@ -158,26 +158,26 @@
                 color: 'rgba(255,12,0,1)'
               }
             },
-            areaStyle: {
-              color: {
-                type: 'linear',
-                x: 0,
-                y: 0,
-                x2: 0,
-                y2: 1,
-                colorStops: [{
-                  offset: 0,
-                  color: 'rgba(79,247,214,1)' // 0% 处的颜色
-                }, {
-                  offset: 0.5,
-                  color: 'rgba(79,247,214,0.5)' // 5% 处的颜色
-                }, {
-                  offset: 1,
-                  color: 'rgba(79,247,214,0)' // 100% 处的颜色
-                }],
-                global: false // 缺省为 false
-              }
-            }
+            // areaStyle: {
+            //   color: {
+            //     type: 'linear',
+            //     x: 0,
+            //     y: 0,
+            //     x2: 0,
+            //     y2: 1,
+            //     colorStops: [{
+            //       offset: 0,
+            //       color: 'rgba(79,247,214,1)' // 0% 处的颜色
+            //     }, {
+            //       offset: 0.5,
+            //       color: 'rgba(79,247,214,0.5)' // 5% 处的颜色
+            //     }, {
+            //       offset: 1,
+            //       color: 'rgba(79,247,214,0)' // 100% 处的颜色
+            //     }],
+            //     global: false // 缺省为 false
+            //   }
+            // }
           }]
         },
         tableData: []
@@ -240,11 +240,11 @@
             yzaoShengList.push(item.zaoSheng)
           })
           const maxzaoShengValue = yzaoShengList.length == 0 ? 0 : Math.max.apply(null, yzaoShengList)
-          that.zaoShengOption.title.subtext = '{a|时间范围内最大湿度是' + maxzaoShengValue + '%}'
+          that.zaoShengOption.title.subtext = '{a|时间范围内最大噪音是' + maxzaoShengValue/10 + '}'
           that.zaoShengOption.xAxis.data = xzaoShengList
           that.zaoShengOption.series[0].data = yzaoShengList
           const exception = zaoShengList.filter((item) => {
-            return item.zaoSheng >= 70
+            return item.zaoSheng/10 >= 70
           })
           const exceptionList = []
           exception.forEach((item, index) => {
@@ -252,7 +252,7 @@
             const x = time.getHours() + ':' + time.getMinutes()
             const exceptionItem = {}
             exceptionItem.name = item.zaoSheng
-            exceptionItem.value = item.zaoSheng
+            exceptionItem.value = item.zaoSheng/10
             exceptionItem.xAxis = x
             exceptionItem.yAxis = item.zaoSheng
             exceptionList.push(exceptionItem)
