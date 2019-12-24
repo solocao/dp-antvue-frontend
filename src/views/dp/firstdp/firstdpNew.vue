@@ -38,8 +38,8 @@
             <div class="alltitle">
               <img src="../dpimg/firstdp/bg-icon-L1.png"></img>
               <span class="span_L1" style="color:rgba(40,205,156,1)">站点统计信息</span>
-              <span class="span_L2" style="color:#00CCFF">安全运维：</span>
-              <span class="span_L3" style="color:#00CCFF">100</span>
+              <span class="span_L2" style="color:#00CCFF">站点总数：</span>
+              <span class="span_L3" style="color:#00CCFF">{{totalCommit}}</span>
             </div>
             <div class="sycm">
               <pieecharts ref="pieecharts" @pieNum="setpieNum"></pieecharts>
@@ -158,7 +158,7 @@
               <div @click="closePopover" style="margin-left:auto;margin-right:0px">
                   关闭
               </div>
-              <el-table :data="tablePieData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;color:#fff;max-height: 40rem;">
+              <el-table :data="tablePieData.slice((pagePieIndex-1)*pageSize,pagePieIndex*pageSize)" style="width: 100%;color:#fff;max-height: 40rem;">
                 <el-table-column width="200" property="CREATEDATE" label="日期"></el-table-column>
                 <el-table-column width="430" property="STATIONNAME" label="站点名称"></el-table-column>
                 <el-table-column width="100" property="ALARMTYPE" label="告警类型"></el-table-column>
@@ -171,7 +171,7 @@
               <span class="dialogstxt">{{dialogvalue}}</span>
               <span slot="footer" class="dialog-footer">
             <el-button @click="handleClose">忽 略</el-button>
-            <el-button type="primary" @click="handleClose">处 理</el-button>
+            <!--<el-button type="primary" @click="handleClose">处 理</el-button>-->
           </span>
               <!-- </span> -->
             </el-dialog>
@@ -518,21 +518,21 @@
       sizeChangeHandle(val) {
         this.pageSize = val
         this.pageIndex = 1
-        this.getTableData()
+        // this.getTableData()
       },
       sizeChangeHandlePie(val) {
         this.pagePieSize = val
         this.pagePieIndex = 1
-        this.getTableData()
+        // this.getTableData()
       },
       // 当前页
       currentChangeHandle(val) {
         this.pageIndex = val
-        this.getTableData()
+        // this.getTableData()
       },
       currentChangeHandlePie(val) {
         this.pagePieIndex = val
-        this.getTableData()
+        // this.getTableData()
       },
       getgroupid() {
         var data = this.cityName;
@@ -1088,9 +1088,9 @@
       width: 30%;
       position: absolute;
       left: 33%;
-      top: 0;
-      background: url("../dpimg/firstdp/work.png");
-      background-size: 100% 90%;
+      top: 0px;
+      background: url("../dpimg/firstdp/work.png") no-repeat 0px 160px;
+      background-size: 100% 30%;
       text-align: center;
       z-index: 100;
       .bottom_p1 {
@@ -1109,8 +1109,8 @@
       position: absolute;
       left: 66%;
       top: 0;
-      background: url("../dpimg/firstdp/work.png");
-      background-size: 100% 90%;
+      background: url("../dpimg/firstdp/work.png") no-repeat 0px 135px;
+      background-size: 100% 40%;
       z-index: 100;
       text-align: center;
       .bottom_p1 {

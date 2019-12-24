@@ -101,8 +101,30 @@
               }
             }
           },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'cross',
+              animation: false,
+              label: {
+                backgroundColor: '#ccc',
+                borderColor: '#aaa',
+                borderWidth: 1,
+                shadowBlur: 0,
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                textStyle: {
+                  color: '#222'
+                }
+              }
+            },
+            formatter: function (params) {
+
+              return '<span style="font-size: 20px ;">'+params[0].name + '<br />' + params[0].value+'</span>';
+            }
+          },
           legend: {
-            data: ['温度'],
+            data: ['水位'],
             bottom: '0px',
             textStyle: {
               color: '#fff'
@@ -112,7 +134,7 @@
           xAxis: {
             axisLabel: {
               color: '#fff',
-              fontSize: 10
+              fontSize: 15
             },
             axisLine: {
               show: false
@@ -141,7 +163,7 @@
             type: 'value'
           },
           series: [{
-            name: '温度',
+            name: '水位',
             data: [],
             type: 'line',
             lineStyle: {
@@ -184,7 +206,7 @@
       }
     },
     created() {
-      this.dataForm.startTime = new Date(new Date().getTime() - 3 * 24 * 60 * 60 * 1000)
+      this.dataForm.startTime = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000)
       this.dataForm.endTime = new Date()
       this.getTemp()
     },

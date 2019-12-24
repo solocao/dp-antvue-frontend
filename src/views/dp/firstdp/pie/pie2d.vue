@@ -168,28 +168,28 @@
                                         var str = '';
                                         switch (params.name) {
                                             case '红外报警':
-                                                str = '{a|}\n{nameStyle|红外报警 }' + '' + '{rate|' + params.value + '%}';
+                                                str = '{a|}\n{nameStyle|红外报警 }' + '' + '{rate|' + params.value + '}';
                                                 break;
                                             case '湿度报警':
-                                                str = '{b|}\n{nameStyle|湿度报警 }' + '' + '{rate|' + params.value + '%}';
+                                                str = '{b|}\n{nameStyle|湿度报警 }' + '' + '{rate|' + params.value + '}';
                                                 break;
                                             case '温度报警':
-                                                str = '{c|}\n{nameStyle|温度报警 }' + '' + '{rate|' + params.value + '%}';
+                                                str = '{c|}\n{nameStyle|温度报警 }' + '' + '{rate|' + params.value + '}';
                                                 break;
                                             case '水位报警':
-                                                str = '{d|}\n{nameStyle|水位报警 }' + '' + '{rate|' + params.value + '%}';
+                                                str = '{d|}\n{nameStyle|水位报警 }' + '' + '{rate|' + params.value + '}';
                                                 break;
                                             case '门磁报警':
-                                                str = '{e|}\n{nameStyle|门磁报警 }' + '' + '{rate|' + params.value + '%}';
+                                                str = '{e|}\n{nameStyle|门磁报警 }' + '' + '{rate|' + params.value + '}';
                                                 break;
                                             case '电源告警':
-                                                str = '{e|}\n{nameStyle|电源告警 }' + '' + '{rate|' + params.value + '%}';
+                                                str = '{e|}\n{nameStyle|电源告警 }' + '' + '{rate|' + params.value + '}';
                                                 break;
                                             case '烟雾报警':
-                                                str = '{e|}\n{nameStyle|烟雾报警 }' + '' + '{rate|' + params.value + '%}';
+                                                str = '{e|}\n{nameStyle|烟雾报警 }' + '' + '{rate|' + params.value + '}';
                                                 break;
                                             case '凝露报警':
-                                                str = '{e|}\n{nameStyle|凝露报警 }' + '' + '{rate|' + params.value + '%}';
+                                                str = '{e|}\n{nameStyle|凝露报警 }' + '' + '{rate|' + params.value + '}';
                                                 break;
                                         }
                                         return str

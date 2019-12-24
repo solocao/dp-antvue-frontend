@@ -59,7 +59,10 @@
                   <!--<img src="./img/icon-L4.png" class="li2-img1"/>-->
                   <button  @click="detailHandle" class="li2-img1 icon-3 btn btn-default ripple btn-lg " style="cursor:pointer;"></button>
                   <span class="li2-span1">门禁</span>
-                  <span class="li2-span2"><img :src="this.doorStatus=='关' ? this.doorclose : this.dooropen"  /></span>
+                  <span class="li2-span2" >
+                   <span class="li2-span2-span2" style="color:rgba(40,205,156,1);">{{doorStatus}}</span>
+                    <!--<img :src="this.doorStatus=='关' ? this.doorclose : this.dooropen"  />-->
+                  </span>
                   <img src="./img/line-L1.png" class="li2-img2"/>
                 </li>
                 <li>
@@ -212,7 +215,9 @@
         this.stationName=this.$route.params.stationName;
         sessionStorage.setItem('stationName',this.$route.params.stationName);
         this.stationNum=this.$route.params.stationNum;
+        sessionStorage.setItem('stationNum',this.$route.params.stationNum);
         this.stationID=this.$route.params.stationID;
+        sessionStorage.setItem('stationID',this.$route.params.stationID);
         this.waterLevel=this.$route.params.waterLevel;
         this.doorStatus=this.$route.params.doorStatus;
         this.humi=this.$route.params.humi;
@@ -301,6 +306,9 @@
       detailHandle1() {
         this.$router.push({ name: 'shidu-detail' })
       },
+      nil(){
+        this.$router.push({ name: 'nil-detail' })
+      },
       zaoyin() {
         this.$router.push({ name: 'zaoyin-detail' })
       },
@@ -320,7 +328,7 @@
         this.$router.push({ name: 'shuiwei-detail'})
       },
       openMask(num){
-             
+
         this.$router.push({
           path:"/dp/liveplayer",
           query:{}

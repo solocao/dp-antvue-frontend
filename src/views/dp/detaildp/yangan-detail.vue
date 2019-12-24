@@ -36,7 +36,7 @@
     </div>
     <div style="position: relative;top: 20rem;">
       <el-table
-        :data="tableData"
+        :data="tableData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)"
         style="width: 100%;max-height: 40rem;">
         <el-table-column prop="ALARMTYPE" label="报警类型" header-align="center" align="center"　width="300"/>
         <el-table-column prop="STATIONNAME" label="站点名称" header-align="center" align="center" width="400"/>
@@ -81,7 +81,7 @@
       }
     },
     created(){
-      this.dataForm.startTime = new Date(new Date().getTime() - 3 * 24 * 60 * 60 * 1000)
+      this.dataForm.startTime = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000)
       this.dataForm.endTime = new Date()
       this.getTableData()
     },

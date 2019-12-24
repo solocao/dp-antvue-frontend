@@ -37,7 +37,7 @@
         </el-table-column>
         <el-table-column prop="zaoSheng" label="噪声" header-align="center" align="center" width="180">
           <template slot-scope="scope">
-              <span>{{scope.row.zaoSheng/10}}</span>
+              <span >{{scope.row.zaoSheng/10}}</span>
 </template>
         </el-table-column>
         <el-table-column
@@ -88,7 +88,7 @@
           endTime: ""
         },
         zaoShengOption: {
-          color: colors,
+          // color: colors,
           title: {
             subtext: `{a|时间范围内最大噪声是%}`,
             right: '7%',
@@ -99,6 +99,42 @@
                   fontSize: 14
                 }
               }
+            }
+          },
+          visualMap: {
+            show:false,
+            pieces: [{
+              gt: 0,
+              lte: 700,
+              color: 'rgba(79,247,214,1)'
+            }, {
+              gt: 700,
+              color: 'rgba(255, 12, 0, 1)'
+            }],
+            outOfRange: {
+              color: '#999'
+            }
+          },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'cross',
+              animation: false,
+              label: {
+                backgroundColor: '#ccc',
+                borderColor: '#aaa',
+                borderWidth: 1,
+                shadowBlur: 0,
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                textStyle: {
+                  color: '#222'
+                }
+              }
+            },
+            formatter: function (params) {
+
+              return '<span style="font-size: 20px ;">'+params[0].name + '<br />' + params[0].value/10+'</span>';
             }
           },
           legend: {
@@ -112,7 +148,7 @@
           xAxis: {
             axisLabel: {
               color: '#fff',
-              fontSize: 10
+              fontSize: 15
             },
             axisLine: {
               show: false
@@ -144,12 +180,12 @@
             name: '噪声',
             data: [],
             type: 'line',
-            lineStyle: {
-              color: 'rgba(79,247,214,1)'
-            },
-            itemStyle: {
-              borderColor: 'rgba(79,247,214,1)'
-            },
+            // lineStyle: {
+            //   color: 'rgba(79,247,214,1)'
+            // },
+            // itemStyle: {
+            //   borderColor: 'rgba(79,247,214,1)'
+            // },
             markPoint: {
               data: [
                 // {name: '周最低', value: -2, xAxis: '周三', yAxis: -2}
@@ -184,7 +220,7 @@
       }
     },
     created() {
-      this.dataForm.startTime = new Date(new Date().getTime() - 3 * 24 * 60 * 60 * 1000)
+      this.dataForm.startTime = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000)
       this.dataForm.endTime = new Date()
       this.getzaoSheng()
     },
@@ -208,7 +244,7 @@
         this.dataForm.stationID = sessionStorage.getItem('stationID');
         axios.get('/GW.WIR/show/getZaoShengData.action', {
           params: {
-            stationId: this.dataForm.stationID,
+            stationID: this.dataForm.stationID,
             alarmTime_from: this.formatDateT(this.dataForm.startTime),
             startDt:  this.formatDateT(this.dataForm.startTime),
             endDt: this.formatDateT(new Date(new Date(this.dataForm.endTime.toLocaleDateString()).getTime()+24*60*60*1000)),
@@ -230,7 +266,7 @@
           that.totalPage = that.tableData.length;
           //湿度信息
           data.Table.sort((a, b) => {
-            return a.tempTime - b.tempTime
+            return b.tempTime - a.tempTime
           })
           const zaoShengList = data.Table
           const xzaoShengList = []
@@ -245,9 +281,12 @@
           that.zaoShengOption.title.subtext = '{a|时间范围内最大噪音是' + maxzaoShengValue/10 + '}'
           that.zaoShengOption.xAxis.data = xzaoShengList
           that.zaoShengOption.series[0].data = yzaoShengList
+
           const exception = zaoShengList.filter((item) => {
+
             return item.zaoSheng/10 >= 70
           })
+
           const exceptionList = []
           exception.forEach((item, index) => {
             const time = new Date(item.tempTime)
@@ -257,7 +296,10 @@
             exceptionItem.value = item.zaoSheng/10
             exceptionItem.xAxis = x
             exceptionItem.yAxis = item.zaoSheng
-            exceptionList.push(exceptionItem)
+
+              exceptionList.push(exceptionItem)
+
+
           })
           this.zaoShengOption.series[0].markPoint.data = exceptionList
           // console.log(JSON.stringify(this.zaoShengOption))
@@ -290,7 +332,8 @@
         rowIndex,
         columnIndex
       }) {
-        if (row.zaoSheng >= 70 && columnIndex == 1) {
+        if (row.zaoSheng/10 >= 70 && columnIndex == 1) {
+
           return 'exception'
         }
       }

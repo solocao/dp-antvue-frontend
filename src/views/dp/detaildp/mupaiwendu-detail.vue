@@ -126,8 +126,30 @@
               }
             }
           },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'cross',
+              animation: false,
+              label: {
+                backgroundColor: '#ccc',
+                borderColor: '#aaa',
+                borderWidth: 1,
+                shadowBlur: 0,
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                textStyle: {
+                  color: '#222'
+                }
+              }
+            },
+            formatter: function (params) {
+
+              return '<span style="font-size: 20px ;">'+params[0].name + '<br />' + params[0].value+'</span>';
+            }
+          },
           legend: {
-            data: ['湿度'],
+            data: ['母排温度'],
             bottom: '0px',
             textStyle: {
               color: '#fff'
@@ -137,7 +159,7 @@
           xAxis: {
             axisLabel: {
               color: '#fff',
-              fontSize: 10
+              fontSize: 15
             },
             axisLine: {
               show: false
@@ -166,7 +188,7 @@
             type: 'value'
           },
           series: [{
-            name: '湿度',
+            name: '母排温度',
             data: [],
             type: 'line',
             lineStyle: {
@@ -216,7 +238,7 @@
       }
     },
     created() {
-      this.dataForm.startTime = new Date(new Date().getTime() - 3 * 24 * 60 * 60 * 1000)
+      this.dataForm.startTime = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000)
       this.dataForm.endTime = new Date()
       // this.gettemp()
       this.dialogFormVisible = true
@@ -272,11 +294,11 @@
           xtempList.push(x)
           ytempList.push(item.temp)
         })
-        
+
         console.log("maxtempValue---",maxtempValue)
         console.log("ytempList---",ytempList)
         const maxtempValue = ytempList.length == 0 ? 0 : Math.max.apply(null, ytempList)
-        that.tempOption.title.subtext = '{a|时间范围内最大湿度是' + maxtempValue + '%}'
+        that.tempOption.title.subtext = '{a|时间范围内最大母排温度是' + maxtempValue + '%}'
         that.tempOption.xAxis.data = xtempList
         that.tempOption.series[0].data = ytempList
         const exception = tempList.filter((item) => {

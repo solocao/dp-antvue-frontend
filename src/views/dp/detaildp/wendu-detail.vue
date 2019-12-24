@@ -101,6 +101,28 @@
               }
             }
           },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'cross',
+              animation: false,
+              label: {
+                backgroundColor: '#ccc',
+                borderColor: '#aaa',
+                borderWidth: 1,
+                shadowBlur: 0,
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                textStyle: {
+                  color: '#222'
+                }
+              }
+            },
+            formatter: function (params) {
+
+              return '<span style="font-size: 20px ;">'+params[0].name + '<br />' + params[0].value+'℃'+'</span>';
+            }
+          },
           legend: {
             data: ['温度'],
             bottom: '0px',
@@ -112,7 +134,7 @@
           xAxis: {
             axisLabel: {
               color: '#fff',
-              fontSize: 10
+              fontSize: 15
             },
             axisLine: {
               show: false
@@ -185,7 +207,7 @@
     },
     created() {
       // this.dataForm.time = [new Date(new Date().getTime()-3*24*60*60*1000),new Date()]
-      this.dataForm.startTime = new Date(new Date().getTime() - 3 * 24 * 60 * 60 * 1000)
+      this.dataForm.startTime = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000)
       this.dataForm.endTime = new Date()
       this.getTemp()
     },
@@ -224,7 +246,7 @@
           that.totalPage = that.tableData.length;
           //温度信息
           data.Table.sort((a, b) => {
-            return a.temptime - b.temptime
+            return b.temptime - a.temptime
           })
           const tempList = data.Table
           const xTempList = []
@@ -236,7 +258,7 @@
             yTempList.push(item.temperature)
           })
           const maxTempValue = yTempList.length == 0 ? 0 : Math.max.apply(null, yTempList)
-          that.tempOption.title.subtext = '{a|时间范围内最大温度是' + maxTempValue + '%}'
+          that.tempOption.title.subtext = '{a|时间范围内最大温度是' + maxTempValue + '℃}'
           that.tempOption.xAxis.data = xTempList
           that.tempOption.series[0].data = yTempList
           const exception = tempList.filter((item) => {

@@ -12,54 +12,54 @@
       <!--      <img style="position: absolute;top:0.7rem;left: 15.5rem;" src="./img/menjin-add.png">-->
       <!--      <span style="position: absolute;left:17.8rem;top:1.2rem;font-size: 16px;font-weight:bold;font-family:PingFang-SC;color:rgba(255,255,255,1);">+门禁卡添加</span>-->
     </div>
-    <div style="position: relative;top: 8rem;">
-      <div style="position: relative;top: 6rem;">
-        <img style="position: absolute;top:0.28rem;" src="./img/menjin-shaixuan.png">
-        <span style="position: absolute;left:2rem;top:0.8rem;font-size: 16px;font-family:PingFang-SC;color:rgba(255,255,255,1);">开关站点</span>
-        <div style="position: relative;left: 9rem">
-          <!--          <img style="position: absolute;top:0.2rem;" src="./img/menjin-shaixuan-2.png">-->
-          <el-select v-model="dataForm.station" style="position: absolute;top:0.29rem;width: 18rem" placeholder="请选择开关站点">
-            <el-option v-for="item in stationOptions" :key="item.key" :label="item.label" :value="item.value"></el-option>
-          </el-select>
-        </div>
-      </div>
-      <div style="position: relative;top: 6rem;left: 29rem">
-        <img style="position: absolute;top:0.28rem;" src="./img/menjin-shaixuan.png">
-        <span style="position: absolute;left:2rem;top:0.8rem;font-size: 16px;font-family:PingFang-SC;color:rgba(255,255,255,1);">责任人</span>
-        <div style="position: relative;left: 9rem">
-          <el-select v-model="dataForm.person" style="position: absolute;top:0.29rem;width: 18rem" placeholder="请选择责任人">
-            <el-option v-for="item in personOptions" :key="item.key" :label="item.label" :value="item.value"></el-option>
-          </el-select>
-        </div>
-      </div>
-      <div style="position: relative;top: 6rem;left: 58rem">
-        <img style="position: absolute;top:0.28rem;" src="./img/menjin-shaixuan.png">
-        <span style="position: absolute;left:2rem;top:0.8rem;font-size: 16px;font-family:PingFang-SC;color:rgba(255,255,255,1);">生效时间</span>
-        <div style="position: relative;left: 9rem">
-          <el-date-picker
-            style="position: absolute;top:0.29rem;width: 18rem"
-            v-model="dataForm.startTime"
-            type="date"
-            placeholder="选择生效日期">
-          </el-date-picker>
-        </div>
-      </div>
-      <div style="position: relative;top: 6rem;left: 87rem">
-        <img style="position: absolute;top:0.28rem;" src="./img/menjin-shaixuan.png">
-        <span style="position: absolute;left:2rem;top:0.8rem;font-size: 16px;font-family:PingFang-SC;color:rgba(255,255,255,1);">失效时间</span>
-        <div style="position: relative;left: 9rem">
-          <el-date-picker
-            style="position: absolute;top:0.29rem;width: 18rem"
-            v-model="dataForm.endTime"
-            type="date"
-            placeholder="选择失效日期">
-          </el-date-picker>
-        </div>
-      </div>
-    </div>
-    <div style="position: relative;top: 20rem;">
+    <!--<div style="position: relative;top: 8rem;">-->
+      <!--<div style="position: relative;top: 6rem;">-->
+        <!--<img style="position: absolute;top:0.28rem;" src="./img/menjin-shaixuan.png">-->
+        <!--<span style="position: absolute;left:2rem;top:0.8rem;font-size: 16px;font-family:PingFang-SC;color:rgba(255,255,255,1);">开关站点</span>-->
+        <!--<div style="position: relative;left: 9rem">-->
+          <!--&lt;!&ndash;          <img style="position: absolute;top:0.2rem;" src="./img/menjin-shaixuan-2.png">&ndash;&gt;-->
+          <!--<el-select v-model="dataForm.station" style="position: absolute;top:0.29rem;width: 18rem" placeholder="请选择开关站点">-->
+            <!--<el-option v-for="item in stationOptions" :key="item.key" :label="item.label" :value="item.value"></el-option>-->
+          <!--</el-select>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div style="position: relative;top: 6rem;left: 29rem">-->
+        <!--<img style="position: absolute;top:0.28rem;" src="./img/menjin-shaixuan.png">-->
+        <!--<span style="position: absolute;left:2rem;top:0.8rem;font-size: 16px;font-family:PingFang-SC;color:rgba(255,255,255,1);">责任人</span>-->
+        <!--<div style="position: relative;left: 9rem">-->
+          <!--<el-select v-model="dataForm.person" style="position: absolute;top:0.29rem;width: 18rem" placeholder="请选择责任人">-->
+            <!--<el-option v-for="item in personOptions" :key="item.key" :label="item.label" :value="item.value"></el-option>-->
+          <!--</el-select>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div style="position: relative;top: 6rem;left: 58rem">-->
+        <!--<img style="position: absolute;top:0.28rem;" src="./img/menjin-shaixuan.png">-->
+        <!--<span style="position: absolute;left:2rem;top:0.8rem;font-size: 16px;font-family:PingFang-SC;color:rgba(255,255,255,1);">生效时间</span>-->
+        <!--<div style="position: relative;left: 9rem">-->
+          <!--<el-date-picker-->
+            <!--style="position: absolute;top:0.29rem;width: 18rem"-->
+            <!--v-model="dataForm.startTime"-->
+            <!--type="date"-->
+            <!--placeholder="选择生效日期">-->
+          <!--</el-date-picker>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div style="position: relative;top: 6rem;left: 87rem">-->
+        <!--<img style="position: absolute;top:0.28rem;" src="./img/menjin-shaixuan.png">-->
+        <!--<span style="position: absolute;left:2rem;top:0.8rem;font-size: 16px;font-family:PingFang-SC;color:rgba(255,255,255,1);">失效时间</span>-->
+        <!--<div style="position: relative;left: 9rem">-->
+          <!--<el-date-picker-->
+            <!--style="position: absolute;top:0.29rem;width: 18rem"-->
+            <!--v-model="dataForm.endTime"-->
+            <!--type="date"-->
+            <!--placeholder="选择失效日期">-->
+          <!--</el-date-picker>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div style="position: relative;top: 15rem;">
       <el-table
-        :data="tableData"
+        :data="tableData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)"
         style="width: 100%;max-height: 40rem;">
         <el-table-column prop="stationname" label="天关站名称" header-align="center" align="center" />
         <el-table-column prop="hostnum" label="巡检人编号" header-align="center" align="center"　width="180"/>
@@ -116,20 +116,20 @@
       sizeChangeHandle (val) {
         this.pageSize = val
         this.pageIndex = 1
-        this.getTableData()
+        // this.getTableData()
       },
       // 当前页
       currentChangeHandle (val) {
         this.pageIndex = val
-        this.getTableData()
+        // this.getTableData()
       },
       backHandle(){
         this.$router.push({ name: 'detaildp'})
       },
       getTableData(){
         axios.get('/GW.WIR/inspection/getKgInspectionList.action',{
-          params:{start:this.pageIndex,limit: 100000,queryCardString :"",
-            stationID:sessionStorage.getItem('stationID')
+          params:{
+            stationId:sessionStorage.getItem('stationID')
           }
         }).then(({data})=>{
           data = eval('(' + data + ')')
@@ -138,6 +138,9 @@
             this.totalPage = parseInt(data.RecordCount)
             this.tableData = data.Table
           }
+          data.Table.sort((a, b) => {
+            return b.examinetime - a.examinetime
+          })
         })
       },
       formatDate(now) {

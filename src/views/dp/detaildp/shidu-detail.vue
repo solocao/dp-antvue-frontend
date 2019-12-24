@@ -101,6 +101,28 @@
               }
             }
           },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'cross',
+              animation: false,
+              label: {
+                backgroundColor: '#ccc',
+                borderColor: '#aaa',
+                borderWidth: 1,
+                shadowBlur: 0,
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                textStyle: {
+                  color: '#222'
+                }
+              }
+            },
+            formatter: function (params) {
+
+              return '<span style="font-size: 20px ;">'+params[0].name + '<br />' + params[0].value+'%'+'</span>';
+            }
+          },
           legend: {
             data: ['湿度'],
             bottom: '0px',
@@ -112,7 +134,7 @@
           xAxis: {
             axisLabel: {
               color: '#fff',
-              fontSize: 10
+              fontSize: 15
             },
             axisLine: {
               show: false
@@ -184,7 +206,7 @@
       }
     },
     created() {
-      this.dataForm.startTime = new Date(new Date().getTime() - 3 * 24 * 60 * 60 * 1000)
+      this.dataForm.startTime = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000)
       this.dataForm.endTime = new Date()
       this.getHumidity()
     },
@@ -223,7 +245,7 @@
           that.totalPage = that.tableData.length;
           //湿度信息
           data.Table.sort((a, b) => {
-            return a.humiditytime - b.humiditytime
+            return b.humiditytime - a.humiditytime
           })
           const humidityList = data.Table
           const xHumidityList = []

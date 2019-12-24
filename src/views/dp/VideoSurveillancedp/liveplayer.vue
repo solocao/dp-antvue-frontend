@@ -2,11 +2,12 @@
 <template>
     <div class="video-container">
         <el-button @click="goBack">返回</el-button>
+
         <div class="videoPlay" >
             <playBack v-if="playBackVisible" :devid="serial" :channel="code" :streamID="streamID" @closePlayBack="closePlayBack" :token="token"></playBack>
             <live-player v-if="!playBackVisible" class="video" ref="player" :videoUrl="videoUrl" v-loading="loading" fluent autoplay live stretch></live-player>
         </div>
-        <div class="myVideoControl">
+        <div class="myVideoControl1">
              <div class="video_center" >
               <button class="quartercircle divLeft" @click="ptzControl('left')"  style="">
                 <!--<a  style="background: url(./img/L.png) no-repeat center;"></a>-->
@@ -21,21 +22,22 @@
                 <!--<a  style="display:block;position:absolute;z-index:50;background: url(./img/down-hover.png) no-repeat center;"></a>-->
               </button>
              </div>
-             <div class="dialog_button">
+             <div class="dialog_button1">
               <el-button  class="station_video_button" @click="play(players)">播放</el-button>
               <el-button  class="station_video_button" @click="stop()">暂停</el-button>
               </div>
-             <div class="dialog_button1">
+             <div class="dialog_button2">
               <el-button class="station_video_button" @click="ptzControl('zoomout')">-</el-button>
               <el-button  class="station_video_button" @click="ptzControl('zoomin')">+</el-button>
               </div>
-             <div class="dialog_button2">
-              <el-button class="station_video_button" v-for="(item,index) in players" :key="index" type="primary" @click="shuld(item)">{{ item.Model }}{{item.Channel}}</el-button>
+             <div class="video_dialog_button">
+              <el-button class="station_video_button" v-for="(item,index) in players" :key="index" type="primary" @click="shuld(item)">{{ item.Model }}</el-button>
               </div>
              <div class="dialog_button3">
                 <el-button class="station_video_button" @click="lookHistory()"  type="primary">历史回放</el-button>
               </div>
         </div>
+
         <!-- <div class="videoControl" id="video_dialog">
             <div class="video_button">
                 <el-button type="primary" @click="play(players)">播放</el-button>
@@ -99,7 +101,7 @@
                this.$router.go(-1)
             },
             camera(){
-               
+
             },
             closePlayBack () {},
             lookHistory () {
@@ -119,7 +121,10 @@
                         this.players = res.data.ChannelList.filter(function (value) {
                             return value.DeviceID === '34020000001110000009'
                             })
+                      this.players[0].Model='摄像头1号';
+                      this.players[1].Model='摄像头2号';
                         this.shuld(this.players[0])
+
                     })
                 })
             },
@@ -158,23 +163,28 @@
 <style scoped>
     .video-container {
         overflow: hidden;
-        background-color: rgba(0,0,0,.4);
-        height: 1080px;
+      background:#000d4a url("../dpimg/firstdp/backgroundNew.png") center top; background-size:100% 100%;
+        /*background-color: rgba(0,0,0,.4);*/
+      /*opacity: 0;*/
+      height: 1080px;
     }
-    .myVideoControl {
+
+    .myVideoControl1 {
       height: 560px;
       width: 400px;
       background-color: black;
       position: absolute;
 
       top: 140px;
-      left: 1100px;
+      left: 1315px;
+      display:table;
+      text-align: center;
     }
         .videoPlay {
         width: 1000px;
         height: 800px;
         position: relative;
-        left: 30%;
+        left: 40%;
         top: 100px;
         transform: translateX(-50%);
     }
@@ -188,7 +198,7 @@
     .video_button {
         margin-top: 20px;
         margin-left: 30px;
-    } 
+    }
 
     .video_center{
   background:url('../stationdp/img/video-center.png') center no-repeat;
@@ -254,45 +264,52 @@ top: 0
 .divBottom:hover{background: url('../stationdp/img/down-hover.png') no-repeat center;
 }
 
-.dialog_button{
+.video_dialog_button{
   position: absolute;
-  width: 100%;
+  width: 250px;
   /* height: 2rem; */
-  text-align: center;
+
   /* background-color: #0f0; */
   position: absolute;
   top: 400px;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 35px;
 }
 .dialog_button1{
   position: absolute;
-  width: 100%;
+  width: 250px;
   /* height: 2rem; */
-  text-align: center;
+
   /* background-color: #0f0; */
   position: absolute;
   top: 440px;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 35px;
 }
 .dialog_button2{
   position: absolute;
-  width: 100%;
+  width: 250px;
   /* height: 2rem; */
-  text-align: center;
+
   /* background-color: #0f0; */
   position: absolute;
   top: 480px;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 35px;
 }
 .dialog_button3{
   position: absolute;
-  width: 100%;
+  width: 400px;
   /* height: 2rem; */
-  text-align: center;
+
   /* background-color: #0f0; */
   position: absolute;
-  top: 5px;
-  right: -115px;
+  top: 520px;
+  /*right: -150px;*/
+  height: 35px;
 }
 .station_video_button {
   /* 清除默认边框 */
