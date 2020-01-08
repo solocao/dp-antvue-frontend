@@ -146,7 +146,7 @@
             </div>
             <!-- <span class="span_R1 span_R1_r" style="color:rgba(40,205,156,1)" >日期</span>  -->
             <el-popover ref="popover4" placement="right" width="760" popper-class="popperclass" trigger="click">
-              <el-table :data="tableData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;color:#fff;max-height: 40rem;" height="530">
+              <el-table :data="tableData.slice((pageIndex-1)*pageSize,pageIndex*pageSize)" style="width: 100%;color:#fff" height="200">
                 <el-table-column width="200" property="CREATEDATE" label="日期"></el-table-column>
                 <el-table-column width="430" property="STATIONNAME" label="站点名称"></el-table-column>
                 <el-table-column width="100" property="ALARMTYPE" label="告警类型"></el-table-column>
@@ -184,6 +184,13 @@
         </li>
       </ul>
     </div>
+        <div style="width:100%;position:absolute;bottom:0px;z-index:999;margin:0 auto; padding:20px 0;">
+		 		 <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010502005752">
+          <img src="../img/beian.png" style="position:absolute;top:25%;;left:44%;transform:translate(50%,0%);" />
+          <p style="float:left;height:20px;width:100%;line-height:20px; text-align: center;margin: 0px 0px 0px 5px; color:#939393;">浙公网安备 33010502005752号</p>
+          <p style="float:left;height:20px;width:100%;line-height:20px; text-align: center;margin: 0px 0px 0px 5px; color:#939393;">浙ICP备19016846号-16 浙ICP备19016846号-5</p>
+         </a>
+		 	</div>
   </div>
 </template>
 
