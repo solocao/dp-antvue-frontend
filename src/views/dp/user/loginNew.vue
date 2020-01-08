@@ -119,7 +119,15 @@
       </li>
     </ul>>
 
-
+        <div style="width:100%;position:absolute;bottom:0px;z-index:999;margin:0 auto; padding:20px 0;">
+		 		 <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33020502000343">
+          <img src="../img/beian.png" style="position:absolute;top:25%;;left:41%;transform:translate(50%,0%);" />
+          <p style="float:left;height:23px;width:100%;line-height:23px; text-align: center;margin: 0px 0px 0px 5px; color:#939393;">浙公网安备 33010502005752号</p>
+         </a>
+         <a target="_blank" href="http://beian.miit.gov.cn">
+          <p style="float:left;height:23px;width:100%;line-height:23px; text-align: center;margin: 0px 0px 0px 5px; color:#939393;">浙ICP备19016846号-16 浙ICP备19016846号-5</p>
+         </a>
+		 	</div>
   </div>
 </template>
 
