@@ -45,6 +45,7 @@
                         type="password"
                         autocomplete="false"
                         placeholder="密码"
+                        v-model="psw"
                         v-decorator="[
                 'Password',
                 {rules: [{ required: true, message: '请输入密码' }], validateTrigger: 'blur'}
@@ -154,6 +155,7 @@
         requiredTwoStepCaptcha: false,
         stepCaptchaVisible: false,
         form: this.$form.createForm(this),
+        psw:"",
         state: {
           time: 60,
           loginBtn: false,
@@ -214,7 +216,15 @@
         // this.form.resetFields()
       },
       handleSubmit (e) {
+        let isOk = /^(?![A-z0-9]+$)(?![A-z~@*()_]+$)(?![0-9~@*()_]+$)([A-z0-9~@*()_]{10,})$/;
 
+        
+        console.log("psw",)
+        if( !isOk.test(this.psw)  ) {
+            alert("系统不允许弱口令访问")
+            return
+        }
+        
         var inputCode = document.getElementById("captcha").value.toLowerCase();
         if (inputCode.length <= 0) {
           alert("请输入验证码！");
@@ -249,7 +259,8 @@
             loginParams.Password=values.Password
             // loginParams.password=base64.Base64.encode(values.password)
             // loginParams.password = md5(values.password)
-
+            
+             
             axiosKj({
               url: '/GW.WIR/cabTPerson/findCabTPerson.action',
               method: 'post',
@@ -326,7 +337,6 @@
 
         console.log(res)
         if(issuccess) {
-
           var retdataobj='{"data" '+res.substr(res.search('data')+4,res.length-1);
           var retdata=JSON.parse(retdataobj).data;
 
