@@ -123,7 +123,7 @@
         <div style="width:100%;position:absolute;bottom:0px;z-index:999;margin:0 auto; padding:20px 0;">
 		 		 <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33020502000343">
           <img src="../img/beian.png" style="position:absolute;top:25%;;left:41%;transform:translate(50%,0%);" />
-          <p style="float:left;height:23px;width:100%;line-height:23px; text-align: center;margin: 0px 0px 0px 5px; color:#939393;">浙公网安备 33010502005752号</p>
+          <p style="float:left;height:23px;width:100%;line-height:23px; text-align: center;margin: 0px 0px 0px 5px; color:#939393;">浙公网安备 33020502000343号</p>
          </a>
          <a target="_blank" href="http://beian.miit.gov.cn">
           <p style="float:left;height:23px;width:100%;line-height:23px; text-align: center;margin: 0px 0px 0px 5px; color:#939393;">浙ICP备19016846号-16 浙ICP备19016846号-5</p>
@@ -168,6 +168,7 @@
       }
     },
     created () {
+      console.log("1111111111111111111",1350 / 3 * 60 * 24 * 30)
       this.srcyzm = "/GW.WIR/CodeServlet?code=" + this.createCode();
       sessionStorage.setItem('success', false);
       get2step({ })
@@ -219,7 +220,7 @@
         let isOk = /^(?![A-z0-9]+$)(?![A-z~@*()_]+$)(?![0-9~@*()_]+$)([A-z0-9~@*()_]{10,})$/;
 
         
-        console.log("psw",)
+        console.log("psw",this.psw)
         if( !isOk.test(this.psw)  ) {
             alert("系统不允许弱口令访问")
             return
