@@ -245,7 +245,6 @@
         const validateFieldsKey = customActiveKey === 'tab1' ? ['LoginName', 'Password'] : ['mobile', 'captcha']
         validateFields(validateFieldsKey, { force: true }, (err, values) => {
           if (!err) {
-            console.log('login form', values)
             const loginParams = { ...values }
             delete loginParams.LoginName
             loginParams[!state.loginType ? 'email' : 'LoginName'] = values.LoginName
@@ -330,8 +329,6 @@
 
         var obj3='{"success" '+res.substr(res.search('success')+7,res.search(',')-8)+'}';
         var issuccess=JSON.parse(obj3).success;
-
-        console.log(res)
         if(issuccess) {
           var retdataobj='{"data" '+res.substr(res.search('data')+4,res.length-1);
           var retdata=JSON.parse(retdataobj).data;
