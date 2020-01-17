@@ -168,7 +168,6 @@
       }
     },
     created () {
-      console.log("1111111111111111111",1350 / 3 * 60 * 24 * 30)
       this.srcyzm = "/GW.WIR/CodeServlet?code=" + this.createCode();
       sessionStorage.setItem('success', false);
       get2step({ })
@@ -218,14 +217,10 @@
       },
       handleSubmit (e) {
         let isOk = /^(?![A-z0-9]+$)(?![A-z~@*()_]+$)(?![0-9~@*()_]+$)([A-z0-9~@*()_]{10,})$/;
-
-        
-        console.log("psw",this.psw)
         if( !isOk.test(this.psw)  ) {
             alert("系统不允许弱口令访问")
             return
         }
-        
         var inputCode = document.getElementById("captcha").value.toLowerCase();
         if (inputCode.length <= 0) {
           alert("请输入验证码！");
