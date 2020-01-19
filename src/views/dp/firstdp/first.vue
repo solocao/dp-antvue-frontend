@@ -4,7 +4,7 @@
 
     <button class="btn1 ripple" @click="toFirstDp">
       <span class="btn_span_1">1</span>
-      <span class="btn_span_2">配变站所智能预警系统</span>
+      <span class="btn_span_2">标准化站所智能预警系统</span>
       <span class="btn_span_3">Intelligent Early Warning System</span>
     </button>
     <button class="btn2 ripple" @click="toSecondDp">
