@@ -3,7 +3,7 @@
   </div>
 </template>
 <script>
-  import BMap from 'BMap'
+  // import BMap from 'BMap'
   export default {
     name: 'baiduMap',
     props: ['baiduCityName', 'initData', 'stationdata'],
@@ -1415,9 +1415,9 @@
         // this.map.setCurrentCity(this.baiduCityName)
         //开启鼠标滚轮缩放
         this.map.enableScrollWheelZoom(true)
-        this.map.setMapStyleV2({
-          styleJson: styleJson
-        });
+        // this.map.setMapStyleV2({
+        //   styleJson: styleJson
+        // });
       },
       // 添加覆盖物  自定义图标  百度地图
       addPoint(stationv) {

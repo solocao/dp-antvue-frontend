@@ -90,8 +90,9 @@ module.exports = {
         }
       },
       '/GW.WIR/': {
-        target: 'https://61.153.144.212:8403',
-        // target: 'http://192.168.73.1:7777',
+        // target: 'https://61.153.144.212:8403',
+        // target: 'https://61.153.144.212:8403',
+        target: 'http://192.168.0.179:7777',
         ws: false,
         changeOrigin: true
       },

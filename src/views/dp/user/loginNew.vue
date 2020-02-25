@@ -216,11 +216,11 @@
         // this.form.resetFields()
       },
       handleSubmit (e) {
-        let isOk = /^(?![A-z0-9]+$)(?![A-z~@*()_]+$)(?![0-9~@*()_]+$)([A-z0-9~@*()_]{10,})$/;
-        if( !isOk.test(this.psw)  ) {
-            alert("系统不允许弱口令访问")
-            return
-        }
+        // let isOk = /^(?![A-z0-9]+$)(?![A-z~@*()_]+$)(?![0-9~@*()_]+$)([A-z0-9~@*()_]{10,})$/;
+        // if( !isOk.test(this.psw)  ) {
+        //     alert("系统不允许弱口令访问")
+        //     return
+        // }
         var inputCode = document.getElementById("captcha").value.toLowerCase();
         if (inputCode.length <= 0) {
           alert("请输入验证码！");
